@@ -1,0 +1,35 @@
+<div class="container">
+  <h1>Hệ thống quản lí học bạ THPT</h1>
+  <form
+    [formGroup]="signUpForm"
+    class="d-flex flex-column gap-5"
+    (ngSubmit)="signUp()"
+  >
+    <span class="p-float-label">
+      <input pInputText id="username" formControlName="username" />
+      <label htmlFor="username">Username</label>
+    </span>
+
+    <p-selectButton
+      [options]="jobOptions"
+      optionLabel="label"
+      formControlName="job"
+      optionValue="value"
+    ></p-selectButton>
+
+    <span class="p-float-label">
+      <p-password [feedback]="true" formControlName="password"></p-password>
+      <label for="password">Mật khẩu</label>
+    </span>
+
+    <span class="p-float-label">
+      <p-password
+        formControlName="repeatPassword"
+        [feedback]="true"
+      ></p-password>
+      <label for="password">Nhập lại mật khẩu</label>
+    </span>
+
+    <button type="submit">Đăng kí</button>
+  </form>
+</div>
