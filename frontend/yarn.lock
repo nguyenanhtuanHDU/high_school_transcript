@@ -161,7 +161,7 @@
     "ora" "5.4.1"
     "rxjs" "7.8.1"
 
-"@angular/animations@^16.2.0", "@angular/animations@16.2.2":
+"@angular/animations@^16.2.0", "@angular/animations@>=15.0.0", "@angular/animations@16.2.2":
   "integrity" "sha512-p0QefudkPGXjq9inZDrtW6WJrDcSeL+Nkc8lxubjg5fLQATKWKpsUBb+u2xEVu8OvWqj8BvrZUDnXYLyTdM4vw=="
   "resolved" "https://registry.npmjs.org/@angular/animations/-/animations-16.2.2.tgz"
   "version" "16.2.2"
@@ -192,7 +192,7 @@
     "symbol-observable" "4.0.0"
     "yargs" "17.7.2"
 
-"@angular/common@^16.0.0", "@angular/common@^16.2.0", "@angular/common@16.2.2":
+"@angular/common@^16.0.0", "@angular/common@^16.2.0", "@angular/common@>=15.0.0", "@angular/common@16.2.2":
   "integrity" "sha512-2ww8/heDHkfJEBwjakbQeleq610ljcvytNs6ZN1xiXib060xMP+xx17Oa9I3onhi369JsKCHkMR5Qs2U5af1uA=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-16.2.2.tgz"
   "version" "16.2.2"
@@ -220,7 +220,7 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/core@^16.0.0", "@angular/core@^16.2.0", "@angular/core@16.2.2":
+"@angular/core@^16.0.0", "@angular/core@^16.2.0", "@angular/core@>=15.0.0", "@angular/core@16.2.2":
   "integrity" "sha512-l6nJlppguroov7eByBIpbxn/mEPcQrL//Ru1TSPzTtXOLR1p41VqPMaeJXj7xYVx7im57YLTDPAjhtLzkUT/Ow=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-16.2.2.tgz"
   "version" "16.2.2"
@@ -2616,6 +2616,11 @@
     "shebang-command" "^2.0.0"
     "which" "^2.0.1"
 
+"crypto@^1.0.1":
+  "integrity" "sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig=="
+  "resolved" "https://registry.npmjs.org/crypto/-/crypto-1.0.1.tgz"
+  "version" "1.0.1"
+
 "css-loader@6.8.1":
   "integrity" "sha512-xDAXtEVGlD0gJ07iclwWVkLoZOpEvAWaSyf6W18S2pOC//K8+qUDIx8IIT3D+HjnmkJPQeesOPv5aiUaJsCM2g=="
   "resolved" "https://registry.npmjs.org/css-loader/-/css-loader-6.8.1.tgz"
@@ -4560,6 +4565,13 @@
   "version" "16.0.1"
   dependencies:
     "tslib" "^2.0.0"
+
+"ngx-spinner@^16.0.2":
+  "integrity" "sha512-MZpOHb3dvSqD6xiEdR+EtOfPY2r1kfA7t5Hv5IVwi7gkbTwVgnqxDWdOYJ/HW1pSZ5iEGhqlJqWg6CysLmNfHQ=="
+  "resolved" "https://registry.npmjs.org/ngx-spinner/-/ngx-spinner-16.0.2.tgz"
+  "version" "16.0.2"
+  dependencies:
+    "tslib" "^2.3.0"
 
 "node-forge@^1":
   "integrity" "sha512-dPEtOeMvF9VMcYV/1Wb8CPoVAXtp6MKMlcbAt4ddqmGqUJ6fQZFXkNZNkNlfevtNkGtaSoXf/vNNNSvgrdXwtA=="

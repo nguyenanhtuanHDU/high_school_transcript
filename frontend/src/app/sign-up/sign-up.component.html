@@ -10,6 +10,11 @@
       <label htmlFor="username">Username</label>
     </span>
 
+    <span class="p-float-label">
+      <input pInputText id="fullName" formControlName="fullName" />
+      <label htmlFor="fullName">Họ và tên</label>
+    </span>
+
     <p-selectButton
       [options]="jobOptions"
       optionLabel="label"
@@ -18,7 +23,11 @@
     ></p-selectButton>
 
     <span class="p-float-label">
-      <p-password [feedback]="true" formControlName="password"></p-password>
+      <p-password
+        [feedback]="true"
+        [toggleMask]="true"
+        formControlName="password"
+      ></p-password>
       <label for="password">Mật khẩu</label>
     </span>
 
@@ -26,10 +35,12 @@
       <p-password
         formControlName="repeatPassword"
         [feedback]="true"
+        [toggleMask]="true"
       ></p-password>
       <label for="password">Nhập lại mật khẩu</label>
     </span>
-
-    <button type="submit">Đăng kí</button>
+    <button type="submit" pButton pRipple>Đăng kí</button>
   </form>
 </div>
+<p-toast></p-toast>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

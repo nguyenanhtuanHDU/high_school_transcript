@@ -1,4 +1,8 @@
-import { NgModule } from '@angular/core';
+import {
+  APP_INITIALIZER,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -9,6 +13,16 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { PasswordModule } from 'primeng/password';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { PrimeNGConfig } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
+const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
+  primeConfig.ripple = true;
+};
 
 @NgModule({
   declarations: [AppComponent, SignUpComponent],
@@ -20,9 +34,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SelectButtonModule,
     PasswordModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule 
+    BrowserAnimationsModule,
+    ButtonModule,
+    RippleModule,
+    ToastModule,
+    HttpClientModule,
+    NgxSpinnerModule,
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeAppFactory,
+      deps: [PrimeNGConfig],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
