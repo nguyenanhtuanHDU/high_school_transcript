@@ -1,0 +1,23 @@
+<div class="container">
+  <h1 class="mb-5">Sign In</h1>
+  <form
+    [formGroup]="signInForm"
+    (ngSubmit)="signIn()"
+    class="d-flex flex-column gap-5"
+  >
+    <span class="p-float-label">
+      <input pInputText id="username" formControlName="username" />
+      <label htmlFor="username">Username</label>
+    </span>
+
+    <span class="p-float-label">
+      <p-password
+        [feedback]="true"
+        [toggleMask]="true"
+        formControlName="password"
+      ></p-password>
+      <label for="password">Mật khẩu</label>
+    </span>
+    <button type="submit" pButton pRipple>Sign In Now</button>
+  </form>
+</div>

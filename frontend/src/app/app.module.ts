@@ -19,13 +19,14 @@ import { PrimeNGConfig } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
 };
 
 @NgModule({
-  declarations: [AppComponent, SignUpComponent],
+  declarations: [AppComponent, SignUpComponent, SignInComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
