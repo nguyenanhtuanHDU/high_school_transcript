@@ -8,6 +8,8 @@ import { Subject, takeUntil, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import { Principal } from '../models/principal.interface';
+import { PrincipalService } from '../services/principal.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -20,6 +22,7 @@ export class SignUpComponent {
     private titleService: Title,
     private messageService: MessageService,
     private teacherService: TeacherService,
+    private principalService: PrincipalService,
     private spinner: NgxSpinnerService,
     private route: Router
   ) {
@@ -46,6 +49,7 @@ export class SignUpComponent {
     'repeatPassword',
   ];
   teacherData!: Teacher;
+  principalData!: Principal;
   destroy = new Subject();
 
   ngOnDestroy() {
@@ -126,6 +130,31 @@ export class SignUpComponent {
       );
   }
 
+  createPrincipal(principal: Principal) {
+    this.spinner.show();
+    this.principalService
+      .createPrincipal(principal)
+      .pipe(takeUntil(this.destroy))
+      .subscribe(
+        (data: any) => {
+          this.spinner.hide();
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Create accout successfully',
+          });
+        },
+        (error) => {
+          this.spinner.hide();
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: error.error.message,
+          });
+        }
+      );
+  }
+
   setTeacherData() {
     this.teacherData = {
       username: this.signUpForm.get('username')?.value!,
@@ -134,20 +163,26 @@ export class SignUpComponent {
     };
   }
 
+  setPrincipalData() {
+    this.principalData = {
+      username: this.signUpForm.get('username')?.value!,
+      password: this.signUpForm.get('password')?.value!,
+      fullName: this.signUpForm.get('fullName')?.value!,
+    };
+  }
+
   signUp() {
     if (this.checkFormFields()) {
-      console.log('run');
       if (this.signUpForm.get('job')?.value === 'Teacher') {
-        console.log('run teacher');
         this.setTeacherData();
         this.createTeacher(this.teacherData);
         // this.route.navigate(['sign-in']);
       } else if (this.signUpForm.get('job')?.value === 'Principal') {
-        // loading...
+        this.setPrincipalData();
+        this.createPrincipal(this.principalData);
+        // this.route.navigate(['sign-in']);
       }
     } else {
-      console.log('not run');
-
       return;
     }
   }

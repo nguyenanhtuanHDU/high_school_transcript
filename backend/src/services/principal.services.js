@@ -1,8 +1,8 @@
-const Teacher = require("../models/teacher");
+const Principal = require("../models/principal");
 const { generateKeysPair, writePrivateKeyToFile } = require("./key.services");
 
 module.exports = {
-  createSingleTeacher: async (data) => {
+  createSinglePrincipal: async (data) => {
     console.log("🚀 ~ data:", data);
     try {
       if (!data.username) {
@@ -14,15 +14,14 @@ module.exports = {
       if (!data.fullName) {
         return "Missing fullName";
       }
-      const findByUsername = await Teacher.findOne({ username: data.username });
-      console.log("🚀 ~ findByUsername:", findByUsername);
-      if (findByUsername) {
-        return "Username already exists";
+      const listPrincipals = await Principal.find();
+      if (listPrincipals.length > 0) {
+        return "Reaching the limit on the number of principals";
       }
       const { publicKey, privateKey } = await generateKeysPair();
       data.publicKey = publicKey;
-      writePrivateKeyToFile("teacher", data.username, privateKey);
-      await Teacher.create(data);
+      writePrivateKeyToFile("principal", data.username, privateKey);
+      await Principal.create(data);
       return "OK";
     } catch (error) {
       console.log("🚀 ~ error:", error);
