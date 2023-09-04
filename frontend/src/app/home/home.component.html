@@ -1,0 +1,38 @@
+<div class="header d-flex align-items-center justify-content-between py-3 px-5">
+  <header>
+    <nav class="header-navbar d-flex align-items-center">
+      <ul class="nav-list m-auto">
+        <li>
+          <a routerLink="">
+            <fa-icon class="" [icon]="faHome"></fa-icon>
+            <span class="ms-1">Home</span></a
+          >
+        </li>
+        <li>
+          <a>
+            <fa-icon class="" [icon]="faPlus"></fa-icon>
+            <span class="ms-1">Add Student</span></a
+          >
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <div
+    class="header-user d-flex align-items-center justify-content-between gap-3"
+  >
+    <div class="header-user-name">
+      <span class="">{{ usernameSession }}</span>
+    </div>
+    <div class="header-user-avatar br-r">
+      <img src="../../assets/images/users/avatar-default.png" alt="" />
+    </div>
+    <div
+      class="header-user-logout br-r bg-secondary flex-center cursor-p hover-1"
+      pRipple
+      (click)="logOut()"
+    >
+      <fa-icon class="text-white" [icon]="faRightFromBracket"></fa-icon>
+    </div>
+  </div>
+</div>
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>

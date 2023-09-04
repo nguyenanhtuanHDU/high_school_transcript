@@ -20,13 +20,16 @@ import { ToastModule } from 'primeng/toast';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { HomeComponent } from './home/home.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
 };
 
 @NgModule({
-  declarations: [AppComponent, SignUpComponent, SignInComponent],
+  declarations: [AppComponent, SignUpComponent, SignInComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -41,6 +44,8 @@ const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
     ToastModule,
     HttpClientModule,
     NgxSpinnerModule,
+    FontAwesomeModule,
+    ConfirmDialogModule,
   ],
   providers: [
     CookieService,

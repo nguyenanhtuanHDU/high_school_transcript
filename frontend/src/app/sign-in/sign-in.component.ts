@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { ISignIn } from '../models/sign-in.interface';
 import { Subject, takeUntil } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -18,7 +19,8 @@ export class SignInComponent {
     private titleService: Title,
     private authService: AuthService,
     private messageService: MessageService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) {
     this.titleService.setTitle('Sign In');
   }
@@ -77,19 +79,23 @@ export class SignInComponent {
 
   signIn() {
     if (this.validateSignIn()) {
-      console.log(this.signInForm.value);
       this.spinner.show();
       this.authService
         .signIn(this.dataSignIn)
         .pipe(takeUntil(this.destroy))
         .subscribe(
           (data: any) => {
+            this.authService.setToken(
+              'usernameSession',
+              this.signInForm.get('username')?.value!
+            );
             this.spinner.hide();
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
-              detail: 'Create accout successfully',
+              detail: 'Login successfully',
             });
+            this.router.navigate(['']);
           },
           (error) => {
             this.spinner.hide();

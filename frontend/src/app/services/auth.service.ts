@@ -10,16 +10,19 @@ export class AuthService {
   constructor(private cookieService: CookieService, private http: HttpClient) {}
   apiAuth: string = 'http://localhost:8000/auth/sign-in';
 
-  setToken(token: string) {
-    this.cookieService.set('token', token);
+  setToken(tokenName: string, token: string) {
+    this.cookieService.set(tokenName, token);
   }
 
-  removeToken() {
-    this.cookieService.delete('token');
+  getToken(tokenName: string): string{
+    return this.cookieService.get(tokenName)
+  }
+
+  removeToken(tokenName: string) {
+    this.cookieService.delete(tokenName);
   }
 
   signIn(data: ISignIn) {
-    console.log("🚀 ~ data:", data)
     return this.http.post(this.apiAuth, data);
   }
 }

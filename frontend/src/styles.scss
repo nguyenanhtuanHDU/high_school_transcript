@@ -1,1 +1,85 @@
 /* You can add global styles to this file, and also import other style files */
+$text-color: #2d4f62;
+// $primary: #5946d2;
+$primary: #009aff;
+$secondary: #17c3b2;
+$success: #2ecc71;
+$warning: #f1b016;
+$danger: #f8526e;
+$dark: #393a62;
+$custom-colors: (
+  "light": #ebebeb,
+  "gray": #828282,
+);
+
+// Merge the maps
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+$theme-colors: map-merge($theme-colors, $custom-colors);
+@import "node_modules/bootstrap/scss/bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif !important;
+}
+
+.br {
+  &-round {
+    border-radius: 50px;
+  }
+
+  @for $i from 8 through 20 {
+    &-#{$i} {
+      border-radius: #{$i}px !important;
+    }
+  }
+}
+
+.fw {
+  @for $i from 1 through 9 {
+    &-#{$i} {
+      font-weight: #{$i}00 !important;
+    }
+  }
+}
+
+.flex-center {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  &-x {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  &-y {
+    display: flex !important;
+    align-items: center !important;
+  }
+}
+
+.br-r {
+  border-radius: 50px;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cursor-p {
+  cursor: pointer;
+}
+
+.hover-1 {
+  &:hover {
+    opacity: 0.8;
+  }
+}
