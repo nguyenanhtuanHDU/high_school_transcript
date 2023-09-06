@@ -176,11 +176,11 @@ export class SignUpComponent {
       if (this.signUpForm.get('job')?.value === 'Teacher') {
         this.setTeacherData();
         this.createTeacher(this.teacherData);
-        // this.route.navigate(['sign-in']);
+        this.route.navigate(['sign-in']);
       } else if (this.signUpForm.get('job')?.value === 'Principal') {
         this.setPrincipalData();
         this.createPrincipal(this.principalData);
-        // this.route.navigate(['sign-in']);
+        this.route.navigate(['sign-in']);
       }
     } else {
       return;

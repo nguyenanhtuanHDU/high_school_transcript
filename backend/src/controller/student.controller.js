@@ -10,7 +10,6 @@ module.exports = {
     try {
       const { teacherID } = req.query;
       const payload = await getListStudentByTeacherID(teacherID);
-      console.log("🚀 ~ payload:", payload);
       if (!payload.data) {
         res.status(404).json({
           EC: 1,
@@ -56,6 +55,7 @@ module.exports = {
   putUpdateStudent: async (req, res) => {
     try {
       const data = req.body;
+      console.log("🚀 ~ data:", data)
       const { studentID } = req.params;
       const message = await editStudentByID(studentID, data);
       console.log("🚀 ~ message:", message);

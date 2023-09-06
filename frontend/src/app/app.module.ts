@@ -23,13 +23,25 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { HomeComponent } from './home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { StudentComponent } from './student/student.component';
+import { HeaderComponent } from './header/header.component';
+import { DialogModule } from 'primeng/dialog';
+import { CalendarModule } from 'primeng/calendar';
+
 
 const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
 };
 
 @NgModule({
-  declarations: [AppComponent, SignUpComponent, SignInComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    SignUpComponent,
+    SignInComponent,
+    HomeComponent,
+    StudentComponent,
+    HeaderComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -46,6 +58,8 @@ const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
     NgxSpinnerModule,
     FontAwesomeModule,
     ConfirmDialogModule,
+    DialogModule,
+    CalendarModule,
   ],
   providers: [
     CookieService,

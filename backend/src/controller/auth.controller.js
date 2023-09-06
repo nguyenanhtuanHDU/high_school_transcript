@@ -4,15 +4,15 @@ module.exports = {
   signIn: async (req, res) => {
     try {
       const { username, password } = req.body;
-      console.log("🚀 ~ req.body:", req.body)
-      const message = await findUser(username, password);
-      if (message === "OK") {
+      const payload = await findUser(username, password);
+      if (payload.message === "OK") {
         res.status(200).json({
-          status: "OK",
+          status: payload.message,
+          data: payload.data,
         });
       } else {
         res.status(404).json({
-          message,
+          message: payload.message,
         });
       }
     } catch (error) {

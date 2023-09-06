@@ -3,17 +3,24 @@ const Teacher = require("../models/teacher");
 
 module.exports = {
   findUser: async (username, password) => {
-    console.log("🚀 ~ username:", username)
     const teacher = await Teacher.findOne({ username });
     const principal = await Principal.findOne({ username });
     if (!teacher && !principal) {
-      return "User not found";
+      return {
+        message: "User not found",
+        data: null,
+      };
     }
     const account = teacher || principal;
-    console.log("🚀 ~ account:", account);
     if (account.password !== password) {
-      return "Incorrect password";
+      return {
+        message: "Incorrect password",
+        data: null,
+      };
     }
-    return "OK";
+    return {
+      message: "OK",
+      data: account,
+    };
   },
 };

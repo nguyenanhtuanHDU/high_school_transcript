@@ -6,13 +6,13 @@
     class="d-flex flex-column gap-5"
   >
     <span class="p-float-label">
-      <input pInputText id="username" formControlName="username" />
+      <input pInputText id="username" formControlName="username" autofocus />
       <label htmlFor="username">Username</label>
     </span>
 
     <span class="p-float-label">
       <p-password
-        [feedback]="true"
+        [feedback]="false"
         [toggleMask]="true"
         formControlName="password"
       ></p-password>

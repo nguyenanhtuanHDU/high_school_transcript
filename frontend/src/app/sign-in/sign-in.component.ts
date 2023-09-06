@@ -49,8 +49,8 @@ export class SignInComponent {
     const password = this.signInForm.get('password')?.value;
     if (!username) {
       this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
+        severity: 'warn',
+        summary: 'Warn',
         detail: 'Missing username',
       });
       return false;
@@ -58,8 +58,8 @@ export class SignInComponent {
 
     if (!password) {
       this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
+        severity: 'warn',
+        summary: 'Warn',
         detail: 'Missing password',
       });
       return false;
@@ -67,8 +67,8 @@ export class SignInComponent {
 
     if (password.length < 6) {
       this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
+        severity: 'warn',
+        summary: 'Warn',
         detail: 'Password must be greater than 5 in length',
       });
       return false;
@@ -85,8 +85,10 @@ export class SignInComponent {
         .pipe(takeUntil(this.destroy))
         .subscribe(
           (data: any) => {
+            console.log('🚀 ~ data:', data);
+            this.authService.setToken('userSessionID', data.data._id);
             this.authService.setToken(
-              'usernameSession',
+              'userSessionUsername',
               this.signInForm.get('username')?.value!
             );
             this.spinner.hide();
