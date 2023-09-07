@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
 });
 
 // app.use(cookies());
-// app.use(express.static(path.join('./src', 'public')));
+app.use(express.static(path.join('./src', 'public')));
 app.use("/v1/api", apiRoute);
 app.use("/auth", authRoute);
 // app.use('/upload', uploadRoute);

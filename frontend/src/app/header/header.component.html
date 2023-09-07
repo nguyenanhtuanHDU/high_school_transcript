@@ -10,8 +10,14 @@
         </li>
         <li>
           <a routerLink="student">
-            <fa-icon class="" [icon]="faPlus"></fa-icon>
-            <span class="ms-1">Manage Student</span></a
+            <fa-icon class="" [icon]="faListCheck"></fa-icon>
+            <span class="ms-1">Student</span></a
+          >
+        </li>
+        <li>
+          <a routerLink="">
+            <fa-icon class="" [icon]="faBookMedical"></fa-icon>
+            <span class="ms-1">Gading</span></a
           >
         </li>
       </ul>
@@ -21,7 +27,10 @@
     class="header-user d-flex align-items-center justify-content-between gap-3"
   >
     <div class="header-user-name">
-      <span class="">{{ usernameSession }}</span>
+      <span class="">
+        <strong>Teacher: </strong>
+        {{ usernameSession }}</span
+      >
     </div>
     <div class="header-user-avatar br-r">
       <img src="../../assets/images/users/avatar-default.png" alt="" />

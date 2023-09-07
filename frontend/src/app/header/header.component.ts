@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import {
   faHome,
-  faPlus,
   faRightFromBracket,
+  faListCheck,
+  faBookMedical,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   ConfirmationService,
@@ -31,7 +32,8 @@ export class HeaderComponent {
   }
   faRightFromBracket = faRightFromBracket;
   faHome = faHome;
-  faPlus = faPlus;
+  faListCheck = faListCheck;
+  faBookMedical = faBookMedical;
   usernameSession: string = '';
 
   ngOnInit() {
