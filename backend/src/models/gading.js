@@ -3,13 +3,12 @@ const mongoose = require("mongoose");
 const gadingSchema = new mongoose.Schema(
   {
     studentID: { type: String, required: true },
-    subject: { type: String, required: true },
-    yearStart: { type: Number, required: true },
-    yearEnd: { type: Number, required: true },
-    firstSemeter: { type: Number, required: true },
-    secondSemeter: { type: Number, required: true },
-    average: { type: Number, required: true },
-    images: [{ type: String, required: true }],
+    studentName: { type: String, required: true },
+    math: { type: Number },
+    literature: { type: Number },
+    english: { type: Number },
+    average: { type: Number },
+    images: [{ type: String }],
   },
   {
     timestamps: true,

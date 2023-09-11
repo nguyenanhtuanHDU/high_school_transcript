@@ -2,15 +2,15 @@ const {
   createSingleGading,
   deleteGadingById,
   getListGadingByTeacherID,
+  addPoint,
+  changeImages,
 } = require("../services/gading.services");
 
 module.exports = {
   getListGading: async (req, res) => {
     try {
       const { teacherID } = req.query;
-      console.log("🚀 ~ teacherID:", teacherID);
       const payload = await getListGadingByTeacherID(teacherID);
-      console.log("🚀 ~ payload:", payload);
       if (payload.message === "OK") {
         res.status(200).json({
           message: payload.message,
@@ -53,14 +53,68 @@ module.exports = {
       });
     }
   },
-  // putUpdategading: async(req, res) => {
-  //   const data = req.body
-  // }
+  putAddPoint: async (req, res) => {
+    try {
+      let payload = "";
+      const data = JSON.parse(req.body.data);
+      const { type } = data;
+      let images;
+      if (req.files?.images) {
+        images = req.files.images;
+        if (!images.length) {
+          images = [images];
+        }
+      }
 
+      console.log("🚀 ~ images:", images);
+
+      if (type === "CHANGE_IMAGES") {
+        console.log(">>> CHANGE_IMAGES");
+        const imagesDelete = JSON.parse(req.body.imagesDelete);
+        console.log("🚀 ~ imagesDelete:", imagesDelete);
+        payload = await changeImages(data, imagesDelete, images);
+      } else {
+        console.log(">>> NO CHANGE_IMAGES");
+        payload = await addPoint(data, images);
+      }
+      if (payload === "OK") {
+        res.status(200).json({
+          message: payload,
+        });
+      } else {
+        res.status(400).json({
+          EC: 1,
+          message: payload,
+        });
+      }
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      res.status(400).json({
+        EC: 1,
+        message: "Server error",
+      });
+    }
+  },
   deleteGading: async (req, res) => {
-    const { gadingID } = req.params;
-    console.log("🚀 ~ gadingID:", gadingID);
-    const payload = await deleteGadingById(gadingID);
-    console.log("🚀 ~ payload:", payload);
+    try {
+      const { gadingID } = req.params;
+      const payload = await deleteGadingById(gadingID);
+      if (payload === "OK") {
+        res.status(200).json({
+          message: payload,
+        });
+      } else {
+        res.status(400).json({
+          EC: 1,
+          message: payload,
+        });
+      }
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      res.status(400).json({
+        EC: 1,
+        message: "Server error",
+      });
+    }
   },
 };

@@ -2,6 +2,15 @@ const Gading = require("../models/gading");
 const Student = require("../models/student");
 const path = require("path");
 const Teacher = require("../models/teacher");
+const fs = require("fs");
+
+const caculatePoint = (a, b, c) => {
+  const numA = parseFloat(a);
+  const numB = parseFloat(a);
+  const numC = parseFloat(b);
+  const total = numA + numB + numC;
+  return (total / 3).toFixed(1);
+};
 
 module.exports = {
   getListGadingByTeacherID: async (teacherID) => {
@@ -33,7 +42,6 @@ module.exports = {
         .catch((error) => {
           console.error("Lỗi:", error);
         });
-      console.log("🚀 ~ data:", data);
       return {
         message: "OK",
         data,
@@ -99,6 +107,94 @@ module.exports = {
       console.log("🚀 ~ error:", error);
       return "ERROR";
     }
+  },
+  addPoint: async (data, images) => {
+    try {
+      if (!data.math) {
+        return "Missing math";
+      }
+      if (!data.literature) {
+        return "Missing literature";
+      }
+      if (!data.english) {
+        return "Missing english";
+      }
+      const imagesData = [];
+      images.map((image, index) => {
+        fileName = data._id + "-" + (Date.now() + index);
+        imagesData.push(fileName + path.extname(image.name));
+        uploadPath =
+          path.join("./src", "public/images/") +
+          fileName +
+          path.extname(image.name);
+        image.mv(uploadPath, function (err) {
+          if (err) return "Upload file error";
+        });
+      });
+      const average = caculatePoint(data.math, data.literature, data.english);
+      data.images = [...data.images, ...imagesData];
+      data.average = average;
+      await Gading.findByIdAndUpdate(data._id, data);
+      return "OK";
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      return "ERROR";
+    }
+  },
+
+  changeImages: async (data, imagesDelete, images) => {
+    console.log("🚀 ~ images:", images);
+    const gading = await Gading.findById(data._id);
+    if (!gading) {
+      return "Gading not found";
+    }
+
+    // delete images
+    const imagesDB = gading.images;
+    console.log("🚀 ~ imagesDB 1:", imagesDB);
+    imagesDelete.map(async (img, index) => {
+      if (imagesDB.includes(img)) {
+        imagesDB.splice(index, 1);
+
+        fs.unlink("./src/public/images/" + img, function (err) {
+          if (err) {
+            console.log("🚀 ~ err:", err);
+            return "File to delete not found";
+          }
+        });
+
+        await Gading.findByIdAndUpdate(data._id, {
+          $pull: { images: img },
+        })
+          .then()
+          .catch((err) => {
+            console.log("🚀 ~ err:", err);
+          });
+      }
+    });
+
+    // await Gading.findByIdAndUpdate(data._id, { images: imagesDBCopy });
+
+    // add new images
+    if (images && images.length > 0) {
+      const imagesData = [];
+      images.map((image, index) => {
+        fileName = data._id + "-" + (Date.now() + index);
+        imagesData.push(fileName + path.extname(image.name));
+        uploadPath =
+          path.join("./src", "public/images/") +
+          fileName +
+          path.extname(image.name);
+        image.mv(uploadPath, function (err) {
+          if (err) return "Upload file error";
+        });
+      });
+      data.images = [...data.images, ...imagesData];
+    }
+    const average = caculatePoint(data.math, data.literature, data.english);
+    data.average = average;
+    await Gading.findByIdAndUpdate(data._id, data);
+    return "OK";
   },
   deleteGadingById: async (gadingId) => {
     try {

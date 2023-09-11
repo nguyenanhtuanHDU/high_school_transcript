@@ -27,7 +27,10 @@ import { StudentComponent } from './student/student.component';
 import { HeaderComponent } from './header/header.component';
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
-
+import { GadingComponent } from './gading/gading.component';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ImageModule } from 'primeng/image';
 
 const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -41,6 +44,7 @@ const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
     HomeComponent,
     StudentComponent,
     HeaderComponent,
+    GadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +64,9 @@ const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
     ConfirmDialogModule,
     DialogModule,
     CalendarModule,
+    InputNumberModule,
+    FileUploadModule,
+    ImageModule
   ],
   providers: [
     CookieService,

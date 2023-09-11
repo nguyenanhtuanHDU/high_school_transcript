@@ -7,7 +7,7 @@ const {
   deleteSingleStudent,
   getListStudent,
 } = require("../controller/student.controller");
-const { postCreateGading, deleteGading, getListGading } = require("../controller/gading.controller");
+const { postCreateGading, deleteGading, getListGading, putAddPoint } = require("../controller/gading.controller");
 
 const router = express.Router();
 
@@ -22,6 +22,7 @@ router.delete("/student/:studentID", deleteSingleStudent);
 
 router.get("/gading/gadings", getListGading);
 router.post("/gading", postCreateGading);
+router.put("/gading", putAddPoint);
 router.delete("/gading/:gadingID", deleteGading);
 
 module.exports = router;

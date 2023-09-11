@@ -1,3 +1,4 @@
+const Gading = require("../models/gading");
 const Student = require("../models/student");
 const Teacher = require("../models/teacher");
 
@@ -33,7 +34,11 @@ module.exports = {
       if (!teacher) {
         return "Teacher not found";
       }
-      await Student.create(data);
+      const student = await Student.create(data);
+      await Gading.create({
+        studentID: student._id,
+        studentName: student.fullName,
+      });
       return "OK";
     } catch (error) {
       return "ERROR";
@@ -74,6 +79,7 @@ module.exports = {
         return "Student not found";
       }
       await Student.findByIdAndRemove(studentID);
+      await Gading.deleteOne({ studentID });
       return "OK";
     } catch (error) {
       return "Student not found";

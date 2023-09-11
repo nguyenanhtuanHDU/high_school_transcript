@@ -6,6 +6,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { HomeComponent } from './home/home.component';
 import { StudentComponent } from './student/student.component';
 import { AuthGuard } from './guard/auth.guard';
+import { GadingComponent } from './gading/gading.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -17,6 +18,11 @@ const routes: Routes = [
   {
     path: 'student',
     component: StudentComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'gading',
+    component: GadingComponent,
     canActivate: [AuthGuard],
   },
 ];

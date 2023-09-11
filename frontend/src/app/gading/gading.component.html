@@ -1,0 +1,179 @@
+<app-header></app-header>
+<div class="container">
+  <div
+    class="student-header d-flex gap-2 align-items-center justify-content-between"
+  >
+    <h2>List gadings</h2>
+    <div>
+      <button pRipple class="btn btn-secondary text-white student-btn me-2">
+        <span class="me-1">Refresh</span>
+        <fa-icon class="" [icon]="faArrowsRotate"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <table class="styled-table student w-100">
+    <thead>
+      <tr>
+        <th>Number</th>
+        <th>Full Name</th>
+        <th>Math</th>
+        <th>Literature</th>
+        <th>English</th>
+        <th>Average</th>
+        <th>Images</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        [ngClass]="{ 'active-row': odd }"
+        class="fw-6"
+        *ngFor="
+          let gading of listGadings;
+          let even = even;
+          let odd = odd;
+          index as i
+        "
+      >
+        <td>{{ i + 1 }}</td>
+        <td>{{ gading.studentName }}</td>
+        <td>{{ gading.math }}</td>
+        <td>{{ gading.literature }}</td>
+        <td>{{ gading.english }}</td>
+        <td>{{ gading.average }}</td>
+        <td class="d-flex gap-3">
+          <div class="gading-images br-8" *ngFor="let img of gading.images">
+            <!-- <img [src]="apiImage + img" alt="" /> -->
+            <p-image
+              [src]="apiImage + img"
+              [preview]="true"
+              alt="Image"
+              width="250"
+            >
+              <ng-template pTemplate="indicator">
+                <i class="pi pi-check"></i>
+              </ng-template>
+            </p-image>
+          </div>
+        </td>
+        <td>
+          <button
+            pRipple
+            class="btn btn-secondary text-white student-btn me-2"
+            (click)="showFormEditGading(gading)"
+          >
+            <span class="me-1">Edit</span>
+            <fa-icon class="" [icon]="faPenToSquare"></fa-icon>
+          </button>
+          <!-- <button pRipple class="btn btn-danger text-white student-btn" (click)="deleteGading(gading._id)">
+            <span class="me-1">Delete</span>
+            <fa-icon class="" [icon]="faTrash"></fa-icon>
+          </button> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p-dialog
+  [header]="headingForm"
+  [(visible)]="isShowAddGading"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <form (submit)="submitFormGading()" class="mt-5">
+    <div class="d-flex justify-content-between d-flex flex-column gap-3">
+      <div class="d-flex justify-content-between">
+        <span class="p-float-label">
+          <p-inputNumber
+            inputId="integeronly"
+            [(ngModel)]="gadingSession.math"
+            [ngModelOptions]="{ standalone: true }"
+          >
+          </p-inputNumber>
+          <label htmlFor="number-input">Math</label>
+        </span>
+        <span class="p-float-label">
+          <p-inputNumber
+            inputId="integeronly"
+            [(ngModel)]="gadingSession.literature"
+            [ngModelOptions]="{ standalone: true }"
+          >
+          </p-inputNumber>
+          <label htmlFor="number-input">Literature</label>
+        </span>
+        <span class="p-float-label">
+          <p-inputNumber
+            inputId="integeronly"
+            [(ngModel)]="gadingSession.english"
+            [ngModelOptions]="{ standalone: true }"
+          >
+          </p-inputNumber>
+          <label htmlFor="number-input">English</label>
+        </span>
+      </div>
+      <strong>Currtent Images</strong>
+
+      <div class="w-100 d-flex gap-3">
+        <ng-container *ngFor="let item of gadingSession.images">
+          <div class="student-img br-8" *ngIf="!imagesDelete.includes(item)">
+            <div
+              class="student-img-close br-round flex-center bg-white"
+              (click)="addImagesDelete(item)"
+            >
+              <fa-icon class="" [icon]="faXmark"></fa-icon>
+            </div>
+            <img [src]="apiImage + item" alt="" />
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="pt-5"></div>
+    <div>
+      <input
+        type="file"
+        id="file"
+        [multiple]="true"
+        (change)="handleFileInput($event)"
+        class="d-none"
+      />
+      <label for="file" pButton pRipple>Choose Files</label>
+    </div>
+    <strong>New Images</strong>
+
+    <div class="d-flex gap-3">
+      <div class="student-img" *ngFor="let item of imagesDisplay; index as i">
+        <div
+          class="student-img-close br-round flex-center bg-white br-8"
+          (click)="removeImagesDisplay(i)"
+        >
+          <fa-icon class="" [icon]="faXmark"></fa-icon>
+        </div>
+        <img [src]="item" alt="" />
+      </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <div
+        pRipple
+        class="btn btn-gray text-white mt-5"
+        (click)="hideFormEditGading()"
+      >
+        <span class="me-1"
+          >Cancel
+          <fa-icon class="" [icon]="faXmark"></fa-icon>
+        </span>
+      </div>
+      <button type="submit" pRipple class="btn btn-success text-white mt-5">
+        <span class="me-1"
+          >OK
+          <fa-icon class="" [icon]="faCheck"></fa-icon>
+        </span>
+      </button>
+    </div>
+  </form>
+</p-dialog>
+<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+<p-toast></p-toast>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
