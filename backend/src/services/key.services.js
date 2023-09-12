@@ -1,5 +1,8 @@
 const crypto = require("crypto");
 const fs = require("fs");
+const util = require("util");
+
+const readFileAsync = util.promisify(fs.readFile);
 
 module.exports = {
   generateKeysPair: async () => {
@@ -44,5 +47,31 @@ module.exports = {
     // console.log("Dữ liệu:", dataToSign);
     // console.log("Chữ ký:", signature);
     // console.log("Chữ ký đã được xác minh:", isVerified);
+  },
+
+  getPrivateKey: async (username, duty) => {
+    let payload = "";
+    if (duty !== "teachers" && duty !== "principal") {
+      payload = "ERROR DUTY";
+    } else {
+      try {
+        const data = await readFileAsync(
+          `./src/private-keys/${duty}/${username}.pem`,
+          "utf8"
+        );
+        payload = data;
+      } catch (err) {
+        console.log("🚀 ~ err:", err);
+        payload = "ERROR";
+      }
+    }
+    return payload;
+  },
+
+  createSign: async (privateKey, data) => {
+    const sign = crypto.createSign("RSA-SHA256");
+    sign.update(JSON.stringify(data));
+    const signature = sign.sign(privateKey, "base64");
+    return signature;
   },
 };

@@ -2,6 +2,14 @@ const Teacher = require("../models/teacher");
 const { generateKeysPair, writePrivateKeyToFile } = require("./key.services");
 
 module.exports = {
+  getTeacherByID: async (teacherID) => {
+    const teacher = await Teacher.findById(teacherID);
+    if (!teacher) {
+      return null;
+    } else {
+      return teacher;
+    }
+  },
   createSingleTeacher: async (data) => {
     console.log("🚀 ~ data:", data);
     try {

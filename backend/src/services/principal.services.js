@@ -2,8 +2,11 @@ const Principal = require("../models/principal");
 const { generateKeysPair, writePrivateKeyToFile } = require("./key.services");
 
 module.exports = {
+  getPrincipal: async () => {
+    const listPrincipals = await Principal.find();
+    return listPrincipals[0];
+  },
   createSinglePrincipal: async (data) => {
-    console.log("🚀 ~ data:", data);
     try {
       if (!data.username) {
         return "Missing username";

@@ -6,6 +6,7 @@ import {
   faTrash,
   faXmark,
   faCheck,
+  faFileSignature
 } from '@fortawesome/free-solid-svg-icons';
 import { IGading, IGadingEdit } from '../models/gading.interface';
 import {
@@ -47,6 +48,7 @@ export class GadingComponent {
   faTrash = faTrash;
   faXmark = faXmark;
   faCheck = faCheck;
+  faFileSignature = faFileSignature;
 
   listGadings: IGading[] = [];
   gadingSession: IGadingEdit = {

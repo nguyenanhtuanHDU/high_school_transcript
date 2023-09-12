@@ -8,6 +8,7 @@ const {
   getListStudent,
 } = require("../controller/student.controller");
 const { postCreateGading, deleteGading, getListGading, putAddPoint } = require("../controller/gading.controller");
+const { createBlockTemp } = require("../controller/block.controller");
 
 const router = express.Router();
 
@@ -24,5 +25,7 @@ router.get("/gading/gadings", getListGading);
 router.post("/gading", postCreateGading);
 router.put("/gading", putAddPoint);
 router.delete("/gading/:gadingID", deleteGading);
+
+router.post("/block/temp", createBlockTemp);
 
 module.exports = router;
