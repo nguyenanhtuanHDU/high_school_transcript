@@ -124,4 +124,18 @@ module.exports = {
       return "ERROR";
     }
   },
+
+  deleteBlockTempByID: async (blockID) => {
+    try {
+      const block = await Block.findById(blockID)
+      if(!block){
+        return 'BLOCK TEMP NOT FOUND'
+      }
+      await Block.findByIdAndRemove(blockID);
+      return "OK";
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      return "ERROR";
+    }
+  },
 };
