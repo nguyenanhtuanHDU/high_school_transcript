@@ -21,7 +21,9 @@ const getPrincipalPrivateKey = async () => {
 };
 
 const getLastBlock = async () => {
-  const lastBlock = await Block.findOne().sort({ createdAt: -1 });
+  const lastBlock = await Block.findOne({ isVerify: true }).sort({
+    createdAt: -1,
+  });
   return lastBlock;
 };
 
@@ -36,8 +38,10 @@ const getPrevHashBlock = async () => {
 };
 
 const getNextNumer = async () => {
-  const listBlocks = await Block.find();
+  const listBlocks = await Block.find({ isVerify: true });
+  console.log("🚀 ~ listBlocks:", listBlocks);
   const lastBlock = await getLastBlock();
+  console.log("🚀 ~ lastBlock:", lastBlock);
   if (listBlocks.length == lastBlock.number) {
     return listBlocks.length + 1;
   } else {
@@ -148,8 +152,12 @@ module.exports = {
       if (!isVerified) {
         return "Signature is false or data is changed";
       }
-      await Block.findByIdAndUpdate(blockID, { isVerify: true });
-
+      const number = await getNextNumer();
+      console.log("🚀 ~ number:", number);
+      if (number === "ERROR NUMBER") {
+        return number;
+      }
+      await Block.findByIdAndUpdate(blockID, { isVerify: true, number });
       return "OK";
     } catch (error) {
       console.log("🚀 ~ error:", error);
