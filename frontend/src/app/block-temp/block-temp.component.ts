@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment.development';
 import { BlockService } from '../services/block.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-block-temp',
@@ -18,8 +19,11 @@ export class BlockTempComponent {
     private blockService: BlockService,
     private spinner: NgxSpinnerService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
-  ) {}
+    private confirmationService: ConfirmationService,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('School - Block Temp');
+  }
   ngOnInit() {
     this.getListBlocksTemp();
   }

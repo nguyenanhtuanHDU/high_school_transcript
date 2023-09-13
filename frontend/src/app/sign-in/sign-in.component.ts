@@ -22,7 +22,7 @@ export class SignInComponent {
     private spinner: NgxSpinnerService,
     private router: Router
   ) {
-    this.titleService.setTitle('Sign In');
+    this.titleService.setTitle('School - Sign In');
   }
   signInForm = new FormGroup({
     username: new FormControl(''),

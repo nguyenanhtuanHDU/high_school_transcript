@@ -23,14 +23,11 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   constructor(
-    private titleService: Title,
     private authService: AuthService,
     private router: Router,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
-  ) {
-    this.titleService.setTitle('Home');
-  }
+  ) {}
   faRightFromBracket = faRightFromBracket;
   faHome = faHome;
   faListCheck = faListCheck;

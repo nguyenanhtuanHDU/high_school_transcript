@@ -26,7 +26,7 @@ export class SignUpComponent {
     private spinner: NgxSpinnerService,
     private route: Router
   ) {
-    this.titleService.setTitle('Đăng kí');
+    this.titleService.setTitle('School - Sign Up');
   }
 
   signUpForm = new FormGroup({

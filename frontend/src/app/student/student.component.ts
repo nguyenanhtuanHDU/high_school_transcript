@@ -33,7 +33,9 @@ export class StudentComponent {
     private spinner: NgxSpinnerService,
     private authService: AuthService,
     private confirmationService: ConfirmationService
-  ) {}
+  ) {
+    this.titleService.setTitle('School - Students');
+  }
 
   faPenToSquare = faPenToSquare;
   faTrash = faTrash;
@@ -54,7 +56,6 @@ export class StudentComponent {
   headingForm: string = '';
 
   ngOnInit() {
-    this.titleService.setTitle('Manage Students');
     this.teacherIDSession = this.authService.getToken('userSessionID');
     this.getListStudent();
   }

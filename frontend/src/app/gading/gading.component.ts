@@ -19,6 +19,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from 'src/environments/environment.development';
 import { BlockService } from '../services/block.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-gading',
@@ -32,8 +33,11 @@ export class GadingComponent {
     private spinner: NgxSpinnerService,
     private messageService: MessageService,
     private blockService: BlockService,
+    private titleService: Title,
     private confirmationService: ConfirmationService
-  ) {}
+  ) {
+    this.titleService.setTitle('School - Gading');
+  }
 
   ngOnInit() {
     this.getListGadings();
