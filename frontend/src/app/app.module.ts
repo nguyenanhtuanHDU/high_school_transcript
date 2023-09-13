@@ -33,6 +33,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { BlockTempComponent } from './block-temp/block-temp.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -48,6 +49,7 @@ const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
     HeaderComponent,
     GadingComponent,
     BlockTempComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

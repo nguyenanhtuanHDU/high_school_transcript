@@ -5,6 +5,7 @@ export interface IBlockTemp {
   signature: {
     teacher: string;
   };
+  teacherPublicKey: string;
   data: IGading | any;
   hashPrevBlock: String;
   isVerify: boolean;

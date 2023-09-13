@@ -3,25 +3,29 @@
     <nav class="header-navbar d-flex align-items-center">
       <ul class="nav-list m-auto">
         <li>
-          <a routerLink="">
+          <a
+            routerLink=""
+            routerLinkActive="header-navbar-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <fa-icon class="" [icon]="faHome"></fa-icon>
             <span class="ms-1">Home</span></a
           >
         </li>
-        <li>
-          <a routerLink="/student">
+        <li *ngIf="typeSession === 'TEACHER'">
+          <a routerLink="/student" routerLinkActive="header-navbar-active">
             <fa-icon class="" [icon]="faListCheck"></fa-icon>
             <span class="ms-1">Student</span></a
           >
         </li>
-        <li>
-          <a routerLink="/gading">
+        <li *ngIf="typeSession === 'TEACHER'">
+          <a routerLink="/gading" routerLinkActive="header-navbar-active">
             <fa-icon class="" [icon]="faBookMedical"></fa-icon>
             <span class="ms-1">Gading</span></a
           >
         </li>
         <li>
-          <a routerLink="/block/temp">
+          <a routerLink="/block/temp" routerLinkActive="header-navbar-active">
             <fa-icon class="" [icon]="faHourglassHalf"></fa-icon>
             <span class="ms-1">Block Temp</span></a
           >
@@ -34,7 +38,8 @@
   >
     <div class="header-user-name">
       <span class="">
-        <strong>Teacher: </strong>
+        <strong *ngIf="typeSession === 'TEACHER'">Teacher: </strong>
+        <strong *ngIf="typeSession === 'PRINCIPAL'">Principal: </strong>
         {{ usernameSession }}</span
       >
     </div>

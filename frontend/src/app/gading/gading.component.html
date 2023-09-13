@@ -1,11 +1,16 @@
 <app-header></app-header>
-<div class="container">
+<div class="container"
+ style="height: 2000px;">
   <div
     class="student-header d-flex gap-2 align-items-center justify-content-between"
   >
     <h2>List gadings</h2>
     <div>
-      <button pRipple class="btn btn-secondary text-white student-btn me-2">
+      <button
+        pRipple
+        class="btn btn-secondary text-white student-btn me-2"
+        (click)="getListGadings()"
+      >
         <span class="me-1">Refresh</span>
         <fa-icon class="" [icon]="faArrowsRotate"></fa-icon>
       </button>

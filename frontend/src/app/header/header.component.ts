@@ -34,9 +34,11 @@ export class HeaderComponent {
   faBookMedical = faBookMedical;
   faHourglassHalf = faHourglassHalf;
   usernameSession: string = '';
+  typeSession: string = '';
 
   ngOnInit() {
     this.usernameSession = this.authService.getToken('userSessionUsername');
+    this.typeSession = this.authService.getToken('type');
   }
   logOut() {
     this.confirmationService.confirm({

@@ -3,6 +3,19 @@
   margin-bottom: 42px;
   &-navbar {
     text-align: center;
+    &-active {
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        border-radius: 21px;
+        height: 4px;
+        width: 100%;
+        background-color: var(--bs-secondary);
+      }
+    }
     .nav-list {
       list-style: none;
       padding: 0;

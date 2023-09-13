@@ -8,6 +8,7 @@ import { StudentComponent } from './student/student.component';
 import { AuthGuard } from './guard/auth.guard';
 import { GadingComponent } from './gading/gading.component';
 import { BlockTempComponent } from './block-temp/block-temp.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -31,6 +32,7 @@ const routes: Routes = [
     component: BlockTempComponent,
     canActivate: [AuthGuard],
   },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

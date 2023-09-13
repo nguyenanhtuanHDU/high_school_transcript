@@ -74,4 +74,14 @@ module.exports = {
     const signature = sign.sign(privateKey, "base64");
     return signature;
   },
+
+  compareSign: async (data, publicKey, signature) => {
+    const verify = crypto.createVerify("RSA-SHA256");
+    verify.update(JSON.stringify(data));
+    const isVerified = verify.verify(publicKey, signature, "base64");
+    if (isVerified) {
+      return true;
+    }
+    return false;
+  },
 };

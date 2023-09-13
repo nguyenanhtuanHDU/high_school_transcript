@@ -5,8 +5,13 @@ import { IBlockTemp } from '../models/block.interface';
 import { environment } from 'src/environments/environment.development';
 import { BlockService } from '../services/block.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTrash,
+  faEye,
+  faFileSignature,
+} from '@fortawesome/free-solid-svg-icons';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-block-temp',
@@ -20,12 +25,14 @@ export class BlockTempComponent {
     private spinner: NgxSpinnerService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private authService: AuthService,
     private titleService: Title
   ) {
     this.titleService.setTitle('School - Block Temp');
   }
   ngOnInit() {
     this.getListBlocksTemp();
+    this.typeSession = this.authService.getToken('type');
   }
   ngOndestroy() {
     this.destroy.next(true);
@@ -34,9 +41,11 @@ export class BlockTempComponent {
 
   faTrash = faTrash;
   faEye = faEye;
+  faFileSignature = faFileSignature;
+
   destroy = new Subject();
   apiImage: string = environment.apiImage;
-
+  typeSession: string = '';
   listBlocksTemp: IBlockTemp[] = [];
 
   getListBlocksTemp() {

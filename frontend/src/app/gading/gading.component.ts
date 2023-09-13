@@ -154,7 +154,6 @@ export class GadingComponent {
     if (this.imagesDelete.length > 0) {
       this.changeImages();
     } else {
-      // if (this.selectedFiles) {
       this.gadingService
         .addPoint(this.gadingSession, this.selectedFiles!)
         .pipe(takeUntil(this.destroy))
@@ -179,7 +178,6 @@ export class GadingComponent {
             });
           }
         );
-      // }
     }
   }
 

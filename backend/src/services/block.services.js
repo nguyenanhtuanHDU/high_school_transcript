@@ -1,7 +1,7 @@
 const Block = require("../models/block");
 const crypto = require("crypto");
 
-const { getPrivateKey, createSign } = require("./key.services");
+const { getPrivateKey, createSign, compareSign } = require("./key.services");
 const { getPrincipal } = require("./principal.services");
 const { getTeacherByID } = require("./teacher.services");
 const { editGadingByID } = require("./gading.services");
@@ -66,6 +66,7 @@ module.exports = {
     console.log("🚀 ~ data:", data);
     try {
       const teacher = await getTeacherByID(teacherID);
+      const publickey = teacher.publicKey;
       if (!teacher) {
         return "TEACHER NOT FOUND";
       }
@@ -119,12 +120,36 @@ module.exports = {
           };
           data.hashPrevBlock = await getPrevHashBlock();
           data.isVerify = false;
+          data.teacherPublicKey = publickey;
           await createBlock(data);
           await editGadingByID(data.data._id, { isSign: true });
         } else {
           return "STUDENT ALREADY EXIST";
         }
       }
+      return "OK";
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      return "ERROR";
+    }
+  },
+
+  updateBlockTempToBlock: async (blockID) => {
+    try {
+      const block = await Block.findById(blockID);
+      if (!block) {
+        return "BLOCK NOT FOUND";
+      }
+      const isVerified = await compareSign(
+        block.data,
+        block.teacherPublicKey,
+        block.signature.teacher
+      );
+      if (!isVerified) {
+        return "Signature is false or data is changed";
+      }
+      await Block.findByIdAndUpdate(blockID, { isVerify: true });
+
       return "OK";
     } catch (error) {
       console.log("🚀 ~ error:", error);

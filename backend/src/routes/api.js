@@ -17,6 +17,7 @@ const {
   createBlockTemp,
   deleteBlockTemp,
   getListBlockTemp,
+  createBlock,
 } = require("../controller/block.controller");
 
 const router = express.Router();
@@ -34,6 +35,8 @@ router.get("/gading/gadings", getListGading);
 router.post("/gading", postCreateGading);
 router.put("/gading", putAddPoint);
 router.delete("/gading/:gadingID", deleteGading);
+
+router.put("/block/:blockID", createBlock);
 
 router.get("/block/temp/list", getListBlockTemp);
 router.post("/block/temp", createBlockTemp);
