@@ -6,6 +6,10 @@ module.exports = {
     const listPrincipals = await Principal.find();
     return listPrincipals[0];
   },
+  getPrincipalByID: async (principalID) => {
+    const principal = await Principal.findById(principalID);
+    return principal;
+  },
   createSinglePrincipal: async (data) => {
     try {
       if (!data.username) {

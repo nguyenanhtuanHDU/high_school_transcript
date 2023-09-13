@@ -34,6 +34,8 @@ import { ImageModule } from 'primeng/image';
 import { BlockTempComponent } from './block-temp/block-temp.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { BlockComponent } from './block/block.component';
+import { TimeAgoPipe } from './share/pipe/time-ago.pipe';
 
 const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -50,6 +52,8 @@ const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
     GadingComponent,
     BlockTempComponent,
     PageNotFoundComponent,
+    BlockComponent,
+    TimeAgoPipe,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import {
   faListCheck,
   faBookMedical,
   faHourglassHalf,
+  faCube
 } from '@fortawesome/free-solid-svg-icons';
 import {
   ConfirmationService,
@@ -33,6 +34,7 @@ export class HeaderComponent {
   faListCheck = faListCheck;
   faBookMedical = faBookMedical;
   faHourglassHalf = faHourglassHalf;
+  faCube = faCube;
   usernameSession: string = '';
   typeSession: string = '';
 

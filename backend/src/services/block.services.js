@@ -2,7 +2,7 @@ const Block = require("../models/block");
 const crypto = require("crypto");
 
 const { getPrivateKey, createSign, compareSign } = require("./key.services");
-const { getPrincipal } = require("./principal.services");
+const { getPrincipal, getPrincipalByID } = require("./principal.services");
 const { getTeacherByID } = require("./teacher.services");
 const { editGadingByID } = require("./gading.services");
 
@@ -62,6 +62,12 @@ const checkConditionCreateBlock = async (studentID) => {
 };
 
 module.exports = {
+  getListBlocks: async () => {
+    const listBlocks = await Block.find({ isVerify: true }).sort({
+      isVerify: 1,
+    });
+    return listBlocks;
+  },
   getListBlocksTemp: async () => {
     const listBlocks = await Block.find({ isVerify: false });
     return listBlocks;
@@ -138,7 +144,7 @@ module.exports = {
     }
   },
 
-  updateBlockTempToBlock: async (blockID) => {
+  updateBlockTempToBlock: async (blockID, principalID) => {
     try {
       const block = await Block.findById(blockID);
       if (!block) {
@@ -157,7 +163,18 @@ module.exports = {
       if (number === "ERROR NUMBER") {
         return number;
       }
-      await Block.findByIdAndUpdate(blockID, { isVerify: true, number });
+      const principal = await getPrincipalByID(principalID);
+      const principalPrivateKey = await getPrivateKey(
+        principal.username,
+        "principal"
+      );
+      const principalSign = await createSign(principalPrivateKey, block.data);
+
+      await Block.findByIdAndUpdate(blockID, {
+        isVerify: true,
+        number,
+        "signature.principal": principalSign,
+      });
       return "OK";
     } catch (error) {
       console.log("🚀 ~ error:", error);

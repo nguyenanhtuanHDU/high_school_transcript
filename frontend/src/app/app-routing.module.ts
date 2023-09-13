@@ -9,6 +9,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { GadingComponent } from './gading/gading.component';
 import { BlockTempComponent } from './block-temp/block-temp.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { BlockComponent } from './block/block.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path: 'block/temp',
     component: BlockTempComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'block',
+    component: BlockComponent,
     canActivate: [AuthGuard],
   },
   { path: '**', component: PageNotFoundComponent },

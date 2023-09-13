@@ -30,6 +30,16 @@
             <span class="ms-1">Block Temp</span></a
           >
         </li>
+        <li *ngIf="typeSession === 'PRINCIPAL'">
+          <a
+            routerLink="/block"
+            routerLinkActive="header-navbar-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <fa-icon class="" [icon]="faCube"></fa-icon>
+            <span class="ms-1">Block</span></a
+          >
+        </li>
       </ul>
     </nav>
   </header>
