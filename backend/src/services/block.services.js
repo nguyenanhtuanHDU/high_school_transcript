@@ -138,6 +138,7 @@ module.exports = {
       if (!block) {
         return "BLOCK TEMP NOT FOUND";
       }
+      await editGadingByID(block.data._id, { isSign: false });
       await Block.findByIdAndRemove(blockID);
       return "OK";
     } catch (error) {
