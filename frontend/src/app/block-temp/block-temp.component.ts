@@ -102,4 +102,38 @@ export class BlockTempComponent {
       reject: () => {},
     });
   }
+
+  createBlock(blockID: string) {
+    this.confirmationService.confirm({
+      message: 'Do you want to sign ?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.spinner.show();
+        this.blockService
+          .createBlock(blockID)
+          .pipe(takeUntil(this.destroy))
+          .subscribe(
+            () => {
+              this.spinner.hide()
+              this.getListBlocksTemp()
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: "Sign to block successfully",
+              });
+            },
+            (error) => {
+              this.spinner.hide();
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: error.error.message,
+              });
+            }
+          );
+      },
+      reject: () => {},
+    });
+  }
 }

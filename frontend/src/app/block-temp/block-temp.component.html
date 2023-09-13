@@ -95,7 +95,11 @@
           </button>
         </td>
         <td *ngIf="typeSession === 'PRINCIPAL'">
-          <button pRipple class="btn btn-warning text-white student-btn">
+          <button
+            pRipple
+            class="btn btn-warning text-white student-btn"
+            (click)="createBlock(block._id)"
+          >
             <span class="me-1">Sign</span>
             <fa-icon class="" [icon]="faFileSignature"></fa-icon>
           </button>

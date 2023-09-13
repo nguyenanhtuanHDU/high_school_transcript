@@ -21,6 +21,11 @@ export class BlockService {
     return this.http.post(this.apiTemp + '?teacherID=' + teacherID, data);
   }
 
+  createBlock(blockID: string) {
+    const teacherID = this.authService.getToken('userSessionID');
+    return this.http.put(this.api + blockID, { isVerify: true });
+  }
+
   deleteBlockTempByID(blockID: string) {
     return this.http.delete(this.api + 'temp/' + blockID);
   }
