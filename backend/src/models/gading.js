@@ -9,6 +9,7 @@ const gadingSchema = new mongoose.Schema(
     english: { type: Number },
     average: { type: Number },
     images: [{ type: String }],
+    isSign: { type: Boolean, default: false },
   },
   {
     timestamps: true,

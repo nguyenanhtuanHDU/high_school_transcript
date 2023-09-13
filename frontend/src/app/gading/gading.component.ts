@@ -6,7 +6,7 @@ import {
   faTrash,
   faXmark,
   faCheck,
-  faFileSignature
+  faFileSignature,
 } from '@fortawesome/free-solid-svg-icons';
 import { IGading, IGadingEdit } from '../models/gading.interface';
 import {
@@ -18,6 +18,7 @@ import { GadingService } from '../services/gading.service';
 import { Subject, takeUntil } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from 'src/environments/environment.development';
+import { BlockService } from '../services/block.service';
 
 @Component({
   selector: 'app-gading',
@@ -30,6 +31,7 @@ export class GadingComponent {
     private gadingService: GadingService,
     private spinner: NgxSpinnerService,
     private messageService: MessageService,
+    private blockService: BlockService,
     private confirmationService: ConfirmationService
   ) {}
 
@@ -119,7 +121,6 @@ export class GadingComponent {
   }
 
   changeImages() {
-    console.log('>>> change images');
     this.gadingService
       .changeImages(this.gadingSession, this.selectedFiles!, this.imagesDelete)
       .pipe(takeUntil(this.destroy))
@@ -146,91 +147,37 @@ export class GadingComponent {
   }
 
   addPoint() {
-    console.log('>>> this.imagesDelete: ', this.imagesDelete);
     if (this.imagesDelete.length > 0) {
       this.changeImages();
     } else {
-      console.log('add point');
-      if (this.selectedFiles) {
-        this.gadingService
-          .addPoint(this.gadingSession, this.selectedFiles)
-          .pipe(takeUntil(this.destroy))
-          .subscribe(
-            (data) => {
-              this.spinner.hide();
-              this.resetForm();
-              this.messageService.add({
-                severity: 'success',
-                summary: 'Success',
-                detail: 'Edit gading successfully',
-              });
-              this.resetForm();
-              this.getListGadings();
-              console.log('🚀 ~ data:', data);
-            },
-            (error) => {
-              this.spinner.hide();
-              this.messageService.add({
-                severity: 'error',
-                summary: 'Error',
-                detail: error.error.message,
-              });
-            }
-          );
-      }
+      // if (this.selectedFiles) {
+      this.gadingService
+        .addPoint(this.gadingSession, this.selectedFiles!)
+        .pipe(takeUntil(this.destroy))
+        .subscribe(
+          () => {
+            this.spinner.hide();
+            this.resetForm();
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'Edit gading successfully',
+            });
+            this.resetForm();
+            this.getListGadings();
+          },
+          (error) => {
+            this.spinner.hide();
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: error.error.message,
+            });
+          }
+        );
+      // }
     }
   }
-
-  // deleteGading(gadingID: string) {
-  //   this.confirmationService.confirm({
-  //     message: 'Are you sure that you want to delete?',
-  //     header: 'Confirmation',
-  //     icon: 'pi pi-exclamation-triangle',
-  //     accept: () => {
-  //       this.spinner.show();
-  //       this.gadingService
-  //         .deleteGadingByID(gadingID)
-  //         .pipe(takeUntil(this.destroy))
-  //         .subscribe(
-  //           () => {
-  //             this.spinner.hide();
-  //             this.messageService.add({
-  //               severity: 'success',
-  //               summary: 'Success',
-  //               detail: 'Delete gading successfully',
-  //             });
-  //             this.getListGadings();
-  //           },
-  //           (error) => {
-  //             this.spinner.hide();
-  //             this.messageService.add({
-  //               severity: 'error',
-  //               summary: 'Error',
-  //               detail: error.error.message,
-  //             });
-  //           }
-  //         );
-  //     },
-  //     reject: (type: ConfirmEventType) => {
-  //       switch (type) {
-  //         case ConfirmEventType.REJECT:
-  //           this.messageService.add({
-  //             severity: 'error',
-  //             summary: 'Rejected',
-  //             detail: 'You have rejected',
-  //           });
-  //           break;
-  //         case ConfirmEventType.CANCEL:
-  //           this.messageService.add({
-  //             severity: 'warn',
-  //             summary: 'Cancelled',
-  //             detail: 'You have cancelled',
-  //           });
-  //           break;
-  //       }
-  //     },
-  //   });
-  // }
 
   validatePoint(): boolean {
     const math = this.gadingSession.math;
@@ -310,5 +257,39 @@ export class GadingComponent {
     this.gadingSession._id = gading._id;
     this.gadingSession = gading;
     this.isShowAddGading = true;
+  }
+
+  createBlockTemp(gading: IGading) {
+    this.confirmationService.confirm({
+      message: 'Do you want to sign ?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.spinner.show();
+        this.blockService
+          .createBlockTemp(gading)
+          .pipe(takeUntil(this.destroy))
+          .subscribe(
+            () => {
+              this.spinner.hide();
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: 'Sign successfully',
+              });
+              this.getListGadings();
+            },
+            (error) => {
+              this.spinner.hide();
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: error.error.message,
+              });
+            }
+          );
+      },
+      reject: () => {},
+    });
   }
 }

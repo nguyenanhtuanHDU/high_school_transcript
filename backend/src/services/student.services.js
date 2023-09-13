@@ -1,6 +1,7 @@
 const Gading = require("../models/gading");
 const Student = require("../models/student");
 const Teacher = require("../models/teacher");
+const { deleteGadingById } = require("./gading.services");
 
 module.exports = {
   getListStudentByTeacherID: async (teacherID) => {
@@ -79,7 +80,13 @@ module.exports = {
         return "Student not found";
       }
       await Student.findByIdAndRemove(studentID);
-      await Gading.deleteOne({ studentID });
+      await deleteGadingById(studentID)
+        .then((data) => {
+          console.log("🚀 ~ data:", data);
+        })
+        .catch((err) => {
+          console.log("🚀 ~ err:", err);
+        });
       return "OK";
     } catch (error) {
       return "Student not found";

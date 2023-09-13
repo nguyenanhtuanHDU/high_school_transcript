@@ -66,8 +66,6 @@ module.exports = {
         }
       }
 
-      console.log("🚀 ~ images:", images);
-
       if (type === "CHANGE_IMAGES") {
         console.log(">>> CHANGE_IMAGES");
         const imagesDelete = JSON.parse(req.body.imagesDelete);

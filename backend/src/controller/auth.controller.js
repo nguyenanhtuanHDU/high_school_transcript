@@ -9,6 +9,7 @@ module.exports = {
         res.status(200).json({
           status: payload.message,
           data: payload.data,
+          type: payload.type,
         });
       } else {
         res.status(404).json({

@@ -7,6 +7,7 @@ export interface IGading {
   english?: number;
   average?: number;
   images?: string[];
+  isSign: boolean
 }
 
 export interface IGadingEdit {

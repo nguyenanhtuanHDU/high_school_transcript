@@ -3,11 +3,12 @@ const Student = require("../models/student");
 const path = require("path");
 const Teacher = require("../models/teacher");
 const fs = require("fs");
+const { deleteListFiles } = require("./file.services");
 
 const caculatePoint = (a, b, c) => {
   const numA = parseFloat(a);
-  const numB = parseFloat(a);
-  const numC = parseFloat(b);
+  const numB = parseFloat(b);
+  const numC = parseFloat(c);
   const total = numA + numB + numC;
   return (total / 3).toFixed(1);
 };
@@ -120,7 +121,7 @@ module.exports = {
         return "Missing english";
       }
       const imagesData = [];
-      images.map((image, index) => {
+      images && images.length > 0 && images.map((image, index) => {
         fileName = data._id + "-" + (Date.now() + index);
         imagesData.push(fileName + path.extname(image.name));
         uploadPath =
@@ -143,37 +144,37 @@ module.exports = {
   },
 
   changeImages: async (data, imagesDelete, images) => {
-    console.log("🚀 ~ images:", images);
     const gading = await Gading.findById(data._id);
     if (!gading) {
       return "Gading not found";
     }
 
     // delete images
-    const imagesDB = gading.images;
-    console.log("🚀 ~ imagesDB 1:", imagesDB);
+    const imagesDB = [...gading.images];
     imagesDelete.map(async (img, index) => {
       if (imagesDB.includes(img)) {
         imagesDB.splice(index, 1);
-
         fs.unlink("./src/public/images/" + img, function (err) {
           if (err) {
             console.log("🚀 ~ err:", err);
             return "File to delete not found";
           }
         });
-
-        await Gading.findByIdAndUpdate(data._id, {
-          $pull: { images: img },
-        })
-          .then()
+        await Gading.findByIdAndUpdate(
+          data._id,
+          {
+            $pull: { images: img },
+          },
+          { new: true }
+        )
+          .then((data) => {
+            console.log("🚀 ~ data:", data);
+          })
           .catch((err) => {
             console.log("🚀 ~ err:", err);
           });
       }
     });
-
-    // await Gading.findByIdAndUpdate(data._id, { images: imagesDBCopy });
 
     // add new images
     if (images && images.length > 0) {
@@ -196,12 +197,26 @@ module.exports = {
     await Gading.findByIdAndUpdate(data._id, data);
     return "OK";
   },
-  deleteGadingById: async (gadingId) => {
+  editGadingByID: async (gadingID, data) => {
     try {
-      const gading = await Gading.findByIdAndDelete(gadingId);
+      const gading = await Gading.findById(gadingID);
+      if (!gading) {
+        return "GADING NOT FOUND";
+      }
+      await Gading.findByIdAndUpdate(gadingID, data);
+      return "OK";
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      return "ERROR";
+    }
+  },
+  deleteGadingById: async (studentID) => {
+    try {
+      const gading = await Gading.findOne({ studentID });
       if (!gading) {
         return "Gading not found";
       }
+      await deleteListFiles(gading.images);
       return "OK";
     } catch (error) {
       console.log("🚀 ~ error:", error);

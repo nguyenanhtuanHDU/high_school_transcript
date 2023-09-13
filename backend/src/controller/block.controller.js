@@ -7,7 +7,8 @@ module.exports = {
   createBlockTemp: async (req, res) => {
     try {
       const { teacherID } = req.query;
-      const data = req.body;
+      const data = {};
+      data.data = req.body;
       const payload = await createBlockTemp(data, teacherID);
       if (payload === "OK") {
         res.status(200).json({

@@ -4,6 +4,7 @@ const crypto = require("crypto");
 const { getPrivateKey, createSign } = require("./key.services");
 const { getPrincipal } = require("./principal.services");
 const { getTeacherByID } = require("./teacher.services");
+const { editGadingByID } = require("./gading.services");
 
 const isStart = async () => {
   const listBlocks = await Block.find();
@@ -57,9 +58,10 @@ const checkConditionCreateBlock = async (studentID) => {
 };
 
 module.exports = {
-  createBlockTemp: async (data, id) => {
+  createBlockTemp: async (data, teacherID) => {
+    console.log("🚀 ~ data:", data);
     try {
-      const teacher = await getTeacherByID(id);
+      const teacher = await getTeacherByID(teacherID);
       if (!teacher) {
         return "TEACHER NOT FOUND";
       }
@@ -114,6 +116,7 @@ module.exports = {
           data.hashPrevBlock = await getPrevHashBlock();
           data.isVerify = false;
           await createBlock(data);
+          await editGadingByID(data.data._id, { isSign: true });
         } else {
           return "STUDENT ALREADY EXIST";
         }
@@ -127,9 +130,9 @@ module.exports = {
 
   deleteBlockTempByID: async (blockID) => {
     try {
-      const block = await Block.findById(blockID)
-      if(!block){
-        return 'BLOCK TEMP NOT FOUND'
+      const block = await Block.findById(blockID);
+      if (!block) {
+        return "BLOCK TEMP NOT FOUND";
       }
       await Block.findByIdAndRemove(blockID);
       return "OK";
