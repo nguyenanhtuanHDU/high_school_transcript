@@ -8,7 +8,7 @@ import { IGadingEdit, IGadingEditImages } from '../models/gading.interface';
   providedIn: 'root',
 })
 export class GadingService {
-  api: string = environment.apiBackEnd + 'gading/';
+  private api: string = environment.apiBackEnd + 'gading/';
   constructor(private authService: AuthService, private http: HttpClient) {}
 
   getListGadingsByTeacherID() {

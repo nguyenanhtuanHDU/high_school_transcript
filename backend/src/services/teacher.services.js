@@ -14,18 +14,17 @@ module.exports = {
     console.log("🚀 ~ data:", data);
     try {
       if (!data.username) {
-        return "Missing username";
+        return "MISSING USERNAME";
       }
       if (!data.password) {
-        return "Missing password";
+        return "MISSING PASSWORD";
       }
       if (!data.fullName) {
-        return "Missing fullName";
+        return "MISSING FULLNAME";
       }
       const findByUsername = await Teacher.findOne({ username: data.username });
-      console.log("🚀 ~ findByUsername:", findByUsername);
       if (findByUsername) {
-        return "Username already exists";
+        return "USERNAME ALREADY EXISTS";
       }
       const { publicKey, privateKey } = await generateKeysPair();
       data.publicKey = publicKey;

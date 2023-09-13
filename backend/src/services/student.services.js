@@ -77,7 +77,7 @@ module.exports = {
     try {
       const student = await Student.findById(studentID);
       if (!student) {
-        return "Student not found";
+        return "STUDENT NOT FOUND";
       }
       await Student.findByIdAndRemove(studentID);
       await deleteGadingById(studentID)
@@ -89,7 +89,7 @@ module.exports = {
         });
       return "OK";
     } catch (error) {
-      return "Student not found";
+      return "STUDENT NOT FOUND";
     }
   },
 };

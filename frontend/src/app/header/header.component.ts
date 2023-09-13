@@ -6,7 +6,7 @@ import {
   faListCheck,
   faBookMedical,
   faHourglassHalf,
-  faCube
+  faCube,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   ConfirmationService,
@@ -48,32 +48,10 @@ export class HeaderComponent {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.messageService.add({
-          severity: 'info',
-          summary: 'Confirmed',
-          detail: 'You have accepted',
-        });
         this.authService.removeToken('userSessionID');
         this.router.navigate(['sign-in']);
       },
-      reject: (type: any) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Rejected',
-              detail: 'You have rejected',
-            });
-            break;
-          case ConfirmEventType.CANCEL:
-            this.messageService.add({
-              severity: 'warn',
-              summary: 'Cancelled',
-              detail: 'You have cancelled',
-            });
-            break;
-        }
-      },
+      reject: () => {},
     });
   }
 }

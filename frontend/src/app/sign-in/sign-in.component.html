@@ -1,26 +1,48 @@
-<div class="container">
-  <h1 class="mb-5">Sign In</h1>
-  <form
-    [formGroup]="signInForm"
-    (ngSubmit)="signIn()"
-    class="d-flex flex-column gap-5"
-  >
-    <span class="p-float-label">
-      <input pInputText id="username" formControlName="username" autofocus />
-      <label htmlFor="username">Username</label>
-    </span>
-
-    <span class="p-float-label">
-      <p-password
-        [feedback]="false"
-        [toggleMask]="true"
-        formControlName="password"
-      ></p-password>
-      <label for="password">Mật khẩu</label>
-    </span>
-    <button type="submit" pButton pRipple>Sign In Now</button>
-  </form>
-  <button pButton pRipple routerLink="/sign-up">Sign Up</button>
+<div>
+  <div class="img"><img src="../../assets/images/backgrounds/bg-1.jpeg" /></div>
+  <div class="container">
+    <div class="flex-center wrapper">
+      <div class="wrapper-form br-12 px-4 py-5">
+        <h1 class="mb-5 text-center wrapper-form-heading">Sign In</h1>
+        <form
+          [formGroup]="signInForm"
+          (ngSubmit)="signIn()"
+          class="d-flex flex-column gap-5"
+        >
+          <span class="p-float-label">
+            <input
+              pInputText
+              id="username"
+              formControlName="username"
+              autofocus
+              class="w-100"
+            />
+            <label htmlFor="username">Username</label>
+          </span>
+          <span class="p-float-label">
+            <p-password
+              [feedback]="false"
+              [toggleMask]="true"
+              formControlName="password"
+              class="w-100"
+            ></p-password>
+            <label for="password">Password</label>
+          </span>
+          <button type="submit" class="flex-center" pButton pRipple>
+            Sign In Now
+          </button>
+        </form>
+        <button
+          class="w-100 flex-center mt-4 p-button-success"
+          pButton
+          pRipple
+          routerLink="/sign-up"
+        >
+          <span>Sign Up</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <p-toast></p-toast>
+  <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
 </div>
-<p-toast></p-toast>
-<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

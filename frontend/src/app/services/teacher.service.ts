@@ -9,7 +9,7 @@ import { Teacher } from '../models/teacher.interface';
 export class TeacherService {
   constructor(private http: HttpClient) {}
 
-  api: string = environment.apiBackEnd;
+  private api: string = environment.apiBackEnd;
 
   createTeacher(teacher: Teacher) {
     return this.http.post(this.api + 'teacher', teacher);

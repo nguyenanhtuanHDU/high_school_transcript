@@ -1,0 +1,11 @@
+.wrapper {
+  height: 100vh;
+  &-form {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 450px;
+    &-heading {
+      font-size: 36px;
+      font-weight: 600;
+    }
+  }
+}

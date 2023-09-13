@@ -3,7 +3,7 @@
   <table class="styled-table student w-100">
     <thead>
       <tr>
-        <th>ID</th>
+        <th>Number</th>
         <th>Teacher Signature</th>
         <th>Principal Signature</th>
         <th>Data</th>
@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let block of listBlocks">
-        <td>{{ block._id }}</td>
+        <td>{{ block.number }}</td>
         <td>
           <span class="text-overflow">{{ block.signature.teacher }}</span>
         </td>
@@ -31,7 +31,7 @@
           </button>
           <p-overlayPanel #op>
             <div class="d-flex flex-column gap-3">
-              <div *ngIf="block.data">
+              <div *ngIf="block.data && !block.data.studentID">
                 <strong>Data: </strong>
                 <span>{{ block.data }}</span>
               </div>

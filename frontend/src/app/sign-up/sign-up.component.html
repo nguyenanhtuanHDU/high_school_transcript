@@ -1,49 +1,67 @@
 <div class="container">
-  <h1>High School Transcript Management</h1>
-  <form
-    [formGroup]="signUpForm"
-    class="d-flex flex-column gap-5"
-    (ngSubmit)="signUp()"
-  >
-    <span class="p-float-label">
-      <input pInputText id="username" formControlName="username" autofocus />
-      <label htmlFor="username">Username</label>
-    </span>
-
-    <span class="p-float-label">
-      <input pInputText id="fullName" formControlName="fullName" />
-      <label htmlFor="fullName">Full name</label>
-    </span>
-
-    <p-selectButton
-      [options]="jobOptions"
-      optionLabel="label"
-      formControlName="job"
-      optionValue="value"
-    ></p-selectButton>
-
-    <span class="p-float-label">
-      <p-password
-        [feedback]="true"
-        [toggleMask]="true"
-        formControlName="password"
-      ></p-password>
-      <label for="password">Password</label>
-    </span>
-
-    <span class="p-float-label">
-      <p-password
-        formControlName="repeatPassword"
-        [feedback]="true"
-        [toggleMask]="true"
-      ></p-password>
-      <label for="password">Re-enter password</label>
-    </span>
-    <button type="submit" pButton pRipple>Sign Up</button>
-  </form>
-  <button pButton pRipple routerLink="/sign-in" class="p-button-success">
-    Back To Sign In
-  </button>
+  <div class="wrapper flex-center">
+    <div class="wrapper-form br-12 px-4 py-5">
+      <h1 class="wrapper-form-heading mb-4">High School Transcript</h1>
+      <form
+        [formGroup]="signUpForm"
+        class="d-flex flex-column gap-4"
+        (ngSubmit)="signUp()"
+      >
+        <span class="p-float-label">
+          <input
+            pInputText
+            id="username"
+            formControlName="username"
+            autofocus
+            class="w-100"
+          />
+          <label htmlFor="username">Username</label>
+        </span>
+        <span class="p-float-label">
+          <input
+            pInputText
+            id="fullName"
+            formControlName="fullName"
+            class="w-100"
+          />
+          <label htmlFor="fullName">Full name</label>
+        </span>
+        <p-selectButton
+          [options]="jobOptions"
+          optionLabel="label"
+          formControlName="job"
+          optionValue="value"
+        ></p-selectButton>
+        <span class="p-float-label">
+          <p-password
+            [feedback]="true"
+            [toggleMask]="true"
+            formControlName="password"
+          ></p-password>
+          <label for="password">Password</label>
+        </span>
+        <span class="p-float-label">
+          <p-password
+            formControlName="repeatPassword"
+            [feedback]="true"
+            [toggleMask]="true"
+          ></p-password>
+          <label for="password">Re-enter password</label>
+        </span>
+        <button type="submit" class="flex-center" pButton pRipple>
+          Sign Up
+        </button>
+      </form>
+      <button
+        pButton
+        pRipple
+        routerLink="/sign-in"
+        class="p-button-success w-100 mt-3 flex-center"
+      >
+        Back To Sign In
+      </button>
+    </div>
+  </div>
 </div>
 <p-toast></p-toast>
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>

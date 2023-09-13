@@ -2,7 +2,6 @@ const fs = require("fs");
 
 module.exports = {
   deleteListFiles: async (files) => {
-    console.log("🚀 ~ files:", files)
     for (const file of files) {
       const filePath = "./src/public/images/" + file;
       await fs.unlink(filePath, (err) => {

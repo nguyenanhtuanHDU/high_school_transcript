@@ -14,14 +14,14 @@ module.exports = {
     }
     if (!teacher && !principal) {
       return {
-        message: "User not found",
+        message: "USER NOT FOUND",
         data: null,
       };
     }
     const account = teacher || principal;
     if (account.password !== password) {
       return {
-        message: "Incorrect password",
+        message: "INCORRECT PASSWORD",
         data: null,
       };
     }

@@ -112,13 +112,13 @@ module.exports = {
   addPoint: async (data, images) => {
     try {
       if (!data.math) {
-        return "Missing math";
+        return "MISSING MATH";
       }
       if (!data.literature) {
-        return "Missing literature";
+        return "MISSING LITERATURE";
       }
       if (!data.english) {
-        return "Missing english";
+        return "MISSING ENGLISH";
       }
       const imagesData = [];
       images && images.length > 0 && images.map((image, index) => {
@@ -129,7 +129,7 @@ module.exports = {
           fileName +
           path.extname(image.name);
         image.mv(uploadPath, function (err) {
-          if (err) return "Upload file error";
+          if (err) return "UPLOAD FILE ERROR";
         });
       });
       const average = caculatePoint(data.math, data.literature, data.english);
@@ -146,7 +146,7 @@ module.exports = {
   changeImages: async (data, imagesDelete, images) => {
     const gading = await Gading.findById(data._id);
     if (!gading) {
-      return "Gading not found";
+      return "GADING NOT FOUND";
     }
 
     // delete images
@@ -157,7 +157,7 @@ module.exports = {
         fs.unlink("./src/public/images/" + img, function (err) {
           if (err) {
             console.log("🚀 ~ err:", err);
-            return "File to delete not found";
+            return "FILE TO DELETE NOT FOUND";
           }
         });
         await Gading.findByIdAndUpdate(
@@ -187,7 +187,7 @@ module.exports = {
           fileName +
           path.extname(image.name);
         image.mv(uploadPath, function (err) {
-          if (err) return "Upload file error";
+          if (err) return "UPLOAD FILE ERROR";
         });
       });
       data.images = [...data.images, ...imagesData];

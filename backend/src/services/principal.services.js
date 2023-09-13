@@ -13,17 +13,17 @@ module.exports = {
   createSinglePrincipal: async (data) => {
     try {
       if (!data.username) {
-        return "Missing username";
+        return "MISSING USERNAME";
       }
       if (!data.password) {
-        return "Missing password";
+        return "MISSING PASSWORD";
       }
       if (!data.fullName) {
-        return "Missing fullName";
+        return "MISSING FULLNAME";
       }
       const listPrincipals = await Principal.find();
       if (listPrincipals.length > 0) {
-        return "Reaching the limit on the number of principals";
+        return "LIMIT NUMBER OF PRINCIPALS";
       }
       const { publicKey, privateKey } = await generateKeysPair();
       data.publicKey = publicKey;

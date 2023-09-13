@@ -34,21 +34,6 @@ module.exports = {
     }
   },
 
-  demoSignature: () => {
-    // const dataToSign = "Hello, world!";
-    // // Tạo chữ ký bằng khóa riêng tư
-    // const sign = crypto.createSign("RSA-SHA256");
-    // sign.update(dataToSign);
-    // const signature = sign.sign(privateKey, "base64");
-    // // Xác minh chữ ký bằng khóa công khai
-    // const verify = crypto.createVerify("RSA-SHA256");
-    // verify.update(dataToSign);
-    // const isVerified = verify.verify(publicKey, signature, "base64");
-    // console.log("Dữ liệu:", dataToSign);
-    // console.log("Chữ ký:", signature);
-    // console.log("Chữ ký đã được xác minh:", isVerified);
-  },
-
   getPrivateKey: async (username, duty) => {
     let payload = "";
     if (duty !== "teachers" && duty !== "principal") {

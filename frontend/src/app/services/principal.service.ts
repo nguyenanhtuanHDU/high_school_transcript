@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment.development';
 })
 export class PrincipalService {
   constructor(private http: HttpClient) {}
-  api: string = environment.apiBackEnd + 'principal/';
+  private api: string = environment.apiBackEnd + 'principal/';
 
   createPrincipal(principal: Principal) {
     return this.http.post(this.api, principal);

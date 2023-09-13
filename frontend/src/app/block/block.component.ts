@@ -45,15 +45,16 @@ export class BlockComponent {
   destroy = new Subject();
   listBlocks: IBlock[] = [];
   apiImage: string = environment.apiImage;
-
   typeSession: string = '';
 
   getListBlock() {
+    this.spinner.show();
     this.blockService
       .getListBlocks()
       .pipe(takeUntil(this.destroy))
       .subscribe(
         (data: any) => {
+          this.spinner.hide();
           console.log('🚀 ~ data:', data);
           this.listBlocks = data.data;
           this.spinner.hide();

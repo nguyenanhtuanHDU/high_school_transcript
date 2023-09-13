@@ -7,8 +7,8 @@ import { IStudent, IStudentGet } from '../models/student.interface';
   providedIn: 'root',
 })
 export class StudentService {
-  api: string = environment.apiBackEnd + 'student/';
-  apiList: string = 'http://localhost:8000/v1/api/students?teacherID=';
+  private api: string = environment.apiBackEnd + 'student/';
+  private apiList: string = 'http://localhost:8000/v1/api/students?teacherID=';
   constructor(private http: HttpClient) {}
 
   getListStudentsByTeacherID(teacherID: string) {
