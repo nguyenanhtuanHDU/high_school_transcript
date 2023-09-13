@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { StudentComponent } from './student/student.component';
 import { AuthGuard } from './guard/auth.guard';
 import { GadingComponent } from './gading/gading.component';
+import { BlockTempComponent } from './block-temp/block-temp.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -23,6 +24,11 @@ const routes: Routes = [
   {
     path: 'gading',
     component: GadingComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'block/temp',
+    component: BlockTempComponent,
     canActivate: [AuthGuard],
   },
 ];

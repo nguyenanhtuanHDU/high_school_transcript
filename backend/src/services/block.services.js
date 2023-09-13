@@ -58,6 +58,10 @@ const checkConditionCreateBlock = async (studentID) => {
 };
 
 module.exports = {
+  getListBlocksTemp: async () => {
+    const listBlocks = await Block.find({ isVerify: false });
+    return listBlocks;
+  },
   createBlockTemp: async (data, teacherID) => {
     console.log("🚀 ~ data:", data);
     try {

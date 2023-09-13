@@ -1,0 +1,104 @@
+<app-header></app-header>
+<div class="container">
+  <table class="styled-table student w-100">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Teacher Signature</th>
+        <th>Data</th>
+        <th>Hash Prev Block</th>
+        <th>Verify</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let block of listBlocksTemp">
+        <td>{{ block._id }}</td>
+        <td>
+          <span class="text-overflow">{{ block.signature.teacher }}</span>
+        </td>
+        <td>
+          <button
+            pRipple
+            class="btn btn-success text-white student-btn me-2"
+            (click)="op.toggle($event)"
+          >
+            <span class="me-1">Show</span>
+            <fa-icon class="" [icon]="faEye"></fa-icon>
+          </button>
+          <p-overlayPanel #op>
+            <div class="d-flex flex-column gap-3">
+              <div>
+                <strong>ID</strong>:
+                <span>{{ block.data._id }}</span>
+              </div>
+              <div>
+                <strong>Student ID</strong>:
+                <span>{{ block.data.studentID }}</span>
+              </div>
+              <div>
+                <strong>Student Name</strong>:
+                <span>{{ block.data.studentName }}</span>
+              </div>
+              <div>
+                <strong>Math</strong>:
+                <span>{{ block.data.math }}</span>
+              </div>
+              <div>
+                <strong>Literature</strong>:
+                <span>{{ block.data.literature }}</span>
+              </div>
+              <div>
+                <strong>English</strong>:
+                <span>{{ block.data.english }}</span>
+              </div>
+              <div>
+                <strong>Average</strong>:
+                <span>{{ block.data.average }}</span>
+              </div>
+              <div>
+                <strong>Images</strong>:
+                <span class="d-flex gap-2 pt-2">
+                  <div
+                    class="gading-images br-8"
+                    *ngFor="let img of block.data.images"
+                  >
+                    <p-image
+                      [src]="apiImage + img"
+                      [preview]="true"
+                      alt="Image"
+                      width="250"
+                    >
+                      <ng-template pTemplate="indicator">
+                        <i class="pi pi-check"></i>
+                      </ng-template>
+                    </p-image>
+                  </div>
+                </span>
+              </div>
+            </div>
+          </p-overlayPanel>
+        </td>
+
+        <td>
+          <span class="text-overflow">{{ block.hashPrevBlock }}</span>
+        </td>
+        <td>{{ block.data.isVerify ? "Yes" : "No" }}</td>
+        <td>
+          <button
+            pRipple
+            class="btn btn-danger text-white student-btn me-2"
+            (click)="deleteBlockTemp(block._id)"
+          >
+            <span class="me-1">Delete</span>
+            <fa-icon class="" [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+<p-toast></p-toast>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

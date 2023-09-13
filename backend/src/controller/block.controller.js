@@ -1,9 +1,24 @@
 const {
   createBlockTemp,
   deleteBlockTempByID,
+  getListBlocksTemp,
 } = require("../services/block.services");
 
 module.exports = {
+  getListBlockTemp: async (req, res) => {
+    try {
+      const listBlocks = await getListBlocksTemp();
+      res.status(200).json({
+        data: listBlocks,
+      });
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      res.status(400).json({
+        EC: 1,
+        message: "Server error",
+      });
+    }
+  },
   createBlockTemp: async (req, res) => {
     try {
       const { teacherID } = req.query;

@@ -5,6 +5,7 @@ import {
   faRightFromBracket,
   faListCheck,
   faBookMedical,
+  faHourglassHalf,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   ConfirmationService,
@@ -34,6 +35,7 @@ export class HeaderComponent {
   faHome = faHome;
   faListCheck = faListCheck;
   faBookMedical = faBookMedical;
+  faHourglassHalf = faHourglassHalf;
   usernameSession: string = '';
 
   ngOnInit() {

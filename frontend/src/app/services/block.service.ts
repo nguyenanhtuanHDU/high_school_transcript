@@ -12,8 +12,16 @@ export class BlockService {
   private api: string = environment.apiBackEnd + 'block/';
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+  getListBlocksTemp() {
+    return this.http.get(this.api + 'temp/list');
+  }
+
   createBlockTemp(data: IGading) {
-    const teacherID = this.authService.getToken("userSessionID")
-    return this.http.post(this.apiTemp + "?teacherID=" + teacherID, data)
+    const teacherID = this.authService.getToken('userSessionID');
+    return this.http.post(this.apiTemp + '?teacherID=' + teacherID, data);
+  }
+
+  deleteBlockTempByID(blockID: string) {
+    return this.http.delete(this.api + 'temp/' + blockID);
   }
 }

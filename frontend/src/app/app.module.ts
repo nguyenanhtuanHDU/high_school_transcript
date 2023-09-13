@@ -31,6 +31,8 @@ import { GadingComponent } from './gading/gading.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
+import { BlockTempComponent } from './block-temp/block-temp.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -45,6 +47,7 @@ const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
     StudentComponent,
     HeaderComponent,
     GadingComponent,
+    BlockTempComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,8 @@ const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
     CalendarModule,
     InputNumberModule,
     FileUploadModule,
-    ImageModule
+    ImageModule,
+    OverlayPanelModule,
   ],
   providers: [
     CookieService,
