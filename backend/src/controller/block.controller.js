@@ -4,6 +4,7 @@ const {
   getListBlocksTemp,
   updateBlockTempToBlock,
   getListBlocks,
+  getNumberOfUser,
 } = require("../services/block.services");
 
 module.exports = {
@@ -27,6 +28,27 @@ module.exports = {
       res.status(200).json({
         data: listBlocks,
       });
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      res.status(400).json({
+        EC: 1,
+        message: "Server error",
+      });
+    }
+  },
+  getNumberOfUSer: async (req, res) => {
+    try {
+      const payload = await getNumberOfUser();
+      if (payload.message === "OK") {
+        res.status(200).json({
+          data: payload.data,
+        });
+      } else {
+        res.status(400).json({
+          EC: 1,
+          message: payload,
+        });
+      }
     } catch (error) {
       console.log("🚀 ~ error:", error);
       res.status(400).json({

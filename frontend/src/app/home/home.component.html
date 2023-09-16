@@ -1,1 +1,147 @@
 <app-header></app-header>
+<div class="container">
+  <div class="home row flex-center">
+    <div class="col-7">
+      <div class="home-header row">
+        <div class="col-6">
+          <div
+            class="home-header-item br-12 px-5 py-4 d-flex gap-5 mb-4 bg-white text-secondary"
+          >
+            <div class="home-header-item-icon flex-center">
+              <fa-icon
+                class=""
+                style="font-size: 30px"
+                [icon]="faCube"
+              ></fa-icon>
+            </div>
+            <div
+              class="home-header-item-data d-flex flex-column gap-3 justify-content-center align-items-start"
+            >
+              <span
+                class="home-header-item-data-number"
+                *ngIf="listBlock && listBlock.length"
+                >{{ listBlock.length }}</span
+              >
+              <p-skeleton
+                *ngIf="!listBlock"
+                width="10rem"
+                height="4rem"
+              ></p-skeleton>
+
+              <span class="home-header-item-data-title text-uppercase"
+                >blocks</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div
+            class="home-header-item br-12 px-5 py-4 d-flex gap-5 mb-4 bg-white text-secondary"
+          >
+            <div class="home-header-item-icon flex-center">
+              <fa-icon
+                class=""
+                style="font-size: 30px"
+                [icon]="faDatabase"
+              ></fa-icon>
+            </div>
+            <div
+              class="home-header-item-data d-flex flex-column gap-3 align-items-sm-start"
+            >
+              <span
+                class="home-header-item-data-number"
+                *ngIf="listBlock && listBlock.length"
+                >{{ listBlock.length }}</span
+              >
+              <p-skeleton
+                *ngIf="!listBlock"
+                width="10rem"
+                height="4rem"
+              ></p-skeleton>
+
+              <span class="home-header-item-data-title text-uppercase"
+                >transactions</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div
+            class="home-header-item br-12 px-5 py-4 d-flex gap-5 mb-4 bg-white text-secondary"
+          >
+            <div class="home-header-item-icon flex-center">
+              <fa-icon
+                class=""
+                style="font-size: 30px"
+                [icon]="faUsersViewfinder"
+              ></fa-icon>
+            </div>
+            <div
+              class="home-header-item-data d-flex flex-column gap-3 align-items-start"
+            >
+              <span *ngIf="countPrincipals" class="home-header-item-data-number"
+                >1</span
+              >
+              <p-skeleton
+                *ngIf="!countPrincipals"
+                width="10rem"
+                height="4rem"
+              ></p-skeleton>
+              <span class="home-header-item-data-title text-uppercase"
+                >nodes</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div
+            class="home-header-item br-12 px-5 py-4 d-flex gap-5 mb-4 bg-white text-secondary"
+          >
+            <div class="home-header-item-icon flex-center">
+              <fa-icon
+                class=""
+                style="font-size: 30px"
+                [icon]="faUser"
+              ></fa-icon>
+            </div>
+            <div
+              class="home-header-item-data d-flex flex-column gap-3 align-items-start"
+            >
+              <span
+                class="home-header-item-data-number"
+                *ngIf="countPrincipals"
+                >{{ countPrincipals }}</span
+              >
+              <p-skeleton
+                *ngIf="!countPrincipals"
+                width="10rem"
+                height="4rem"
+              ></p-skeleton>
+
+              <span class="home-header-item-data-title text-uppercase"
+                >users</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="home-body d-flex justify-content-end">
+        <div class="home-body-chart">
+          <!-- <p-chart type="doughnut" [data]="data" [options]="options"></p-chart> -->
+          <canvas
+            *ngIf="listBlock && listBlockTemp"
+            baseChart
+            [labels]="doughnutChartLabels"
+            [datasets]="doughnutChartDatasets"
+            [options]="doughnutChartOptions"
+            [legend]="true"
+            [type]="'doughnut'"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

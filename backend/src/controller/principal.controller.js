@@ -1,4 +1,7 @@
-const { createSinglePrincipal } = require("../services/principal.services");
+const {
+  createSinglePrincipal,
+  getNunberOfPrincipals,
+} = require("../services/principal.services");
 
 module.exports = {
   postCreatePrincipal: async (req, res) => {

@@ -20,6 +20,10 @@ export class BlockService {
     return this.http.get(this.apiTemp + 'list');
   }
 
+  getNumberOfUser() {
+    return this.http.get(this.api + 'users');
+  }
+
   createBlockTemp(data: IGading) {
     const teacherID = this.authService.getToken('userSessionID');
     return this.http.post(this.apiTemp + '?teacherID=' + teacherID, data);

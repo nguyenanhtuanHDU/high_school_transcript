@@ -36,6 +36,9 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BlockComponent } from './block/block.component';
 import { TimeAgoPipe } from './share/pipe/time-ago.pipe';
+import { ChartModule } from 'primeng/chart';
+import { NgChartsModule } from 'ng2-charts';
+import { SkeletonModule } from 'primeng/skeleton';
 
 const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -77,6 +80,9 @@ const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
     FileUploadModule,
     ImageModule,
     OverlayPanelModule,
+    ChartModule,
+    NgChartsModule,
+    SkeletonModule,
   ],
   providers: [
     CookieService,

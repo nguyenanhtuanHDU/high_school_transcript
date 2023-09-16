@@ -1,0 +1,23 @@
+.home {
+  margin-top: 150px;
+  &-header {
+    &-item {
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      &-data {
+        &-number {
+          font-size: 36px;
+          font-weight: 600;
+        }
+        &-title {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+  &-body {
+    &-chart {
+      width: 350px;
+      height: 350px;
+    }
+  }
+}

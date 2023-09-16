@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import {
   faHome,
   faRightFromBracket,
@@ -11,7 +10,6 @@ import {
 import {
   ConfirmationService,
   MessageService,
-  ConfirmEventType,
 } from 'primeng/api';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';

@@ -1,6 +1,8 @@
 const express = require("express");
 const { postCreateTeacher } = require("../controller/teacher.controller");
-const { postCreatePrincipal } = require("../controller/principal.controller");
+const {
+  postCreatePrincipal,
+} = require("../controller/principal.controller");
 const {
   postCreateStudent,
   putUpdateStudent,
@@ -19,6 +21,7 @@ const {
   getListBlockTemp,
   createBlock,
   getListBlocks,
+  getNumberOfUSer,
 } = require("../controller/block.controller");
 
 const router = express.Router();
@@ -38,6 +41,7 @@ router.put("/gading", putAddPoint);
 router.delete("/gading/:gadingID", deleteGading);
 
 router.get("/block/list", getListBlocks);
+router.get("/block/users", getNumberOfUSer);
 router.put("/block/:blockID", createBlock);
 
 router.get("/block/temp/list", getListBlockTemp);

@@ -5,6 +5,8 @@ const { getPrivateKey, createSign, compareSign } = require("./key.services");
 const { getPrincipal, getPrincipalByID } = require("./principal.services");
 const { getTeacherByID } = require("./teacher.services");
 const { editGadingByID } = require("./gading.services");
+const Principal = require("../models/principal");
+const Teacher = require("../models/teacher");
 
 const isStart = async () => {
   const listBlocks = await Block.find();
@@ -71,6 +73,22 @@ module.exports = {
   getListBlocksTemp: async () => {
     const listBlocks = await Block.find({ isVerify: false });
     return listBlocks;
+  },
+  getNumberOfUser: async () => {
+    try {
+      const principal = await Principal.find();
+      const teacher = await Teacher.find();
+      return {
+        message: "OK",
+        data: principal.length + teacher.length,
+      };
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      return {
+        message: "ERROR",
+        data: null,
+      };
+    }
   },
   createBlockTemp: async (data, teacherID) => {
     console.log("🚀 ~ data:", data);
