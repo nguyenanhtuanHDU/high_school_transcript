@@ -26,6 +26,7 @@
     "date-fns": "^2.30.0",
     "ng2-charts": "^5.0.3",
     "ngx-chartjs": "^0.0.1",
+    "ngx-clipboard": "^16.0.0",
     "ngx-cookie-service": "^16.0.1",
     "ngx-spinner": "^16.0.2",
     "primeng": "^16.3.1",

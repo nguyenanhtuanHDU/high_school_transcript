@@ -7,10 +7,7 @@ import {
   faHourglassHalf,
   faCube,
 } from '@fortawesome/free-solid-svg-icons';
-import {
-  ConfirmationService,
-  MessageService,
-} from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -46,7 +43,7 @@ export class HeaderComponent {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.authService.removeToken('userSessionID');
+        this.authService.logOut();
         this.router.navigate(['sign-in']);
       },
       reject: () => {},

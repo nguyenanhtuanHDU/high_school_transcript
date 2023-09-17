@@ -5,6 +5,7 @@ import {
   faCube,
   faUsersViewfinder,
   faUser,
+  faCopy,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   Observable,
@@ -19,6 +20,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { IBlock, IBlockTemp } from '../models/block.interface';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { PrincipalService } from '../services/principal.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -31,20 +33,23 @@ export class HomeComponent {
     private titleService: Title,
     private blockService: BlockService,
     private principalService: PrincipalService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authService: AuthService
   ) {
     this.titleService.setTitle('School - Home');
   }
 
   ngOnInit() {
     this.loadData();
-    this.getNumberOfPrincipal()
+    this.getNumberOfPrincipal();
+    this.userPK = this.authService.getToken('userPK');
   }
 
   faCube = faCube;
   faDatabase = faDatabase;
   faUsersViewfinder = faUsersViewfinder;
   faUser = faUser;
+  faCopy = faCopy;
 
   isChart: boolean = false;
   destroy = new Subject();
@@ -53,16 +58,28 @@ export class HomeComponent {
   listBlock!: IBlock[];
   listBlockTemp!: IBlockTemp[];
   countPrincipals!: number;
+  userPK: string = '';
+  visiblePK: boolean = false;
 
   public doughnutChartLabels: string[] = ['Block', 'Block Temp'];
   public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] =
     [{ data: [5, 5] }];
-  // public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] =
-  //   [{ data: [this.listBlock?.length, this.listBlockTemp?.length] }];
 
   public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
     responsive: false,
   };
+
+  showDialogUserPK() {
+    this.visiblePK = true;
+  }
+
+  copyPK() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Copy to clipboard successfully',
+    });
+  }
 
   getListBlock() {
     this.blockService
@@ -141,7 +158,7 @@ export class HomeComponent {
       .pipe(takeUntil(this.destroy))
       .subscribe(
         (data: any) => {
-          console.log("🚀 ~ data:", data)
+          console.log('🚀 ~ data:', data);
           this.countPrincipals = data.data;
         },
         (error) => {

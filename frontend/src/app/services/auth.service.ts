@@ -23,6 +23,10 @@ export class AuthService {
     this.cookieService.delete(tokenName);
   }
 
+  logOut() {
+    this.cookieService.deleteAll();
+  }
+
   signIn(data: ISignIn) {
     return this.http.post(this.apiAuth, data);
   }

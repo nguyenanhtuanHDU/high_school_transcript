@@ -91,6 +91,7 @@ export class SignInComponent {
               this.signInForm.get('username')?.value!
             );
             this.authService.setToken('type', data.type);
+            this.authService.setToken('userPK', data.data.publicKey);
             this.spinner.hide();
             this.messageService.add({
               severity: 'success',

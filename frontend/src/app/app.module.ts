@@ -39,6 +39,7 @@ import { TimeAgoPipe } from './share/pipe/time-ago.pipe';
 import { ChartModule } from 'primeng/chart';
 import { NgChartsModule } from 'ng2-charts';
 import { SkeletonModule } from 'primeng/skeleton';
+import { ClipboardModule } from 'ngx-clipboard';
 
 const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -83,6 +84,7 @@ const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
     ChartModule,
     NgChartsModule,
     SkeletonModule,
+    ClipboardModule
   ],
   providers: [
     CookieService,

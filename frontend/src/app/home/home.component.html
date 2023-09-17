@@ -2,7 +2,31 @@
 <div class="container">
   <div class="home row flex-center">
     <div class="col-7">
-      <div class="home-header row">
+      <p-button
+        (click)="showDialogUserPK()"
+        icon="pi pi-external-link"
+        label="Your Public Key"
+      ></p-button>
+      <p-dialog
+        header="Header"
+        [(visible)]="visiblePK"
+        [style]="{ width: '50vw' }"
+        [modal]="true"
+      >
+        <p id="pk">
+          {{ userPK }}
+        </p>
+        <ng-template pTemplate="footer">
+          <p-button
+          (onClick)="copyPK()"
+            ngxClipboard
+            [cbContent]="userPK"
+            label="Copy"
+            styleClass="p-button-success"
+          ></p-button>
+        </ng-template>
+      </p-dialog>
+      <div class="home-header row mt-4">
         <div class="col-6">
           <div
             class="home-header-item br-12 px-5 py-4 d-flex gap-5 mb-4 bg-white text-secondary"

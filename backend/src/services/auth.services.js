@@ -19,6 +19,7 @@ module.exports = {
       };
     }
     const account = teacher || principal;
+    console.log("🚀 ~ account:", account)
     if (account.password !== password) {
       return {
         message: "INCORRECT PASSWORD",
