@@ -146,7 +146,6 @@ module.exports = {
           data.signature = {
             teacher: teacherSign,
           };
-          data.hashPrevBlock = await getPrevHashBlock();
           data.isVerify = false;
           data.teacherPublicKey = publickey;
           await createBlock(data);
@@ -191,6 +190,7 @@ module.exports = {
       await Block.findByIdAndUpdate(blockID, {
         isVerify: true,
         number,
+        hashPrevBlock: await getPrevHashBlock(),
         "signature.principal": principalSign,
       });
       return "OK";
