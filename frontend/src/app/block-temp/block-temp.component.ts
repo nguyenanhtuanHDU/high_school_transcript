@@ -47,6 +47,8 @@ export class BlockTempComponent {
   apiImage: string = environment.apiImage;
   typeSession: string = '';
   listBlocksTemp: IBlockTemp[] = [];
+  isShowImage: boolean = false;
+  imgSrc: string = '';
 
   getListBlocksTemp() {
     this.spinner.show();
@@ -115,12 +117,12 @@ export class BlockTempComponent {
           .pipe(takeUntil(this.destroy))
           .subscribe(
             () => {
-              this.spinner.hide()
-              this.getListBlocksTemp()
+              this.spinner.hide();
+              this.getListBlocksTemp();
               this.messageService.add({
                 severity: 'success',
                 summary: 'Success',
-                detail: "Sign to block successfully",
+                detail: 'Sign to block successfully',
               });
             },
             (error) => {
@@ -135,5 +137,10 @@ export class BlockTempComponent {
       },
       reject: () => {},
     });
+  }
+
+  displayDialogImage(isShow: boolean, imgSrc: string) {
+    this.isShowImage = isShow;
+    this.imgSrc = imgSrc;
   }
 }

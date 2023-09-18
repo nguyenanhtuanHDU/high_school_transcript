@@ -46,6 +46,8 @@ export class BlockComponent {
   listBlocks: IBlock[] = [];
   apiImage: string = environment.apiImage;
   typeSession: string = '';
+  isShowImage: boolean = false;
+  imgSrc: string = '';
 
   getListBlock() {
     this.spinner.show();
@@ -68,5 +70,9 @@ export class BlockComponent {
           });
         }
       );
+  }
+  displayDialogImage(isShow: boolean, imgSrc: string) {
+    this.isShowImage = isShow;
+    this.imgSrc = imgSrc;
   }
 }

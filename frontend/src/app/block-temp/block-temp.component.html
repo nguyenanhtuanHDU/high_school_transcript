@@ -63,7 +63,14 @@
                     class="gading-images br-8"
                     *ngFor="let img of block.data.images"
                   >
-                    <p-image
+                    <img
+                      [src]="apiImage + img"
+                      alt="Image"
+                      width="250"
+                      (click)="displayDialogImage(true, apiImage + img)"
+                    />
+
+                    <!-- <p-image
                       [src]="apiImage + img"
                       [preview]="true"
                       alt="Image"
@@ -72,7 +79,7 @@
                       <ng-template pTemplate="indicator">
                         <i class="pi pi-check"></i>
                       </ng-template>
-                    </p-image>
+                    </p-image> -->
                   </div>
                 </span>
               </div>
@@ -112,3 +119,10 @@
 <p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
 <p-toast></p-toast>
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<p-dialog
+  [(visible)]="isShowImage"
+  [style]="{ width: '90vw', height: '92vh' }"
+  [modal]="true"
+>
+  <div class="img-show"><img [src]="imgSrc" alt="" /></div>
+</p-dialog>
