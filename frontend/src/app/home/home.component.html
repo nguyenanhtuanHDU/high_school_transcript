@@ -18,7 +18,7 @@
         </p>
         <ng-template pTemplate="footer">
           <p-button
-          (onClick)="copyPK()"
+            (click)="copyPK()"
             ngxClipboard
             [cbContent]="userPK"
             label="Copy"
@@ -169,3 +169,4 @@
     </div>
   </div>
 </div>
+<p-toast></p-toast>

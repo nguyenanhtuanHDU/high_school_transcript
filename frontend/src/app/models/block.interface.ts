@@ -21,4 +21,5 @@ export interface IBlock {
   data: IGading | any;
   hashPrevBlock: String;
   createdAt: Date;
+  updatedAt: Date;
 }

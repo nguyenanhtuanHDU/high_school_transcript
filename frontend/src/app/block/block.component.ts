@@ -57,7 +57,7 @@ export class BlockComponent {
       .subscribe(
         (data: any) => {
           this.spinner.hide();
-          console.log('🚀 ~ data:', data);
+          console.log('🚀 ~ data 2:', data);
           this.listBlocks = data.data;
           this.spinner.hide();
         },

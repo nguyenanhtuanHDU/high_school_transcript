@@ -15,10 +15,26 @@
       <tr *ngFor="let block of listBlocks">
         <td>{{ block.number }}</td>
         <td>
-          <span class="text-overflow">{{ block.signature.teacher }}</span>
+          <span class="text-overflow cursor-p" (click)="op2.toggle($event)">{{
+            block.signature.teacher
+          }}</span>
+          <p-overlayPanel
+            #op2
+            [style]="{ width: '50vw', 'word-wrap': 'break-word' }"
+          >
+            <strong>{{ block.signature.teacher }}</strong>
+          </p-overlayPanel>
         </td>
         <td>
-          <span class="text-overflow">{{ block.signature.principal }}</span>
+          <span class="text-overflow cursor-p" (click)="op3.toggle($event)">{{
+            block.signature.principal
+          }}</span>
+          <p-overlayPanel
+            #op3
+            [style]="{ width: '50vw', 'word-wrap': 'break-word' }"
+          >
+            <strong>{{ block.signature.principal }}</strong>
+          </p-overlayPanel>
         </td>
         <td>
           <button
@@ -93,10 +109,18 @@
           </p-overlayPanel>
         </td>
         <td>
-          <span class="text-overflow">{{ block.hashPrevBlock }}</span>
+          <span class="text-overflow cursor-p" (click)="op4.toggle($event)">{{
+            block.hashPrevBlock
+          }}</span>
+          <p-overlayPanel
+            #op4
+            [style]="{ width: '50vw', 'word-wrap': 'break-word' }"
+          >
+            <strong>{{ block.signature.teacher }}</strong>
+          </p-overlayPanel>
         </td>
         <td>
-          <span>{{ block.createdAt | timeAgo }}</span>
+          <span>{{ block.updatedAt | timeAgo }}</span>
         </td>
       </tr>
     </tbody>
