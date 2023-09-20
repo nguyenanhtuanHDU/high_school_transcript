@@ -210,17 +210,4 @@ module.exports = {
       return "ERROR";
     }
   },
-  deleteGadingById: async (studentID) => {
-    try {
-      const gading = await Gading.findOne({ studentID });
-      if (!gading) {
-        return "Gading not found";
-      }
-      await deleteListFiles(gading.images);
-      return "OK";
-    } catch (error) {
-      console.log("🚀 ~ error:", error);
-      return "ERROR";
-    }
-  },
 };

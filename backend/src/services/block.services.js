@@ -66,7 +66,7 @@ const checkConditionCreateBlock = async (studentID) => {
 module.exports = {
   getListBlocks: async () => {
     const listBlocks = await Block.find({ isVerify: true }).sort({
-      isVerify: 1,
+      number: 1,
     });
     return listBlocks;
   },
