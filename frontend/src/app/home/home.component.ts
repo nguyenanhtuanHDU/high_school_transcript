@@ -74,13 +74,12 @@ export class HomeComponent {
   }
 
   copyPK() {
-    console.log('urun');
-    
     this.messageService.add({
       severity: 'success',
       summary: 'Success',
       detail: 'Copy to clipboard successfully',
     });
+    this.visiblePK = false;
   }
 
   getListBlock() {

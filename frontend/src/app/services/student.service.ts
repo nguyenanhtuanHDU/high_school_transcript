@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
-import { IStudent, IStudentGet } from '../models/student.interface';
+import { IStudent, IStudentEdit } from '../models/student.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class StudentService {
     return this.http.post(this.api, data);
   }
 
-  editStudentByID(student: IStudentGet) {
+  editStudentByID(student: IStudentEdit) {
     const { _id, fullName, birthday } = student;
     return this.http.put(this.api + _id, { fullName, birthday });
   }

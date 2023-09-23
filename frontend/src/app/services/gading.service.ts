@@ -11,6 +11,10 @@ export class GadingService {
   private api: string = environment.apiBackEnd + 'gading/';
   constructor(private authService: AuthService, private http: HttpClient) {}
 
+  getSingleGadingsByStudentID(studentID: string) {
+    return this.http.get(this.api + studentID);
+  }
+
   getListGadingsByTeacherID() {
     const teacherID = this.authService.getToken('userSessionID');
     return this.http.get(this.api + 'gadings/?teacherID=' + teacherID);

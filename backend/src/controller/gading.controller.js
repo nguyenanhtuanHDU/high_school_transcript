@@ -4,9 +4,33 @@ const {
   getListGadingByTeacherID,
   addPoint,
   changeImages,
+  getSingleGadingByStudentID,
 } = require("../services/gading.services");
 
 module.exports = {
+  getSingleGading: async (req, res) => {
+    try {
+      const { studentID } = req.params;
+      const payload = await getSingleGadingByStudentID(studentID);
+      if (payload.message === "OK") {
+        res.status(200).json({
+          message: payload.message,
+          data: payload.data,
+        });
+      } else {
+        res.status(404).json({
+          EC: 1,
+          message: data.payload,
+        });
+      }
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      res.status(400).json({
+        EC: 1,
+        message: "Server error",
+      });
+    }
+  },
   getListGading: async (req, res) => {
     try {
       const { teacherID } = req.query;

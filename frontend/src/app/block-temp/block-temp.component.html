@@ -1,5 +1,20 @@
 <app-header></app-header>
 <div class="container">
+  <div
+    class="student-header d-flex gap-2 align-items-center justify-content-between"
+  >
+    <h2>List Block Temporary</h2>
+    <div>
+      <button
+        pRipple
+        class="btn btn-secondary text-white student-btn me-2"
+        (click)="getListBlocksTemp()"
+      >
+        <span class="me-1">Refresh</span>
+        <fa-icon class="" [icon]="faArrowsRotate"></fa-icon>
+      </button>
+    </div>
+  </div>
   <table class="styled-table student w-100">
     <thead>
       <tr>
@@ -18,7 +33,10 @@
           <span class="text-overflow cursor-p" (click)="op2.toggle($event)">{{
             block.signature.teacher
           }}</span>
-          <p-overlayPanel #op2 [style]="{ width: '50vw', 'word-wrap': 'break-word' }">
+          <p-overlayPanel
+            #op2
+            [style]="{ width: '50vw', 'word-wrap': 'break-word' }"
+          >
             <strong>{{ block.signature.teacher }}</strong>
           </p-overlayPanel>
         </td>
@@ -91,10 +109,14 @@
             </div>
           </p-overlayPanel>
         </td>
-
         <td>
-          <span class="text-overflow cursor-p" (click)="op3.toggle($event)">{{ block.hashPrevBlock }}</span>
-          <p-overlayPanel #op3 [style]="{ width: '50vw', 'word-wrap': 'break-word' }">
+          <span class="text-overflow cursor-p" (click)="op3.toggle($event)">{{
+            block.hashPrevBlock
+          }}</span>
+          <p-overlayPanel
+            #op3
+            [style]="{ width: '50vw', 'word-wrap': 'break-word' }"
+          >
             <strong>{{ block.hashPrevBlock }}</strong>
           </p-overlayPanel>
         </td>
@@ -109,7 +131,20 @@
             <fa-icon class="" [icon]="faTrash"></fa-icon>
           </button>
         </td>
+
         <td *ngIf="typeSession === 'PRINCIPAL'">
+          <button
+            pRipple
+            *ngIf="typeSession === 'PRINCIPAL'"
+            class="btn btn-primary text-white student-btn me-2"
+            (click)="
+              displayDialogCheckStudent(true, block.data.studentID);
+              getGadingCurrtent(block.data)
+            "
+          >
+            <span class="me-1">Check</span>
+            <fa-icon class="" [icon]="faMagnifyingGlass"></fa-icon>
+          </button>
           <button
             pRipple
             class="btn btn-warning text-white student-btn"
@@ -133,4 +168,81 @@
   [modal]="true"
 >
   <div class="img-show"><img [src]="imgSrc" alt="" /></div>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="isCheckStudent"
+  [style]="{ width: '50vw' }"
+  [modal]="true"
+  [header]="headerCheckGading"
+>
+  <div class="d-flex gap-3 justify-content-around">
+    <div class="d-flex flex-column gap-4">
+      <h2>Current Gading</h2>
+      <div class="check-item">
+        <span>Full Name: </span>
+        <strong *ngIf="gadingCurrent && gadingCurrent.studentName">{{
+          gadingCurrent.studentName
+        }}</strong>
+      </div>
+      <div class="check-item">
+        <span>Math: </span>
+        <strong *ngIf="gadingCurrent && gadingCurrent.math">{{
+          gadingCurrent.math
+        }}</strong>
+      </div>
+      <div class="check-item">
+        <span>Literature: </span>
+        <strong *ngIf="gadingCurrent && gadingCurrent.literature">{{
+          gadingCurrent.literature
+        }}</strong>
+      </div>
+      <div class="check-item">
+        <span>English: </span>
+        <strong *ngIf="gadingCurrent && gadingCurrent.english">{{
+          gadingCurrent.english
+        }}</strong>
+      </div>
+      <div class="check-item">
+        <span>Average: </span>
+        <strong *ngIf="gadingCurrent && gadingCurrent.average">{{
+          gadingCurrent.average
+        }}</strong>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column gap-4">
+      <h2>Find Gading</h2>
+      <div class="check-item">
+        <span>Full Name: </span>
+        <strong *ngIf="gadingCheck && gadingCheck.studentName">{{
+          gadingCheck.studentName
+        }}</strong>
+      </div>
+      <div class="check-item">
+        <span>Math: </span>
+        <strong *ngIf="gadingCheck && gadingCheck.math">{{
+          gadingCheck.math
+        }}</strong>
+      </div>
+      <div class="check-item">
+        <span>Literature: </span>
+        <strong *ngIf="gadingCheck && gadingCheck.literature">{{
+          gadingCheck.literature
+        }}</strong>
+      </div>
+      <div class="check-item">
+        <span>English: </span>
+        <strong *ngIf="gadingCheck && gadingCheck.english">{{
+          gadingCheck.english
+        }}</strong>
+      </div>
+      <div class="check-item">
+        <span>Average: </span>
+        <strong *ngIf="gadingCheck && gadingCheck.average">{{
+          gadingCheck.average
+        }}</strong>
+      </div>
+    </div>
+  </div>
 </p-dialog>

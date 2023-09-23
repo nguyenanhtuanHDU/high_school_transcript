@@ -84,3 +84,12 @@
     }
   }
 }
+
+.check {
+  &-item {
+    span {
+      width: 90px;
+      display: inline-block;
+    }
+  }
+}

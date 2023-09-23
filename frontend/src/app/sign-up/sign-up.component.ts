@@ -111,13 +111,14 @@ export class SignUpComponent {
       .createTeacher(teacher)
       .pipe(takeUntil(this.destroy))
       .subscribe(
-        (data: any) => {
+        () => {
           this.spinner.hide();
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
             detail: 'Create accout successfully',
           });
+          this.route.navigate(['sign-in']);
         },
         (error) => {
           this.spinner.hide();
@@ -134,17 +135,20 @@ export class SignUpComponent {
     this.spinner.show();
     this.principalService
       .createPrincipal(principal)
-      .pipe(takeUntil(this.destroy))
+      // .pipe(takeUntil(this.destroy))
       .subscribe(
         (data: any) => {
+          console.log('🚀 ~ data:', data);
           this.spinner.hide();
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
             detail: 'Create accout successfully',
           });
+          this.route.navigate(['sign-in']);
         },
         (error) => {
+          console.log('🚀 ~ error:', error);
           this.spinner.hide();
           this.messageService.add({
             severity: 'error',
@@ -176,11 +180,9 @@ export class SignUpComponent {
       if (this.signUpForm.get('job')?.value === 'Teacher') {
         this.setTeacherData();
         this.createTeacher(this.teacherData);
-        this.route.navigate(['sign-in']);
       } else if (this.signUpForm.get('job')?.value === 'Principal') {
         this.setPrincipalData();
         this.createPrincipal(this.principalData);
-        this.route.navigate(['sign-in']);
       }
     } else {
       return;

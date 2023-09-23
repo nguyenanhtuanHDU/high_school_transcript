@@ -7,7 +7,7 @@ const blockSchema = new mongoose.Schema(
       teacher: { type: String, required: true },
       principal: { type: String },
     },
-    teacherPublicKey: { type: String, required: true },
+    teacherPublicKey: { type: String },
     data: { type: mongoose.Schema.Types.Mixed, required: true },
     hashPrevBlock: String,
     isVerify: { type: Boolean, default: false },

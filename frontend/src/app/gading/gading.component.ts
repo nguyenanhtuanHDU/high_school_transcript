@@ -263,7 +263,10 @@ export class GadingComponent {
 
   createBlockTemp(gading: IGading) {
     this.confirmationService.confirm({
-      message: 'Do you want to sign ?',
+      message:
+        'Do you want to sign to student with full name is: ' +
+        gading.studentName +
+        ' ?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

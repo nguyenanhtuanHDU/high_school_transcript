@@ -14,6 +14,27 @@ const caculatePoint = (a, b, c) => {
 };
 
 module.exports = {
+  getSingleGadingByStudentID: async (studentID) => {
+    try {
+      const student = await Gading.findOne({ studentID });
+      if (!student) {
+        return {
+          data: null,
+          message: "GADING NOT FOUND",
+        };
+      }
+      return {
+        data: student,
+        message: "OK",
+      };
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      return {
+        data: null,
+        message: "ERRORS",
+      };
+    }
+  },
   getListGadingByTeacherID: async (teacherID) => {
     try {
       const teacher = await Teacher.findById(teacherID);
@@ -121,17 +142,19 @@ module.exports = {
         return "MISSING ENGLISH";
       }
       const imagesData = [];
-      images && images.length > 0 && images.map((image, index) => {
-        fileName = data._id + "-" + (Date.now() + index);
-        imagesData.push(fileName + path.extname(image.name));
-        uploadPath =
-          path.join("./src", "public/images/") +
-          fileName +
-          path.extname(image.name);
-        image.mv(uploadPath, function (err) {
-          if (err) return "UPLOAD FILE ERROR";
+      images &&
+        images.length > 0 &&
+        images.map((image, index) => {
+          fileName = data._id + "-" + (Date.now() + index);
+          imagesData.push(fileName + path.extname(image.name));
+          uploadPath =
+            path.join("./src", "public/images/") +
+            fileName +
+            path.extname(image.name);
+          image.mv(uploadPath, function (err) {
+            if (err) return "UPLOAD FILE ERROR";
+          });
         });
-      });
       const average = caculatePoint(data.math, data.literature, data.english);
       data.images = [...data.images, ...imagesData];
       data.average = average;

@@ -46,8 +46,7 @@ module.exports = {
     }
   },
   editStudentByID: async (studentID, data) => {
-    // console.log("🚀 ~ data:", data)
-    console.log("🚀 ~ studentID:", studentID);
+    console.log("🚀 ~ data:", data);
     try {
       const student = await Student.findById(studentID);
       if (!student) {
@@ -60,12 +59,7 @@ module.exports = {
       if (!data.birthday) {
         return "Missing birthday";
       }
-      const res = await Student.findByIdAndUpdate(studentID, data, {});
-
-      console.log("🚀 ~ res:", res);
-      // student.fullName = data.fullName;
-      // student.birthday = data.birthday;
-      await student.save();
+      await Student.findByIdAndUpdate(studentID, data);
       return "OK";
     } catch (error) {
       console.log("🚀 ~ error:", error);
@@ -73,6 +67,9 @@ module.exports = {
     }
   },
 
+  editVerifyStudent: async (studentID, isSign) => {
+    await Student.findByIdAndUpdate(studentID, { isSign });
+  },
   deleteStudentByID: async (studentID) => {
     try {
       const student = await Student.findById(studentID);

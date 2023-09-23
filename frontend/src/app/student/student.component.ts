@@ -195,9 +195,12 @@ export class StudentComponent {
         );
   }
 
-  deleteStudent(studentID: string) {
+  deleteStudent(studentID: string, studentName: string) {
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to delete?',
+      message:
+        'Do you want to delete student with full name is: ' +
+        studentName +
+        ' ?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

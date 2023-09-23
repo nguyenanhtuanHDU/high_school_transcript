@@ -54,9 +54,13 @@ module.exports = {
   },
 
   createSign: async (privateKey, data) => {
+    // Tạo một đối tượng dùng để tạo chữ ký với thuật toán RSA-SHA256
     const sign = crypto.createSign("RSA-SHA256");
+    // Cập nhật đối tượng chữ ký với dữ liệu đầu vào, dữ liệu được chuyển thành dạng chuỗi
     sign.update(JSON.stringify(data));
+    // Tạo chữ ký bằng cách sử dụng khóa bí mật và mã hóa kết quả dưới định dạng base64
     const signature = sign.sign(privateKey, "base64");
+    // Trả về chữ ký đã tạo
     return signature;
   },
 
@@ -64,9 +68,6 @@ module.exports = {
     const verify = crypto.createVerify("RSA-SHA256");
     verify.update(JSON.stringify(data));
     const isVerified = verify.verify(publicKey, signature, "base64");
-    if (isVerified) {
-      return true;
-    }
-    return false;
+    return isVerified;
   },
 };

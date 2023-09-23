@@ -5,7 +5,7 @@ import { IBlock, IBlockTemp } from '../models/block.interface';
 import { environment } from 'src/environments/environment.development';
 import { BlockService } from '../services/block.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsRotate, faEye } from '@fortawesome/free-solid-svg-icons';
 import { Title } from '@angular/platform-browser';
 import { AuthService } from '../services/auth.service';
 
@@ -41,6 +41,7 @@ export class BlockComponent {
   }
 
   faEye = faEye;
+  faArrowsRotate = faArrowsRotate;
 
   destroy = new Subject();
   listBlocks: IBlock[] = [];

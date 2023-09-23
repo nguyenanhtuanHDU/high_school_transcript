@@ -45,6 +45,7 @@
           <button
             pRipple
             class="btn btn-secondary text-white student-btn me-2"
+            [disabled]="student.isSign"
             (click)="showFormEditStudent(student)"
           >
             <span class="me-1">Edit</span>
@@ -52,8 +53,9 @@
           </button>
           <button
             pRipple
+            [disabled]="student.isSign"
             class="btn btn-danger text-white student-btn"
-            (click)="deleteStudent(student._id)"
+            (click)="deleteStudent(student._id, student.fullName)"
           >
             <span class="me-1">Delete</span>
             <fa-icon class="" [icon]="faTrash"></fa-icon>

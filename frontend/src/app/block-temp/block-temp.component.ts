@@ -9,9 +9,13 @@ import {
   faTrash,
   faEye,
   faFileSignature,
+  faArrowsRotate,
+  faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import { Title } from '@angular/platform-browser';
 import { AuthService } from '../services/auth.service';
+import { IGading } from '../models/gading.interface';
+import { GadingService } from '../services/gading.service';
 
 @Component({
   selector: 'app-block-temp',
@@ -22,6 +26,7 @@ import { AuthService } from '../services/auth.service';
 export class BlockTempComponent {
   constructor(
     private blockService: BlockService,
+    private gadingService: GadingService,
     private spinner: NgxSpinnerService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
@@ -42,13 +47,19 @@ export class BlockTempComponent {
   faTrash = faTrash;
   faEye = faEye;
   faFileSignature = faFileSignature;
+  faArrowsRotate = faArrowsRotate;
+  faMagnifyingGlass = faMagnifyingGlass;
 
   destroy = new Subject();
   apiImage: string = environment.apiImage;
   typeSession: string = '';
   listBlocksTemp: IBlockTemp[] = [];
   isShowImage: boolean = false;
+  isCheckStudent: boolean = false;
   imgSrc: string = '';
+  gadingCheck!: IGading;
+  gadingCurrent!: IGading;
+  headerCheckGading: string = '';
 
   getListBlocksTemp() {
     this.spinner.show();
@@ -73,7 +84,7 @@ export class BlockTempComponent {
 
   deleteBlockTemp(blockID: string) {
     this.confirmationService.confirm({
-      message: 'Do you want to sign ?',
+      message: 'Do you want to delete ?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -142,5 +153,34 @@ export class BlockTempComponent {
   displayDialogImage(isShow: boolean, imgSrc: string) {
     this.isShowImage = isShow;
     this.imgSrc = imgSrc;
+  }
+
+  getGading(studentID: string) {
+    this.gadingService
+      .getSingleGadingsByStudentID(studentID)
+      .pipe(takeUntil(this.destroy))
+      .subscribe(
+        (data: any) => {
+          this.gadingCheck = data.data;
+        },
+        (error) => {
+          this.spinner.hide();
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: error.error.message,
+          });
+        }
+      );
+  }
+
+  displayDialogCheckStudent(isShow: boolean, studentID: string) {
+    this.getGading(studentID);
+    this.headerCheckGading = 'Find gading by studentID: ' + studentID;
+    this.isCheckStudent = isShow;
+  }
+
+  getGadingCurrtent(gading: IGading) {
+    this.gadingCurrent = gading;
   }
 }

@@ -7,6 +7,7 @@ const { getTeacherByID } = require("./teacher.services");
 const { editGadingByID } = require("./gading.services");
 const Principal = require("../models/principal");
 const Teacher = require("../models/teacher");
+const { editStudentByID, editVerifyStudent } = require("./student.services");
 
 const isStart = async () => {
   const listBlocks = await Block.find();
@@ -91,14 +92,12 @@ module.exports = {
     }
   },
   createBlockTemp: async (data, teacherID) => {
-    console.log("🚀 ~ data:", data);
     try {
       const teacher = await getTeacherByID(teacherID);
-      const publickey = teacher.publicKey;
       if (!teacher) {
         return "TEACHER NOT FOUND";
       }
-
+      const publickey = teacher.publicKey;
       const teacherPrivateKey = await getPrivateKey(
         teacher.username,
         "teachers"
@@ -106,27 +105,22 @@ module.exports = {
       if (teacherPrivateKey.includes("ERROR")) {
         return "CAN NOT GET TEACHER PRIVATE KEY";
       }
-
       const principalPrivateKey = await getPrincipalPrivateKey();
       if (principalPrivateKey.includes("ERROR")) {
         return "CAN NOT GET PRINCIPAL PRIVATE KEY";
       }
 
-      // khi chưa có block nào
       if (await isStart()) {
         data.number = 1;
         data.data = "tuanna";
-
         const teacherSign = await createSign(teacherPrivateKey, data.data);
         if (!teacherSign) {
           return "CAN NOT CREATE TEACHER SIGN";
         }
-
         const principalSign = await createSign(principalPrivateKey, data.data);
         if (!principalSign) {
           return "CAN NOT PRINCIPAL TEACHER SIGN";
         }
-
         if (teacherSign && principalSign) {
           data.isVerify = true;
         }
@@ -142,7 +136,9 @@ module.exports = {
           if (!teacherSign) {
             return "CAN NOT CREATE TEACHER SIGN";
           }
-          // data.number = await getNextNumer();
+          if (!data.data.average) {
+            return "NO DATA TO SIGN";
+          }
           data.signature = {
             teacher: teacherSign,
           };
@@ -150,6 +146,7 @@ module.exports = {
           data.teacherPublicKey = publickey;
           await createBlock(data);
           await editGadingByID(data.data._id, { isSign: true });
+          await editVerifyStudent(data.data.studentID, true);
         } else {
           return "STUDENT ALREADY EXIST";
         }
@@ -176,7 +173,6 @@ module.exports = {
         return "Signature is false or data is changed";
       }
       const number = await getNextNumer();
-      console.log("🚀 ~ number:", number);
       if (number === "ERROR NUMBER") {
         return number;
       }
@@ -186,7 +182,6 @@ module.exports = {
         "principal"
       );
       const principalSign = await createSign(principalPrivateKey, block.data);
-
       await Block.findByIdAndUpdate(blockID, {
         isVerify: true,
         number,
@@ -207,6 +202,7 @@ module.exports = {
         return "BLOCK TEMP NOT FOUND";
       }
       await editGadingByID(block.data._id, { isSign: false });
+      await editVerifyStudent(block.data.studentID, false);
       await Block.findByIdAndRemove(blockID);
       return "OK";
     } catch (error) {

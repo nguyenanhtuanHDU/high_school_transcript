@@ -1,8 +1,6 @@
 const express = require("express");
 const { postCreateTeacher } = require("../controller/teacher.controller");
-const {
-  postCreatePrincipal,
-} = require("../controller/principal.controller");
+const { postCreatePrincipal } = require("../controller/principal.controller");
 const {
   postCreateStudent,
   putUpdateStudent,
@@ -14,6 +12,7 @@ const {
   deleteGading,
   getListGading,
   putAddPoint,
+  getSingleGading,
 } = require("../controller/gading.controller");
 const {
   createBlockTemp,
@@ -35,6 +34,7 @@ router.post("/student", postCreateStudent);
 router.put("/student/:studentID", putUpdateStudent);
 router.delete("/student/:studentID", deleteSingleStudent);
 
+router.get("/gading/:studentID", getSingleGading);
 router.get("/gading/gadings", getListGading);
 router.post("/gading", postCreateGading);
 router.put("/gading", putAddPoint);
