@@ -20,7 +20,7 @@ module.exports = {
       } else {
         res.status(404).json({
           EC: 1,
-          message: data.payload,
+          message: payload.message,
         });
       }
     } catch (error) {

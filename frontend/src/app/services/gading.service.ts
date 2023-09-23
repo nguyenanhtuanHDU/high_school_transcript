@@ -12,7 +12,7 @@ export class GadingService {
   constructor(private authService: AuthService, private http: HttpClient) {}
 
   getSingleGadingsByStudentID(studentID: string) {
-    return this.http.get(this.api + studentID);
+    return this.http.get(this.api + 'find/' + studentID);
   }
 
   getListGadingsByTeacherID() {

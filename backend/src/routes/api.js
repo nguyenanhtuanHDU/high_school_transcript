@@ -34,7 +34,7 @@ router.post("/student", postCreateStudent);
 router.put("/student/:studentID", putUpdateStudent);
 router.delete("/student/:studentID", deleteSingleStudent);
 
-router.get("/gading/:studentID", getSingleGading);
+router.get("/gading/find/:studentID", getSingleGading);
 router.get("/gading/gadings", getListGading);
 router.post("/gading", postCreateGading);
 router.put("/gading", putAddPoint);
