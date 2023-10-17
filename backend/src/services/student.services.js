@@ -9,7 +9,7 @@ module.exports = {
     return students;
   },
   getListStudentByTeacherID: async (teacherID) => {
-    console.log("🚀 ~ teacherID:", teacherID)
+    console.log("🚀 ~ teacherID:", teacherID);
     try {
       const students = await Student.find({ teacherID }).sort({
         createdAt: -1,
@@ -24,6 +24,9 @@ module.exports = {
         data: null,
       };
     }
+  },
+  getNumberOfStudent: async () => {
+    return (await Student.find()).length;
   },
   createSingleStudent: async (data) => {
     try {

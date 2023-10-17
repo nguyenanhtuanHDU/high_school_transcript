@@ -90,34 +90,7 @@
             </div>
           </div>
         </div>
-        <div class="col-6">
-          <div
-            class="home-header-item br-12 px-5 py-4 d-flex gap-5 mb-4 bg-white text-secondary"
-          >
-            <div class="home-header-item-icon flex-center">
-              <fa-icon
-                class=""
-                style="font-size: 30px"
-                [icon]="faUsersViewfinder"
-              ></fa-icon>
-            </div>
-            <div
-              class="home-header-item-data d-flex flex-column gap-3 align-items-start"
-            >
-              <span *ngIf="countPrincipals" class="home-header-item-data-number"
-                >1</span
-              >
-              <p-skeleton
-                *ngIf="!countPrincipals"
-                width="10rem"
-                height="4rem"
-              ></p-skeleton>
-              <span class="home-header-item-data-title text-uppercase"
-                >nodes</span
-              >
-            </div>
-          </div>
-        </div>
+
         <div class="col-6">
           <div
             class="home-header-item br-12 px-5 py-4 d-flex gap-5 mb-4 bg-white text-secondary"
@@ -145,6 +118,35 @@
 
               <span class="home-header-item-data-title text-uppercase"
                 >users</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div
+            class="home-header-item br-12 px-5 py-4 d-flex gap-5 mb-4 bg-white text-secondary"
+          >
+            <div class="home-header-item-icon flex-center">
+              <fa-icon
+                class=""
+                style="font-size: 30px"
+                [icon]="faUsersViewfinder"
+              ></fa-icon>
+            </div>
+            <div
+              class="home-header-item-data d-flex flex-column gap-3 align-items-start"
+            >
+              <span *ngIf="countStudent" class="home-header-item-data-number">{{
+                countStudent
+              }}</span>
+              <p-skeleton
+                *ngIf="!countStudent"
+                width="10rem"
+                height="4rem"
+              ></p-skeleton>
+              <span class="home-header-item-data-title text-uppercase"
+                >students</span
               >
             </div>
           </div>

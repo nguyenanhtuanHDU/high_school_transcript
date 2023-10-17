@@ -8,11 +8,16 @@ import { IStudent, IStudentEdit } from '../models/student.interface';
 })
 export class StudentService {
   private api: string = environment.apiBackEnd + 'student/';
+  private api2: string = environment.apiBackEnd + 'students/';
   private apiList: string = 'http://localhost:8000/v1/api/students?teacherID=';
   constructor(private http: HttpClient) {}
 
   getListStudentsByTeacherID(teacherID: string) {
     return this.http.get(this.apiList + teacherID);
+  }
+
+  getNumberOfStudent() {
+    return this.http.get(this.api2 + 'count');
   }
 
   createStudent(data: IStudent) {

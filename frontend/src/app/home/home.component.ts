@@ -21,6 +21,7 @@ import { IBlock, IBlockTemp } from '../models/block.interface';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { PrincipalService } from '../services/principal.service';
 import { AuthService } from '../services/auth.service';
+import { StudentService } from '../services/student.service';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +35,8 @@ export class HomeComponent {
     private blockService: BlockService,
     private principalService: PrincipalService,
     private messageService: MessageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private studentService: StudentService
   ) {
     this.titleService.setTitle('School - Home');
   }
@@ -42,6 +44,7 @@ export class HomeComponent {
   ngOnInit() {
     this.loadData();
     this.getNumberOfPrincipal();
+    this.getNumberOfStudent();
     this.userPK = this.authService.getToken('userPK');
     this.userType = this.authService.getToken('type');
   }
@@ -59,6 +62,7 @@ export class HomeComponent {
   listBlock!: IBlock[];
   listBlockTemp!: IBlockTemp[];
   countPrincipals!: number;
+  countStudent!: number;
   userPK: string = '';
   visiblePK: boolean = false;
   userType: string = '';
@@ -121,6 +125,15 @@ export class HomeComponent {
           });
         }
       );
+  }
+
+  getNumberOfStudent() {
+    this.studentService
+      .getNumberOfStudent()
+      .pipe(takeUntil(this.destroy))
+      .subscribe((data: any) => {
+        this.countStudent = data.data;
+      });
   }
 
   loadData() {

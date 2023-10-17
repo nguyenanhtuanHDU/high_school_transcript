@@ -12,6 +12,7 @@ const {
   putUpdateStudent,
   deleteSingleStudent,
   getListStudent,
+  getNumberOfStudent,
 } = require("../controller/student.controller");
 const {
   postCreateGading,
@@ -50,6 +51,7 @@ router.post("/principal", postCreatePrincipal);
 router.delete("/principal/:principalID", verifyAdmin, deletePrincipal);
 
 router.get("/students", getListStudent);
+router.get("/students/count", getNumberOfStudent);
 router.post("/student", postCreateStudent);
 router.put("/student/:studentID", putUpdateStudent);
 router.delete("/student/:studentID", deleteSingleStudent);
