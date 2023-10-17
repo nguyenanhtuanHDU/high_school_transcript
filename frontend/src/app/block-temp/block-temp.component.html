@@ -18,17 +18,16 @@
   <table class="styled-table student w-100">
     <thead>
       <tr>
-        <th>ID</th>
+        <th>Teacher</th>
         <th>Teacher Signature</th>
         <th>Data</th>
-        <th>Hash Prev Block</th>
         <th>Verify</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let block of listBlocksTemp">
-        <td>{{ block._id }}</td>
+        <td>{{ block.teacherUsername }}</td>
         <td>
           <span class="text-overflow cursor-p" (click)="op2.toggle($event)">{{
             block.signature.teacher
@@ -92,40 +91,19 @@
                       width="250"
                       (click)="displayDialogImage(true, apiImage + img)"
                     />
-
-                    <!-- <p-image
-                      [src]="apiImage + img"
-                      [preview]="true"
-                      alt="Image"
-                      width="250"
-                    >
-                      <ng-template pTemplate="indicator">
-                        <i class="pi pi-check"></i>
-                      </ng-template>
-                    </p-image> -->
                   </div>
                 </span>
               </div>
             </div>
           </p-overlayPanel>
         </td>
-        <td>
-          <span class="text-overflow cursor-p" (click)="op3.toggle($event)">{{
-            block.hashPrevBlock
-          }}</span>
-          <p-overlayPanel
-            #op3
-            [style]="{ width: '50vw', 'word-wrap': 'break-word' }"
-          >
-            <strong>{{ block.hashPrevBlock }}</strong>
-          </p-overlayPanel>
-        </td>
         <td>{{ block.data.isVerify ? "Yes" : "No" }}</td>
-        <td *ngIf="typeSession === 'TEACHER'">
+        <td *ngIf="typeSession === 'TEACHER' || 'ADMIN'">
           <button
             pRipple
             class="btn btn-danger text-white student-btn me-2"
             (click)="deleteBlockTemp(block._id)"
+            [disabled]="userSessionUsername !== block.teacherUsername && typeSession != 'ADMIN'"
           >
             <span class="me-1">Delete</span>
             <fa-icon class="" [icon]="faTrash"></fa-icon>
@@ -148,6 +126,7 @@
           <button
             pRipple
             class="btn btn-warning text-white student-btn"
+            [disabled]="gadingCheck && checkGading()"
             (click)="createBlock(block._id)"
           >
             <span class="me-1">Sign</span>
@@ -244,5 +223,25 @@
         }}</strong>
       </div>
     </div>
+  </div>
+  <div class="flex-center mt-4">
+    <button
+      pButton
+      pRipple
+      *ngIf="gadingCheck && checkGading()"
+      label="Match"
+      icon="pi pi-check"
+      iconPos="right"
+      class="p-button-success"
+    ></button>
+    <button
+      pButton
+      pRipple
+      *ngIf="gadingCheck && !checkGading()"
+      label="Not Match"
+      icon="pi pi-times"
+      iconPos="right"
+      class="p-button-danger"
+    ></button>
   </div>
 </p-dialog>

@@ -26,17 +26,25 @@ export class BlockService {
 
   createBlockTemp(data: IGading) {
     const teacherID = this.authService.getToken('userSessionID');
-    return this.http.post(this.apiTemp + '?teacherID=' + teacherID, data);
+    return this.http.post(this.apiTemp + '?teacherID=' + teacherID, data, {
+      withCredentials: true,
+    });
   }
 
   createBlock(blockID: string) {
     const principalID = this.authService.getToken('userSessionID');
-    return this.http.put(this.api + blockID + '?principalID=' + principalID, {
-      isVerify: true,
-    });
+    return this.http.put(
+      this.api + blockID + '?principalID=' + principalID,
+      {
+        isVerify: true,
+      },
+      { withCredentials: true }
+    );
   }
 
   deleteBlockTempByID(blockID: string) {
-    return this.http.delete(this.api + 'temp/' + blockID);
+    return this.http.delete(this.api + 'temp/' + blockID, {
+      withCredentials: true,
+    });
   }
 }

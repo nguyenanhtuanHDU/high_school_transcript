@@ -43,6 +43,7 @@ export class HomeComponent {
     this.loadData();
     this.getNumberOfPrincipal();
     this.userPK = this.authService.getToken('userPK');
+    this.userType = this.authService.getToken('type');
   }
 
   faCube = faCube;
@@ -60,6 +61,7 @@ export class HomeComponent {
   countPrincipals!: number;
   userPK: string = '';
   visiblePK: boolean = false;
+  userType: string = '';
 
   public doughnutChartLabels: string[] = ['Block', 'Block Temp'];
   public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] =

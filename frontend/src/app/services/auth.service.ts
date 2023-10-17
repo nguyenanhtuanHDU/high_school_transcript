@@ -28,6 +28,6 @@ export class AuthService {
   }
 
   signIn(data: ISignIn) {
-    return this.http.post(this.apiAuth, data);
+    return this.http.post(this.apiAuth, data, { withCredentials: true });
   }
 }

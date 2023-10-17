@@ -6,6 +6,7 @@ import {
   faBookMedical,
   faHourglassHalf,
   faCube,
+  faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AuthService } from '../services/auth.service';
@@ -30,12 +31,13 @@ export class HeaderComponent {
   faBookMedical = faBookMedical;
   faHourglassHalf = faHourglassHalf;
   faCube = faCube;
+  faUsers = faUsers;
   usernameSession: string = '';
-  typeSession: string = '';
+  userType: string = '';
 
   ngOnInit() {
     this.usernameSession = this.authService.getToken('userSessionUsername');
-    this.typeSession = this.authService.getToken('type');
+    this.userType = this.authService.getToken('type');
   }
   logOut() {
     this.confirmationService.confirm({

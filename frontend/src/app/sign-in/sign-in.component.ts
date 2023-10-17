@@ -85,13 +85,7 @@ export class SignInComponent {
         .pipe(takeUntil(this.destroy))
         .subscribe(
           (data: any) => {
-            this.authService.setToken('userSessionID', data.data._id);
-            this.authService.setToken(
-              'userSessionUsername',
-              this.signInForm.get('username')?.value!
-            );
-            this.authService.setToken('type', data.type);
-            this.authService.setToken('userPK', data.data.publicKey);
+            console.log('🚀 ~ data:', data);
             this.spinner.hide();
             this.messageService.add({
               severity: 'success',

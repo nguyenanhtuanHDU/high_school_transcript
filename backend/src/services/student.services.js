@@ -4,7 +4,12 @@ const Teacher = require("../models/teacher");
 const { deleteGadingById, editGadingByID } = require("./gading.services");
 
 module.exports = {
+  getAllStudents: async () => {
+    const students = await Student.find();
+    return students;
+  },
   getListStudentByTeacherID: async (teacherID) => {
+    console.log("🚀 ~ teacherID:", teacherID)
     try {
       const students = await Student.find({ teacherID }).sort({
         createdAt: -1,
@@ -80,7 +85,7 @@ module.exports = {
     try {
       const student = await Student.findById(studentID);
       if (!student) {
-        return "STUDENT NOT FOUND";
+        return "Student not found";
       }
       await Student.findByIdAndRemove(studentID);
       await deleteGadingById(studentID)
@@ -92,7 +97,7 @@ module.exports = {
         });
       return "OK";
     } catch (error) {
-      return "STUDENT NOT FOUND";
+      return "Student not found";
     }
   },
 };

@@ -6,6 +6,13 @@ module.exports = {
       const { username, password } = req.body;
       const payload = await findUser(username, password);
       if (payload.message === "OK") {
+        res.cookie("type", payload.type);
+        res.cookie("userSessionUsername", payload.data.username);
+        res.cookie("userSessionID", payload.data._id.toString());
+        if (payload.type !== "ADMIN") {
+          res.cookie("userPK", payload.data.publicKey);
+        }
+
         res.status(200).json({
           status: payload.message,
           data: payload.data,

@@ -10,6 +10,7 @@ module.exports = {
     try {
       const { teacherID } = req.query;
       const payload = await getListStudentByTeacherID(teacherID);
+      console.log("🚀 ~ payload:", payload)
       if (!payload.data) {
         res.status(404).json({
           EC: 1,

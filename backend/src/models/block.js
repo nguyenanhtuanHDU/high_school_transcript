@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const blockSchema = new mongoose.Schema(
   {
     number: { type: String },
+    teacherUsername: { type: String },
+    principalUsername: { type: String },
     signature: {
       teacher: { type: String, required: true },
       principal: { type: String },

@@ -3,6 +3,7 @@
   <div class="home row flex-center">
     <div class="col-7">
       <p-button
+        *ngIf="userType !== 'ADMIN'"
         (click)="showDialogUserPK()"
         icon="pi pi-external-link"
         label="Your Public Key"

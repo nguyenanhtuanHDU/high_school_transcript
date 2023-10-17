@@ -14,4 +14,10 @@ export class PrincipalService {
   createPrincipal(principal: Principal) {
     return this.http.post(this.api, principal);
   }
+
+  deletePrincipal(principalID: string) {
+    return this.http.delete(this.api + principalID, {
+      withCredentials: true,
+    });
+  }
 }

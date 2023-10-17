@@ -9,9 +9,15 @@ import { Teacher } from '../models/teacher.interface';
 export class TeacherService {
   constructor(private http: HttpClient) {}
 
-  private api: string = environment.apiBackEnd;
+  private apiTeacher: string = environment.apiBackEnd + 'teacher/';
 
   createTeacher(teacher: Teacher) {
-    return this.http.post(this.api + 'teacher', teacher);
+    return this.http.post(this.apiTeacher, teacher);
+  }
+
+  deleteTeacher(teacherID: string) {
+    return this.http.delete(this.apiTeacher + teacherID, {
+      withCredentials: true,
+    });
   }
 }

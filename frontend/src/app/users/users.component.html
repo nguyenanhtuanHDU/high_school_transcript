@@ -1,0 +1,152 @@
+<app-header></app-header>
+<div class="container">
+  <div
+    class="student-header d-flex gap-2 align-items-center justify-content-between"
+  ></div>
+
+  <p-tabView>
+    <p-tabPanel header="Principal">
+      <div class="w-100 d-flex justify-content-end">
+        <button
+          pRipple
+          class="btn btn-secondary text-white student-btn me-2"
+          (click)="getAllUser()"
+        >
+          <span class="me-1">Refresh</span>
+          <fa-icon class="" [icon]="faArrowsRotate"></fa-icon>
+        </button>
+      </div>
+      <table class="styled-table student w-100">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Full name</th>
+            <th>Public Key</th>
+            <th>Role Sign</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="listPrincipals && listPrincipals.length > 0">
+          <tr *ngFor="let principal of listPrincipals">
+            <td *ngIf="principal && principal._id">{{ principal._id }}</td>
+            <td *ngIf="principal && principal.username">
+              {{ principal.username }}
+            </td>
+            <td *ngIf="principal && principal.password">
+              {{ principal.password | hiddenString }}
+            </td>
+            <td *ngIf="principal && principal.fullName">
+              {{ principal.fullName }}
+            </td>
+            <td *ngIf="principal && principal.publicKey">
+              <span
+                class="text-overflow cursor-p"
+                (click)="op2.toggle($event)"
+                >{{ principal.publicKey }}</span
+              >
+              <p-overlayPanel
+                #op2
+                [style]="{ width: '50vw', 'word-wrap': 'break-word' }"
+              >
+                <strong>{{ principal.publicKey }}</strong>
+              </p-overlayPanel>
+            </td>
+            <td>
+              <div (click)="editRoleSign(!principal.roleSign, principal._id!)">
+                <p-inputSwitch
+                  class="flex-center-y align-items-start"
+                  [(ngModel)]="principal.roleSign"
+                ></p-inputSwitch>
+              </div>
+            </td>
+            <td>
+              <button
+                pRipple
+                class="btn btn-danger text-white student-btn"
+                (click)="deletePrincipal(principal._id!, principal.username)"
+              >
+                <span class="me-1">Delete</span>
+                <fa-icon class="" [icon]="faTrash"></fa-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </p-tabPanel>
+    <p-tabPanel header="Teacher">
+      <div class="w-100 d-flex justify-content-end">
+        <button
+          pRipple
+          class="btn btn-secondary text-white student-btn me-2"
+          (click)="getAllUser()"
+        >
+          <span class="me-1">Refresh</span>
+          <fa-icon class="" [icon]="faArrowsRotate"></fa-icon>
+        </button>
+      </div>
+      <table class="styled-table student w-100">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Full name</th>
+            <th>Public Key</th>
+            <th>Role Sign</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="listTeachers && listTeachers.length > 0">
+          <tr *ngFor="let teacher of listTeachers">
+            <td *ngIf="teacher && teacher._id">{{ teacher._id }}</td>
+            <td *ngIf="teacher && teacher.username">
+              {{ teacher.username }}
+            </td>
+            <td *ngIf="teacher && teacher.password">
+              {{ teacher.password | hiddenString }}
+            </td>
+            <td *ngIf="teacher && teacher.fullName">
+              {{ teacher.fullName }}
+            </td>
+            <td *ngIf="teacher && teacher.publicKey">
+              <span
+                class="text-overflow cursor-p"
+                (click)="op2.toggle($event)"
+                >{{ teacher.publicKey }}</span
+              >
+              <p-overlayPanel
+                #op2
+                [style]="{ width: '50vw', 'word-wrap': 'break-word' }"
+              >
+                <strong>{{ teacher.publicKey }}</strong>
+              </p-overlayPanel>
+            </td>
+            <td>
+              <div (click)="editRoleSign(!teacher.roleSign, teacher._id!)">
+                <p-inputSwitch
+                  class="flex-center-y align-items-start"
+                  [(ngModel)]="teacher.roleSign"
+                ></p-inputSwitch>
+              </div>
+            </td>
+            <td>
+              <button
+                pRipple
+                class="btn btn-danger text-white student-btn"
+                (click)="deleteTeacher(teacher._id!, teacher.username)"
+              >
+                <span class="me-1">Delete</span>
+                <fa-icon class="" [icon]="faTrash"></fa-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody></table
+    ></p-tabPanel>
+  </p-tabView>
+</div>
+
+<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+<p-toast></p-toast>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

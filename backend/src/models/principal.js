@@ -6,6 +6,7 @@ const principalSchema = new mongoose.Schema(
     password: { type: String, required: true },
     fullName: { type: String, required: true },
     publicKey: { type: String, unique: true },
+    roleSign: { type: Boolean, default: false },
   },
   {
     timestamps: true,

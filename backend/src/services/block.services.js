@@ -75,6 +75,9 @@ module.exports = {
     const listBlocks = await Block.find({ isVerify: false });
     return listBlocks;
   },
+  getBlockByID: async (blockID) => {
+    return await Block.findById(blockID);
+  },
   getNumberOfUser: async () => {
     try {
       const principal = await Principal.find();
@@ -95,7 +98,7 @@ module.exports = {
     try {
       const teacher = await getTeacherByID(teacherID);
       if (!teacher) {
-        return "TEACHER NOT FOUND";
+        return "Teacher not found";
       }
       const publickey = teacher.publicKey;
       const teacherPrivateKey = await getPrivateKey(
@@ -103,11 +106,11 @@ module.exports = {
         "teachers"
       );
       if (teacherPrivateKey.includes("ERROR")) {
-        return "CAN NOT GET TEACHER PRIVATE KEY";
+        return "Can not get teacher private key";
       }
       const principalPrivateKey = await getPrincipalPrivateKey();
       if (principalPrivateKey.includes("ERROR")) {
-        return "CAN NOT GET PRINCIPAL PRIVATE KEY";
+        return "Can not get principal private key";
       }
 
       if (await isStart()) {
@@ -115,11 +118,11 @@ module.exports = {
         data.data = "tuanna";
         const teacherSign = await createSign(teacherPrivateKey, data.data);
         if (!teacherSign) {
-          return "CAN NOT CREATE TEACHER SIGN";
+          return "Can not create teacher sign";
         }
         const principalSign = await createSign(principalPrivateKey, data.data);
         if (!principalSign) {
-          return "CAN NOT PRINCIPAL TEACHER SIGN";
+          return "Can not create principal sign";
         }
         if (teacherSign && principalSign) {
           data.isVerify = true;
@@ -134,21 +137,22 @@ module.exports = {
         if (await checkConditionCreateBlock(data.data.studentID)) {
           const teacherSign = await createSign(teacherPrivateKey, data.data);
           if (!teacherSign) {
-            return "CAN NOT CREATE TEACHER SIGN";
+            return "Can not create teacher sign";
           }
           if (!data.data.average) {
-            return "NO DATA TO SIGN";
+            return "No data to sign";
           }
           data.signature = {
             teacher: teacherSign,
           };
           data.isVerify = false;
           data.teacherPublicKey = publickey;
+          data.teacherUsername = teacher.username;
           await createBlock(data);
           await editGadingByID(data.data._id, { isSign: true });
           await editVerifyStudent(data.data.studentID, true);
         } else {
-          return "STUDENT ALREADY EXIST";
+          return "Student already exist";
         }
       }
       return "OK";
@@ -162,7 +166,7 @@ module.exports = {
     try {
       const block = await Block.findById(blockID);
       if (!block) {
-        return "BLOCK NOT FOUND";
+        return "Block not found";
       }
       const isVerified = await compareSign(
         block.data,
@@ -199,7 +203,7 @@ module.exports = {
     try {
       const block = await Block.findById(blockID);
       if (!block) {
-        return "BLOCK TEMP NOT FOUND";
+        return "Block temp not found";
       }
       await editGadingByID(block.data._id, { isSign: false });
       await editVerifyStudent(block.data.studentID, false);

@@ -12,16 +12,22 @@
             <span class="ms-1">Home</span></a
           >
         </li>
-        <li *ngIf="typeSession === 'TEACHER'">
+        <li *ngIf="userType === 'TEACHER'">
           <a routerLink="/student" routerLinkActive="header-navbar-active">
             <fa-icon class="" [icon]="faListCheck"></fa-icon>
             <span class="ms-1">Student</span></a
           >
         </li>
-        <li *ngIf="typeSession === 'TEACHER'">
+        <li *ngIf="userType === 'TEACHER'">
           <a routerLink="/gading" routerLinkActive="header-navbar-active">
             <fa-icon class="" [icon]="faBookMedical"></fa-icon>
             <span class="ms-1">Gading</span></a
+          >
+        </li>
+        <li *ngIf="userType === 'ADMIN'">
+          <a routerLink="/users" routerLinkActive="header-navbar-active">
+            <fa-icon class="" [icon]="faUsers"></fa-icon>
+            <span class="ms-1">Users</span></a
           >
         </li>
         <li>
@@ -48,8 +54,9 @@
   >
     <div class="header-user-name">
       <span class="">
-        <strong *ngIf="typeSession === 'TEACHER'">Teacher: </strong>
-        <strong *ngIf="typeSession === 'PRINCIPAL'">Principal: </strong>
+        <strong *ngIf="userType === 'TEACHER'">Teacher: </strong>
+        <strong *ngIf="userType === 'PRINCIPAL'">Principal: </strong>
+        <strong *ngIf="userType === 'ADMIN'">Admin: </strong>
         {{ usernameSession }}</span
       >
     </div>

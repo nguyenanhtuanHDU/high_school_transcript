@@ -2,6 +2,8 @@ import { IGading } from './gading.interface';
 
 export interface IBlockTemp {
   _id: string;
+  teacherUsername: string;
+  principalUsername: string;
   signature: {
     teacher: string;
   };
@@ -14,6 +16,8 @@ export interface IBlockTemp {
 export interface IBlock {
   _id: string;
   number: string;
+  teacherUsername: string;
+  principalUsername: string;
   signature: {
     teacher: string;
     principal: string;

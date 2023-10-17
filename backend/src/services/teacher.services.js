@@ -1,7 +1,19 @@
 const Teacher = require("../models/teacher");
+const { deleteFileKeyByUsername } = require("./file.services");
 const { generateKeysPair, writePrivateKeyToFile } = require("./key.services");
 
 module.exports = {
+  findTeacherByID: async (teacherID) => {
+    const teacher = await Teacher.findById(teacherID);
+    if (!teacher) {
+      return null;
+    }
+    return teacher;
+  },
+  getAllTeacher: async () => {
+    const teachers = await Teacher.find();
+    return teachers;
+  },
   getTeacherByID: async (teacherID) => {
     const teacher = await Teacher.findById(teacherID);
     if (!teacher) {
@@ -14,17 +26,17 @@ module.exports = {
     console.log("🚀 ~ data:", data);
     try {
       if (!data.username) {
-        return "MISSING USERNAME";
+        return "Missing username";
       }
       if (!data.password) {
-        return "MISSING PASSWORD";
+        return "Missing passowrd";
       }
       if (!data.fullName) {
-        return "MISSING FULLNAME";
+        return "Missing fullname";
       }
       const findByUsername = await Teacher.findOne({ username: data.username });
       if (findByUsername) {
-        return "USERNAME ALREADY EXISTS";
+        return "Username already exists";
       }
       const { publicKey, privateKey } = await generateKeysPair();
       data.publicKey = publicKey;
@@ -35,5 +47,27 @@ module.exports = {
       console.log("🚀 ~ error:", error);
       return "ERROR";
     }
+  },
+  editTeacher: async (teacherID, data) => {
+    console.log("🚀 ~ data:", data);
+    const teacher = await Teacher.findById(teacherID);
+    if (!teacher) {
+      return {
+        message: "Teacher not found",
+      };
+    }
+    const res = await Teacher.findByIdAndUpdate(teacherID, data);
+    console.log("🚀 ~ res:", res);
+    return {
+      message: "OK",
+    };
+  },
+  deleteTeacherByID: async (teacherID) => {
+    const teacher = await Teacher.findById(teacherID);
+    if (!teacher) {
+      return "Teacher not found";
+    }
+    await deleteFileKeyByUsername(teacher.username, "teachers");
+    await Teacher.findByIdAndDelete(teacherID);
   },
 };

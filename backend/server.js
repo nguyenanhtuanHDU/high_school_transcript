@@ -1,7 +1,10 @@
 require("dotenv").config();
+const cookieParser = require('cookie-parser');
 const express = require("express");
 const http = require("http");
 const app = express();
+app.use(cookieParser());
+
 const server = http.createServer(app);
 const mongoose = require("mongoose");
 
@@ -18,18 +21,15 @@ const hostname = process.env.HOST_NAME;
 
 const apiRoute = require("./src/routes/api");
 const authRoute = require("./src/routes/auth");
-// const uploadRoute = require('./routes/fileUpload');
 const path = require("path");
 
 app.get("/", (req, res) => {
-  res.send("Welcome to tuanna-blog");
+  res.send("Author: tuanna");
 });
 
-// app.use(cookies());
 app.use(express.static(path.join('./src', 'public')));
 app.use("/v1/api", apiRoute);
 app.use("/auth", authRoute);
-// app.use('/upload', uploadRoute);
 
 (async () => {
   try {

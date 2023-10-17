@@ -10,6 +10,7 @@ import { GadingComponent } from './gading/gading.component';
 import { BlockTempComponent } from './block-temp/block-temp.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BlockComponent } from './block/block.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -17,6 +18,11 @@ const routes: Routes = [
   {
     path: 'sign-in',
     component: SignInComponent,
+  },
+  {
+    path: 'users',
+    component: UsersComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'student',

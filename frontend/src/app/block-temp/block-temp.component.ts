@@ -11,6 +11,7 @@ import {
   faFileSignature,
   faArrowsRotate,
   faMagnifyingGlass,
+  faCircleCheck,
 } from '@fortawesome/free-solid-svg-icons';
 import { Title } from '@angular/platform-browser';
 import { AuthService } from '../services/auth.service';
@@ -38,6 +39,7 @@ export class BlockTempComponent {
   ngOnInit() {
     this.getListBlocksTemp();
     this.typeSession = this.authService.getToken('type');
+    this.userSessionUsername = this.authService.getToken('userSessionUsername');
   }
   ngOndestroy() {
     this.destroy.next(true);
@@ -49,6 +51,7 @@ export class BlockTempComponent {
   faFileSignature = faFileSignature;
   faArrowsRotate = faArrowsRotate;
   faMagnifyingGlass = faMagnifyingGlass;
+  faCircleCheck = faCircleCheck;
 
   destroy = new Subject();
   apiImage: string = environment.apiImage;
@@ -60,6 +63,7 @@ export class BlockTempComponent {
   gadingCheck!: IGading;
   gadingCurrent!: IGading;
   headerCheckGading: string = '';
+  userSessionUsername: string = '';
 
   getListBlocksTemp() {
     this.spinner.show();
@@ -182,5 +186,19 @@ export class BlockTempComponent {
 
   getGadingCurrtent(gading: IGading) {
     this.gadingCurrent = gading;
+  }
+
+  checkGading(): boolean {
+    if (
+      this.gadingCheck.studentName === this.gadingCurrent.studentName &&
+      this.gadingCheck.studentID === this.gadingCurrent.studentID &&
+      this.gadingCheck.math === this.gadingCurrent.math &&
+      this.gadingCheck.literature === this.gadingCurrent.literature &&
+      this.gadingCheck.english === this.gadingCurrent.english &&
+      this.gadingCheck.average === this.gadingCurrent.average
+    ) {
+      return true;
+    }
+    return false;
   }
 }

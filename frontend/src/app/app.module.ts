@@ -40,6 +40,10 @@ import { ChartModule } from 'primeng/chart';
 import { NgChartsModule } from 'ng2-charts';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ClipboardModule } from 'ngx-clipboard';
+import { UsersComponent } from './users/users.component';
+import { HiddenStringPipe } from './share/pipe/hidden-string.pipe';
+import { TabViewModule } from 'primeng/tabview';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -58,6 +62,8 @@ const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
     PageNotFoundComponent,
     BlockComponent,
     TimeAgoPipe,
+    UsersComponent,
+    HiddenStringPipe,
   ],
   imports: [
     BrowserModule,
@@ -84,7 +90,9 @@ const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
     ChartModule,
     NgChartsModule,
     SkeletonModule,
-    ClipboardModule
+    ClipboardModule,
+    TabViewModule,
+    InputSwitchModule
   ],
   providers: [
     CookieService,

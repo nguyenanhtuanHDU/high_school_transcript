@@ -20,7 +20,7 @@ module.exports = {
       if (!student) {
         return {
           data: null,
-          message: "GADING NOT FOUND",
+          message: "Gading not found",
         };
       }
       return {
@@ -133,13 +133,13 @@ module.exports = {
   addPoint: async (data, images) => {
     try {
       if (!data.math) {
-        return "MISSING MATH";
+        return "Missing math";
       }
       if (!data.literature) {
-        return "MISSING LITERATURE";
+        return "Missing litrature";
       }
       if (!data.english) {
-        return "MISSING ENGLISH";
+        return "Missing english";
       }
       const imagesData = [];
       images &&
@@ -152,7 +152,7 @@ module.exports = {
             fileName +
             path.extname(image.name);
           image.mv(uploadPath, function (err) {
-            if (err) return "UPLOAD FILE ERROR";
+            if (err) return "Upload file error";
           });
         });
       const average = caculatePoint(data.math, data.literature, data.english);
@@ -169,7 +169,7 @@ module.exports = {
   changeImages: async (data, imagesDelete, images) => {
     const gading = await Gading.findById(data._id);
     if (!gading) {
-      return "GADING NOT FOUND";
+      return "Gading not found";
     }
 
     // delete images
@@ -180,7 +180,7 @@ module.exports = {
         fs.unlink("./src/public/images/" + img, function (err) {
           if (err) {
             console.log("🚀 ~ err:", err);
-            return "FILE TO DELETE NOT FOUND";
+            return "File to delete not found";
           }
         });
         await Gading.findByIdAndUpdate(
@@ -210,7 +210,7 @@ module.exports = {
           fileName +
           path.extname(image.name);
         image.mv(uploadPath, function (err) {
-          if (err) return "UPLOAD FILE ERROR";
+          if (err) return "Upload file error";
         });
       });
       data.images = [...data.images, ...imagesData];
@@ -224,7 +224,7 @@ module.exports = {
     try {
       const gading = await Gading.findById(gadingID);
       if (!gading) {
-        return "GADING NOT FOUND";
+        return "Gading not found";
       }
       await Gading.findByIdAndUpdate(gadingID, data);
       return "OK";

@@ -1,4 +1,7 @@
-const { createSingleTeacher } = require("../services/teacher.services");
+const {
+  createSingleTeacher,
+  deleteTeacherByID,
+} = require("../services/teacher.services");
 
 module.exports = {
   postCreateTeacher: async (req, res) => {
@@ -16,6 +19,22 @@ module.exports = {
           message,
         });
       }
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      res.status(400).json({
+        EC: 1,
+        message: "Server error",
+      });
+    }
+  },
+  deleteTeacher: async (req, res) => {
+    try {
+      const { teacherID } = req.params;
+      await deleteTeacherByID(teacherID);
+      res.status(200).json({
+        EC: 0,
+        message: "OK",
+      });
     } catch (error) {
       console.log("🚀 ~ error:", error);
       res.status(400).json({
