@@ -48,6 +48,23 @@ module.exports = {
       return "ERROR";
     }
   },
+  toggleActiveTeacher: async (teacherID) => {
+    try {
+      const teacher = await Teacher.findById(teacherID);
+      if (!teacher) {
+        return {
+          message: "Teacher not found",
+        };
+      }
+      await Teacher.findByIdAndUpdate(teacherID, {
+        isActive: !teacher.isActive,
+      });
+      return "OK";
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      return "ERROR";
+    }
+  },
   editTeacher: async (teacherID, data) => {
     console.log("🚀 ~ data:", data);
     const teacher = await Teacher.findById(teacherID);

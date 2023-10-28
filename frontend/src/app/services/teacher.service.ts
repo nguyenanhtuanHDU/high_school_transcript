@@ -15,6 +15,14 @@ export class TeacherService {
     return this.http.post(this.apiTeacher, teacher);
   }
 
+  activeTeacher(teacherID: string) {
+    return this.http.post(
+      this.apiTeacher + 'active/' + teacherID,
+      {},
+      { withCredentials: true }
+    );
+  }
+
   deleteTeacher(teacherID: string) {
     return this.http.delete(this.apiTeacher + teacherID, {
       withCredentials: true,

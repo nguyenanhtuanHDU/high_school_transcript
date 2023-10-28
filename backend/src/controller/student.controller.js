@@ -4,9 +4,26 @@ const {
   deleteStudentByID,
   getListStudentByTeacherID,
   getNumberOfStudent,
+  getAllStudents,
 } = require("../services/student.services");
 
 module.exports = {
+  getAllStudent: async (req, res) => {
+    try {
+      const students = await getAllStudents();
+      res.status(200).json({
+        EC: 0,
+        message: "OK",
+        data: students,
+      });
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      res.status(400).json({
+        EC: 1,
+        message: "Server error",
+      });
+    }
+  },
   getListStudent: async (req, res) => {
     try {
       const { teacherID } = req.query;

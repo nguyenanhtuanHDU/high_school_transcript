@@ -3,7 +3,7 @@
   <div class="container">
     <div class="wrapper flex-center">
       <div class="wrapper-form br-12 px-4 py-5">
-        <h1 class="wrapper-form-heading mb-4">High School Transcript</h1>
+        <h1 class="wrapper-form-heading mb-5 text-center">Sign Up</h1>
         <form
           [formGroup]="signUpForm"
           class="d-flex flex-column gap-4"
@@ -50,7 +50,7 @@
             ></p-password>
             <label for="password">Re-enter password</label>
           </span>
-          <button type="submit" class="flex-center" pButton pRipple>
+          <button type="submit" class="flex-center fw-bold" pButton pRipple>
             Sign Up
           </button>
         </form>
@@ -58,7 +58,7 @@
           pButton
           pRipple
           routerLink="/sign-in"
-          class="p-button-success w-100 mt-3 flex-center"
+          class="p-button-success w-100 mt-3 flex-center fw-bold"
         >
           Back To Sign In
         </button>

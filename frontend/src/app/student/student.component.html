@@ -41,7 +41,7 @@
         <td>{{ student._id }}</td>
         <td>{{ student.fullName }}</td>
         <td>{{ student.birthday | date : "dd/MM/yyyy" }}</td>
-        <td>
+        <td [ngClass]="{ 'cursor-n': student.isSign }">
           <button
             pRipple
             class="btn btn-secondary text-white student-btn me-2"

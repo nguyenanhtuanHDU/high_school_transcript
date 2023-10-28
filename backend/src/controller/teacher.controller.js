@@ -1,6 +1,8 @@
 const {
   createSingleTeacher,
   deleteTeacherByID,
+  activeTeacher,
+  toggleActiveTeacher,
 } = require("../services/teacher.services");
 
 module.exports = {
@@ -8,6 +10,29 @@ module.exports = {
     try {
       const data = req.body;
       let message = await createSingleTeacher(data);
+      if (message === "OK") {
+        res.status(200).json({
+          EC: 0,
+          message,
+        });
+      } else {
+        res.status(400).json({
+          EC: 1,
+          message,
+        });
+      }
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      res.status(400).json({
+        EC: 1,
+        message: "Server error",
+      });
+    }
+  },
+  postToggleActiveTeacher: async (req, res) => {
+    try {
+      const { teacherID } = req.params;
+      let message = await toggleActiveTeacher(teacherID);
       if (message === "OK") {
         res.status(200).json({
           EC: 0,

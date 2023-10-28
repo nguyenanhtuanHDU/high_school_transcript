@@ -98,22 +98,10 @@
           </p-overlayPanel>
         </td>
         <td>{{ block.data.isVerify ? "Yes" : "No" }}</td>
-        <td *ngIf="typeSession === 'TEACHER' || 'ADMIN'">
+        <td>
           <button
             pRipple
-            class="btn btn-danger text-white student-btn me-2"
-            (click)="deleteBlockTemp(block._id)"
-            [disabled]="userSessionUsername !== block.teacherUsername && typeSession != 'ADMIN'"
-          >
-            <span class="me-1">Delete</span>
-            <fa-icon class="" [icon]="faTrash"></fa-icon>
-          </button>
-        </td>
-
-        <td *ngIf="typeSession === 'PRINCIPAL'">
-          <button
-            pRipple
-            *ngIf="typeSession === 'PRINCIPAL'"
+            *ngIf="['ADMIN', 'PRINCIPAL'].includes(typeSession)"
             class="btn btn-primary text-white student-btn me-2"
             (click)="
               displayDialogCheckStudent(true, block.data.studentID);
@@ -124,6 +112,7 @@
             <fa-icon class="" [icon]="faMagnifyingGlass"></fa-icon>
           </button>
           <button
+            *ngIf="typeSession === 'PRINCIPAL'"
             pRipple
             class="btn btn-warning text-white student-btn"
             [disabled]="gadingCheck && checkGading()"
@@ -131,6 +120,16 @@
           >
             <span class="me-1">Sign</span>
             <fa-icon class="" [icon]="faFileSignature"></fa-icon>
+          </button>
+
+          <button
+            pRipple
+            class="btn btn-danger text-white student-btn ms-2"
+            (click)="deleteBlockTemp(block._id)"
+            [disabled]="isDeleteBlockTemp(block.teacherUsername)"
+          >
+            <span class="me-1">Delete</span>
+            <fa-icon class="" [icon]="faTrash"></fa-icon>
           </button>
         </td>
       </tr>

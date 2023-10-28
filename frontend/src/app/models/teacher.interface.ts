@@ -5,4 +5,5 @@ export interface Teacher {
   fullName: string;
   publicKey?: string;
   roleSign?: string;
+  isActive?: boolean;
 }

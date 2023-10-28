@@ -201,4 +201,17 @@ export class BlockTempComponent {
     }
     return false;
   }
+
+  isDeleteBlockTemp(teacherUsername: string): boolean {
+    if (
+      this.typeSession == 'TEACHER' &&
+      this.userSessionUsername !== teacherUsername
+    ) {
+      return false;
+    }
+    if (['ADMIN', 'PRINCIPAL'].includes(this.typeSession)) {
+      return false;
+    }
+    return true;
+  }
 }

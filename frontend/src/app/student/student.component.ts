@@ -54,9 +54,11 @@ export class StudentComponent {
   studentEdit!: IStudentGet;
   students!: IStudentGet[];
   headingForm: string = '';
+  userType: string = '';
 
   ngOnInit() {
     this.teacherIDSession = this.authService.getToken('userSessionID');
+    this.userType = this.authService.getToken('type');
     this.getListStudent();
   }
 
@@ -117,13 +119,23 @@ export class StudentComponent {
 
   getListStudent() {
     this.spinner.show();
-    this.studentService
-      .getListStudentsByTeacherID(this.teacherIDSession)
-      .pipe(takeUntil(this.destroy))
-      .subscribe((data: any) => {
-        this.spinner.hide();
-        this.students = data.data;
-      });
+    if (this.userType == 'ADMIN') {
+      this.studentService
+        .getAllStudents()
+        .pipe(takeUntil(this.destroy))
+        .subscribe((data: any) => {
+          this.spinner.hide();
+          this.students = data.data;
+        });
+    } else {
+      this.studentService
+        .getListStudentsByTeacherID(this.teacherIDSession)
+        .pipe(takeUntil(this.destroy))
+        .subscribe((data: any) => {
+          this.spinner.hide();
+          this.students = data.data;
+        });
+    }
   }
 
   addStudent() {

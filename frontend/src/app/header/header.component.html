@@ -12,7 +12,7 @@
             <span class="ms-1">Home</span></a
           >
         </li>
-        <li *ngIf="userType === 'TEACHER'">
+        <li *ngIf="['ADMIN', 'TEACHER'].includes(userType)">
           <a routerLink="/student" routerLinkActive="header-navbar-active">
             <fa-icon class="" [icon]="faListCheck"></fa-icon>
             <span class="ms-1">Student</span></a
@@ -24,11 +24,12 @@
             <span class="ms-1">Gading</span></a
           >
         </li>
-        <li *ngIf="userType === 'ADMIN'">
+        <li *ngIf="['ADMIN', 'PRINCIPAL'].includes(userType)">
           <a routerLink="/users" routerLinkActive="header-navbar-active">
             <fa-icon class="" [icon]="faUsers"></fa-icon>
-            <span class="ms-1">Users</span></a
-          >
+            <span class="ms-1" *ngIf="userType === 'ADMIN'">Users</span>
+            <span class="ms-1" *ngIf="userType === 'PRINCIPAL'">Teachers</span>
+          </a>
         </li>
         <li>
           <a routerLink="/block/temp" routerLinkActive="header-navbar-active">

@@ -75,8 +75,13 @@ body {
   justify-content: center;
   align-items: center;
 }
-.cursor-p {
-  cursor: pointer;
+.cursor {
+  &-p {
+    cursor: pointer;
+  }
+  &-n {
+    cursor: no-drop;
+  }
 }
 
 .hover-1 {

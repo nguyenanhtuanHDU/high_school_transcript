@@ -23,6 +23,12 @@ module.exports = {
         data: null,
       };
     }
+    if ((teacher && !teacher.isActive) || (principal && !principal.isActive)) {
+      return {
+        message: "User have not permission",
+        data: null,
+      };
+    }
     const account = teacher || principal || admin;
     if (account.password !== password) {
       return {

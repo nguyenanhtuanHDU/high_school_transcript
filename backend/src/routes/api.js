@@ -2,10 +2,13 @@ const express = require("express");
 const {
   postCreateTeacher,
   deleteTeacher,
+  postActiveTeacher,
+  postToggleActiveTeacher,
 } = require("../controller/teacher.controller");
 const {
   postCreatePrincipal,
   deletePrincipal,
+  postToggleActivePrincipal,
 } = require("../controller/principal.controller");
 const {
   postCreateStudent,
@@ -13,6 +16,7 @@ const {
   deleteSingleStudent,
   getListStudent,
   getNumberOfStudent,
+  getAllStudent,
 } = require("../controller/student.controller");
 const {
   postCreateGading,
@@ -33,23 +37,42 @@ const {
   getListUsers,
   editRoleSign,
 } = require("../controller/admin.controller");
-const { verifyAdmin } = require("../middleware/admin");
+const { verifyAdmin, verifyAdminOrPrincipal } = require("../middleware/admin");
 const {
   verifyRoleSign,
   verifyDeleteBlockTemp,
 } = require("../middleware/block");
+const Teacher = require("../models/teacher");
+const Principal = require("../models/principal");
 
 const router = express.Router();
 
+router.post("/all", async (req, res) => {
+  await Teacher.updateMany({}, { isActive: true });
+  await Principal.updateMany({}, { isActive: true });
+  res.send("OK");
+});
+
 router.get("/admin/users", getListUsers);
-router.post("/admin/users/role-sign", verifyAdmin, editRoleSign);
+router.post("/admin/users/role-sign", verifyAdminOrPrincipal, editRoleSign);
 
 router.post("/teacher", postCreateTeacher);
+router.post(
+  "/teacher/active/:teacherID",
+  verifyAdminOrPrincipal,
+  postToggleActiveTeacher
+);
 router.delete("/teacher/:teacherID", verifyAdmin, deleteTeacher);
 
 router.post("/principal", postCreatePrincipal);
+router.post(
+  "/principal/active/:principalID",
+  verifyAdmin,
+  postToggleActivePrincipal
+);
 router.delete("/principal/:principalID", verifyAdmin, deletePrincipal);
 
+router.get("/students/all", verifyAdmin, getAllStudent);
 router.get("/students", getListStudent);
 router.get("/students/count", getNumberOfStudent);
 router.post("/student", postCreateStudent);

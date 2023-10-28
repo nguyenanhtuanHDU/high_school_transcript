@@ -43,6 +43,20 @@ module.exports = {
       return "ERROR";
     }
   },
+  toggleActivePrincipal: async (principalID) => {
+    try {
+      const principal = await Principal.findById(principalID);
+      if (!principal) {
+        return "Principal not found";
+      }
+      await Principal.findByIdAndUpdate(principalID, {
+        isActive: !principal.isActive,
+      });
+      return "OK";
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+    }
+  },
   editPrincipal: async (principalID, data) => {
     const principal = await Principal.findById(principalID);
     if (!principal) {

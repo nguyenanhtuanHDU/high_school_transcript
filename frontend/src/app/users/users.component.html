@@ -5,7 +5,7 @@
   ></div>
 
   <p-tabView>
-    <p-tabPanel header="Principal">
+    <p-tabPanel header="Principal" *ngIf="userType === 'ADMIN'">
       <div class="w-100 d-flex justify-content-end">
         <button
           pRipple
@@ -24,6 +24,7 @@
             <th>Password</th>
             <th>Full name</th>
             <th>Public Key</th>
+            <th>Active</th>
             <th>Role Sign</th>
             <th>Action</th>
           </tr>
@@ -52,6 +53,14 @@
               >
                 <strong>{{ principal.publicKey }}</strong>
               </p-overlayPanel>
+            </td>
+            <td>
+              <div (click)="toggleActivePrincipal(principal._id!)">
+                <p-inputSwitch
+                  class="flex-center-y align-items-start"
+                  [(ngModel)]="principal.isActive"
+                ></p-inputSwitch>
+              </div>
             </td>
             <td>
               <div (click)="editRoleSign(!principal.roleSign, principal._id!)">
@@ -94,6 +103,7 @@
             <th>Password</th>
             <th>Full name</th>
             <th>Public Key</th>
+            <th>Active</th>
             <th>Role Sign</th>
             <th>Action</th>
           </tr>
@@ -122,6 +132,14 @@
               >
                 <strong>{{ teacher.publicKey }}</strong>
               </p-overlayPanel>
+            </td>
+            <td>
+              <div (click)="toggleActiveTeacher(teacher._id!)">
+                <p-inputSwitch
+                  class="flex-center-y align-items-start"
+                  [(ngModel)]="teacher.isActive"
+                ></p-inputSwitch>
+              </div>
             </td>
             <td>
               <div (click)="editRoleSign(!teacher.roleSign, teacher._id!)">

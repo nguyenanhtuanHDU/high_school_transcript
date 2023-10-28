@@ -36,12 +36,14 @@ export class UsersComponent {
     private confirmationService: ConfirmationService,
     private teacherService: TeacherService,
     private principalService: PrincipalService,
+    private authService: AuthService,
     private titleService: Title
   ) {
     this.titleService.setTitle('School - Users');
   }
   ngOnInit() {
     this.getAllUser();
+    this.userType = this.authService.getToken('type');
   }
 
   ngOnDestroy() {
@@ -60,6 +62,7 @@ export class UsersComponent {
   destroy = new Subject();
   listPrincipals!: Principal[];
   listTeachers!: Teacher[];
+  userType: string = '';
 
   getAllUser() {
     this.spinner.show();
@@ -95,6 +98,49 @@ export class UsersComponent {
           this.getAllUser();
         },
         (error) => {
+          this.spinner.hide();
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: error.error.message,
+          });
+        }
+      );
+  }
+
+  toggleActiveTeacher(teacherID: string) {
+    this.spinner.show();
+    this.teacherService
+      .activeTeacher(teacherID)
+      .pipe(takeUntil(this.destroy))
+      .subscribe(
+        () => {
+          this.spinner.hide();
+          this.getAllUser();
+        },
+        (error) => {
+          this.spinner.hide();
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: error.error.message,
+          });
+        }
+      );
+  }
+
+  toggleActivePrincipal(principalID: string) {
+    this.spinner.show();
+    this.principalService
+      .toggleActivePrincipal(principalID)
+      .pipe(takeUntil(this.destroy))
+      .subscribe(
+        () => {
+          this.spinner.hide();
+          this.getAllUser();
+        },
+        (error) => {
+          console.log("🚀 ~ error:", error)
           this.spinner.hide();
           this.messageService.add({
             severity: 'error',

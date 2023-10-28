@@ -12,6 +12,10 @@ export class StudentService {
   private apiList: string = 'http://localhost:8000/v1/api/students?teacherID=';
   constructor(private http: HttpClient) {}
 
+  getAllStudents() {
+    return this.http.get(this.api2 + 'all', { withCredentials: true });
+  }
+
   getListStudentsByTeacherID(teacherID: string) {
     return this.http.get(this.apiList + teacherID);
   }
