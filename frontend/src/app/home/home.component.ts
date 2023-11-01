@@ -22,6 +22,7 @@ import { ChartConfiguration, ChartType } from 'chart.js';
 import { PrincipalService } from '../services/principal.service';
 import { AuthService } from '../services/auth.service';
 import { StudentService } from '../services/student.service';
+import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: 'app-home',
@@ -36,7 +37,8 @@ export class HomeComponent {
     private principalService: PrincipalService,
     private messageService: MessageService,
     private authService: AuthService,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private _clipboardService: ClipboardService
   ) {
     this.titleService.setTitle('School - Home');
   }
@@ -80,6 +82,7 @@ export class HomeComponent {
   }
 
   copyPK() {
+    this._clipboardService.copy(this.userPK);
     this.messageService.add({
       severity: 'success',
       summary: 'Success',

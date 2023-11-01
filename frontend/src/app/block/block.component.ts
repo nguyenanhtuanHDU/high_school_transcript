@@ -8,6 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { faArrowsRotate, faEye } from '@fortawesome/free-solid-svg-icons';
 import { Title } from '@angular/platform-browser';
 import { AuthService } from '../services/auth.service';
+import { io } from 'socket.io-client';
 
 @Component({
   selector: 'app-block',
@@ -31,6 +32,14 @@ export class BlockComponent {
   }
 
   ngOnInit() {
+    this.socket.on('connect', () => {
+      console.log('Connected to socket server');
+    });
+    this.socket.on('data', (message: string) => {
+      if (['BLOCK_CREATED', 'BLOCK_TEMP_DELETED'].includes(message)) {
+        this.getListBlock();
+      }
+    });
     this.getListBlock();
     this.typeSession = this.authService.getToken('type');
   }
@@ -49,6 +58,7 @@ export class BlockComponent {
   typeSession: string = '';
   isShowImage: boolean = false;
   imgSrc: string = '';
+  private socket = io('http://localhost:8000');
 
   getListBlock() {
     this.spinner.show();

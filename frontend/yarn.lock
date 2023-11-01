@@ -2618,6 +2618,11 @@
   dependencies:
     "browserslist" "^4.21.10"
 
+"core-js@^3.0.0":
+  "integrity" "sha512-XeBzWI6QL3nJQiHmdzbAOiMYqjrb7hwU7A39Qhvd/POSa/t9E1AeZyEZx3fNvp/vtM8zXwhoL0FsiS0hD0pruQ=="
+  "resolved" "https://registry.npmjs.org/core-js/-/core-js-3.33.2.tgz"
+  "version" "3.33.2"
+
 "core-util-is@~1.0.0":
   "integrity" "sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ=="
   "resolved" "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.3.tgz"
@@ -2933,6 +2938,17 @@
   "version" "0.1.13"
   dependencies:
     "iconv-lite" "^0.6.2"
+
+"engine.io-client@~6.5.2":
+  "integrity" "sha512-CQZqbrpEYnrpGqC07a9dJDz4gePZUgTPMU3NKJPSeQOyw27Tst4Pl3FemKoFGAlHzgZmKjoRmiJvbWfhCXUlIg=="
+  "resolved" "https://registry.npmjs.org/engine.io-client/-/engine.io-client-6.5.2.tgz"
+  "version" "6.5.2"
+  dependencies:
+    "@socket.io/component-emitter" "~3.1.0"
+    "debug" "~4.3.1"
+    "engine.io-parser" "~5.2.1"
+    "ws" "~8.11.0"
+    "xmlhttprequest-ssl" "~2.0.0"
 
 "engine.io-parser@~5.2.1":
   "integrity" "sha512-9JktcM3u18nU9N2Lz3bWeBgxVgOKpw7yhRaoxQA3FUDZzzw+9WlA6p4G4u0RixNkg14fH7EfEc/RhpurtiROTQ=="
@@ -4646,6 +4662,18 @@
   dependencies:
     "tslib" "^2.0.0"
 
+"ngx-socket-io@^4.5.1":
+  "integrity" "sha512-PNIXmL2NpBwytJLlsyERrf7bUni6ZYtir2LacHMXHFseUDOEnNE7G53kXR+6IKLsVGJlG5RbnplQujRcfMOVxA=="
+  "resolved" "https://registry.npmjs.org/ngx-socket-io/-/ngx-socket-io-4.5.1.tgz"
+  "version" "4.5.1"
+  dependencies:
+    "core-js" "^3.0.0"
+    "reflect-metadata" "^0.1.10"
+    "socket.io" "^4.5.1"
+    "socket.io-client" "^4.5.1"
+    "tslib" "^2.3.0"
+    "zone.js" "~0.11.4"
+
 "ngx-spinner@^16.0.2":
   "integrity" "sha512-MZpOHb3dvSqD6xiEdR+EtOfPY2r1kfA7t5Hv5IVwi7gkbTwVgnqxDWdOYJ/HW1pSZ5iEGhqlJqWg6CysLmNfHQ=="
   "resolved" "https://registry.npmjs.org/ngx-spinner/-/ngx-spinner-16.0.2.tgz"
@@ -5322,7 +5350,7 @@
   dependencies:
     "picomatch" "^2.2.1"
 
-"reflect-metadata@^0.1.2":
+"reflect-metadata@^0.1.10", "reflect-metadata@^0.1.2":
   "integrity" "sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg=="
   "resolved" "https://registry.npmjs.org/reflect-metadata/-/reflect-metadata-0.1.13.tgz"
   "version" "0.1.13"
@@ -5474,7 +5502,7 @@
   dependencies:
     "queue-microtask" "^1.2.2"
 
-"rxjs@^6.0.0 || ^7.8.1", "rxjs@^6.5.3 || ^7.4.0", "rxjs@^7.5.5", "rxjs@~7.8.0", "rxjs@7.8.1":
+"rxjs@^6.0.0 || ^7.8.1", "rxjs@^6.5.3 || ^7.4.0", "rxjs@^7.0.0", "rxjs@^7.5.5", "rxjs@~7.8.0", "rxjs@7.8.1":
   "integrity" "sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg=="
   "resolved" "https://registry.npmjs.org/rxjs/-/rxjs-7.8.1.tgz"
   "version" "7.8.1"
@@ -5754,6 +5782,16 @@
   dependencies:
     "ws" "~8.11.0"
 
+"socket.io-client@^4.5.1":
+  "integrity" "sha512-vtA0uD4ibrYD793SOIAwlo8cj6haOeMHrGvwPxJsxH7CeIksqJ+3Zc06RvWTIFgiSqx4A3sOnTXpfAEE2Zyz6w=="
+  "resolved" "https://registry.npmjs.org/socket.io-client/-/socket.io-client-4.7.2.tgz"
+  "version" "4.7.2"
+  dependencies:
+    "@socket.io/component-emitter" "~3.1.0"
+    "debug" "~4.3.2"
+    "engine.io-client" "~6.5.2"
+    "socket.io-parser" "~4.2.4"
+
 "socket.io-parser@~4.2.4":
   "integrity" "sha512-/GbIKmo8ioc+NIWIhwdecY0ge+qVBSMdgxGygevmdHj24bsfgtCmcUUcQ5ZzcylGFHsN3k4HB4Cgkl96KVnuew=="
   "resolved" "https://registry.npmjs.org/socket.io-parser/-/socket.io-parser-4.2.4.tgz"
@@ -5762,7 +5800,7 @@
     "@socket.io/component-emitter" "~3.1.0"
     "debug" "~4.3.1"
 
-"socket.io@^4.4.1":
+"socket.io@^4.4.1", "socket.io@^4.5.1":
   "integrity" "sha512-bvKVS29/I5fl2FGLNHuXlQaUH/BlzX1IN6S+NKLNZpBsPZIDH+90eQmCs2Railn4YUiww4SzUedJ6+uzwFnKLw=="
   "resolved" "https://registry.npmjs.org/socket.io/-/socket.io-4.7.2.tgz"
   "version" "4.7.2"
@@ -6630,6 +6668,11 @@
   "resolved" "https://registry.npmjs.org/xmlchars/-/xmlchars-2.2.0.tgz"
   "version" "2.2.0"
 
+"xmlhttprequest-ssl@~2.0.0":
+  "integrity" "sha512-QKxVRxiRACQcVuQEYFsI1hhkrMlrXHPegbbd1yn9UHOmRxY+si12nQYzri3vbzt8VdTTRviqcKxcyllFas5z2A=="
+  "resolved" "https://registry.npmjs.org/xmlhttprequest-ssl/-/xmlhttprequest-ssl-2.0.0.tgz"
+  "version" "2.0.0"
+
 "y18n@^5.0.5":
   "integrity" "sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA=="
   "resolved" "https://registry.npmjs.org/y18n/-/y18n-5.0.8.tgz"
@@ -6685,6 +6728,13 @@
   "integrity" "sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g=="
   "resolved" "https://registry.npmjs.org/yocto-queue/-/yocto-queue-1.0.0.tgz"
   "version" "1.0.0"
+
+"zone.js@~0.11.4":
+  "integrity" "sha512-82bctBg2hKcEJ21humWIkXRlLBBmrc3nN7DFh5LGGhcyycO2S7FN8NmdvlcKaGFDNVL4/9kFLmwmInTavdJERA=="
+  "resolved" "https://registry.npmjs.org/zone.js/-/zone.js-0.11.8.tgz"
+  "version" "0.11.8"
+  dependencies:
+    "tslib" "^2.3.0"
 
 "zone.js@~0.13.0":
   "integrity" "sha512-+bIeDAFEBYuXRuU3qGQvzdPap+N1zjM4KkBAiiQuVVCrHrhjDuY6VkUhNa5+U27+9w0q3fbKiMCbpJ0XzMmSWA=="

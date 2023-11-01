@@ -32,7 +32,11 @@ module.exports = {
     const { type, userSessionUsername } = req.cookies;
     const { blockID } = req.params;
     const block = await getBlockByID(blockID);
-    if (block.teacherUsername === userSessionUsername || type === "ADMIN") {
+    if (
+      block.teacherUsername === userSessionUsername ||
+      type === "ADMIN" ||
+      type === "PRINCIPAL"
+    ) {
       next();
     } else {
       res.status(403).json({

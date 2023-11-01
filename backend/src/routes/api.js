@@ -87,10 +87,10 @@ router.delete("/gading/:gadingID", deleteGading);
 
 router.get("/block/list", getListBlocks);
 router.get("/block/users", getNumberOfUSer);
-router.put("/block/:blockID", verifyRoleSign, createBlock);
+// router.put("/block/:blockID", verifyRoleSign, createBlock);
 
 router.get("/block/temp/list", getListBlockTemp);
-router.post("/block/temp", verifyRoleSign, createBlockTemp);
-router.delete("/block/temp/:blockID", verifyDeleteBlockTemp, deleteBlockTemp);
+// router.post("/block/temp", verifyRoleSign, createBlockTemp);
+// router.delete("/block/temp/:blockID", verifyDeleteBlockTemp, deleteBlockTemp);
 
 module.exports = router;

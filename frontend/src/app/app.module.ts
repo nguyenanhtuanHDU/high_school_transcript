@@ -44,6 +44,9 @@ import { UsersComponent } from './users/users.component';
 import { HiddenStringPipe } from './share/pipe/hidden-string.pipe';
 import { TabViewModule } from 'primeng/tabview';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:8000', options: {} };
 
 const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -92,7 +95,8 @@ const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
     SkeletonModule,
     ClipboardModule,
     TabViewModule,
-    InputSwitchModule
+    InputSwitchModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [
     CookieService,

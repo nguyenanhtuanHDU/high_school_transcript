@@ -17,6 +17,8 @@ import { Title } from '@angular/platform-browser';
 import { AuthService } from '../services/auth.service';
 import { IGading } from '../models/gading.interface';
 import { GadingService } from '../services/gading.service';
+import { SocketService } from '../services/socket.service';
+import { io } from 'socket.io-client';
 
 @Component({
   selector: 'app-block-temp',
@@ -32,11 +34,26 @@ export class BlockTempComponent {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private authService: AuthService,
+    private socketService: SocketService,
     private titleService: Title
   ) {
     this.titleService.setTitle('School - Block Temp');
   }
+
+  private socket = io('http://localhost:8000');
   ngOnInit() {
+    this.socket.on('connect', () => {
+      console.log('Connected to socket server');
+    });
+    this.socket.on('data', (message: string) => {
+      if (
+        ['BLOCK_CREATED', 'BLOCK_TEMP_CREATED', 'BLOCK_TEMP_DELETED'].includes(
+          message
+        )
+      ) {
+        this.getListBlocksTemp();
+      }
+    });
     this.getListBlocksTemp();
     this.typeSession = this.authService.getToken('type');
     this.userSessionUsername = this.authService.getToken('userSessionUsername');
@@ -66,6 +83,8 @@ export class BlockTempComponent {
   userSessionUsername: string = '';
 
   getListBlocksTemp() {
+    this.socketService.connectToServer();
+    this.socketService.sendMessage('get list block temp');
     this.spinner.show();
     this.blockService
       .getListBlocksTemp()
@@ -205,7 +224,7 @@ export class BlockTempComponent {
   isDeleteBlockTemp(teacherUsername: string): boolean {
     if (
       this.typeSession == 'TEACHER' &&
-      this.userSessionUsername !== teacherUsername
+      this.userSessionUsername == teacherUsername
     ) {
       return false;
     }

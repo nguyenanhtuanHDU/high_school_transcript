@@ -20,6 +20,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from 'src/environments/environment.development';
 import { BlockService } from '../services/block.service';
 import { Title } from '@angular/platform-browser';
+import { io } from 'socket.io-client';
 
 @Component({
   selector: 'app-gading',
@@ -38,8 +39,18 @@ export class GadingComponent {
   ) {
     this.titleService.setTitle('School - Gading');
   }
+  private socket = io('http://localhost:8000');
 
   ngOnInit() {
+    // this.socket.on('connect', () => {
+    //   console.log('Connected to socket server');
+    // });
+    this.socket.on('data', (message: string) => {
+      console.log('🚀 ~ message:', message);
+      if (['BLOCK_TEMP_CREATED', 'BLOCK_TEMP_DELETED'].includes(message)) {
+        this.getListGadings();
+      }
+    });
     this.getListGadings();
   }
 
