@@ -25,7 +25,7 @@ const getPrincipalPrivateKey = async () => {
 
 const getLastBlock = async () => {
   const lastBlock = await Block.findOne({ isVerify: true }).sort({
-    createdAt: -1,
+    number: -1,
   });
   return lastBlock;
 };
@@ -42,9 +42,9 @@ const getPrevHashBlock = async () => {
 
 const getNextNumer = async () => {
   const listBlocks = await Block.find({ isVerify: true });
-  console.log("🚀 ~ listBlocks:", listBlocks);
+  console.log("🚀 ~ listBlocks:", listBlocks.length);
   const lastBlock = await getLastBlock();
-  console.log("🚀 ~ lastBlock:", lastBlock);
+  console.log("🚀 ~ lastBlock:", lastBlock.number);
   if (listBlocks.length == lastBlock.number) {
     return listBlocks.length + 1;
   } else {
