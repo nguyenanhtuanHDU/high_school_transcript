@@ -27,7 +27,10 @@ const {
   updateBlockTempToBlock,
   deleteBlockTempByID,
 } = require("./src/services/block.services");
-const { verifyDeleteBlockTemp } = require("./src/middleware/block");
+const {
+  verifyDeleteBlockTemp,
+  verifyRoleSign,
+} = require("./src/middleware/block");
 
 app.get("/", (req, res) => {
   res.send("Author: tuanna");
@@ -61,7 +64,7 @@ const server = http.createServer(app);
       });
     });
 
-    app.post("/v1/api/block/temp", async (req, res) => {
+    app.post("/v1/api/block/temp", verifyRoleSign, async (req, res) => {
       try {
         const { teacherID } = req.query;
         const data = {};
