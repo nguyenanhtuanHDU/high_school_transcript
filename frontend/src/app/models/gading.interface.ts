@@ -2,12 +2,13 @@ export interface IGading {
   _id: string;
   studentID: string;
   studentName: string;
+  birthday: Date;
   math?: number;
   literature?: number;
   english?: number;
   average?: number;
   images?: string[];
-  isSign: boolean
+  isSign: boolean;
 }
 
 export interface IGadingEdit {

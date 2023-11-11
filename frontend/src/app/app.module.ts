@@ -45,6 +45,7 @@ import { HiddenStringPipe } from './share/pipe/hidden-string.pipe';
 import { TabViewModule } from 'primeng/tabview';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { GuestComponent } from './guest/guest.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8000', options: {} };
 
@@ -67,6 +68,7 @@ const initializeAppFactory = (primeConfig: PrimeNGConfig) => () => {
     TimeAgoPipe,
     UsersComponent,
     HiddenStringPipe,
+    GuestComponent,
   ],
   imports: [
     BrowserModule,

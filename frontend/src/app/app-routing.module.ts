@@ -11,6 +11,7 @@ import { BlockTempComponent } from './block-temp/block-temp.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BlockComponent } from './block/block.component';
 import { UsersComponent } from './users/users.component';
+import { GuestComponent } from './guest/guest.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -23,6 +24,10 @@ const routes: Routes = [
     path: 'users',
     component: UsersComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'guest',
+    component: GuestComponent,
   },
   {
     path: 'student',

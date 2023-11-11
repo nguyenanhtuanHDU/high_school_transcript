@@ -24,6 +24,7 @@ const {
   getListGading,
   putAddPoint,
   getSingleGading,
+  getListGadingByName,
 } = require("../controller/gading.controller");
 const {
   createBlockTemp,
@@ -80,6 +81,7 @@ router.put("/student/:studentID", putUpdateStudent);
 router.delete("/student/:studentID", deleteSingleStudent);
 
 router.get("/gading/find/:studentID", getSingleGading);
+router.get("/gading/gadings/:studentName", getListGadingByName);
 router.get("/gading/gadings", getListGading);
 router.post("/gading", postCreateGading);
 router.put("/gading", putAddPoint);

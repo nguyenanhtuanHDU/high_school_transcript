@@ -73,6 +73,23 @@ module.exports = {
       return "ERROR";
     }
   },
+  getListGadingStudentName: async (studentName) => {
+    try {
+      const gadings = await Gading.find({
+        studentName: { $regex: studentName, $options: "i" },
+      });
+      return {
+        message: "OK",
+        data: gadings,
+      };
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      return {
+        message: "ERROR",
+        data: null,
+      };
+    }
+  },
   createSingleGading: async (data, images) => {
     try {
       const imagesData = [];

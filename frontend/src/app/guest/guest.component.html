@@ -1,0 +1,90 @@
+<div class="container py-5">
+  <button
+    pButton
+    pRipple
+    class="overflow-hidden container-back"
+    routerLink="/sign-in"
+  >
+    <fa-icon class="" [icon]="faArrowLeft"></fa-icon>
+  </button>
+  <div class="flex-center flex-column p-5">
+    <h1
+      class="text-center text-uppercase text-primary fw-7 mb-5"
+      style="font-size: 26px"
+    >
+      Search gading of student
+    </h1>
+    <div class="list">
+      <span class="p-float-label mt-2" style="width: 50vw">
+        <input
+          class="w-100"
+          pInputText
+          id="username"
+          [(ngModel)]="studentName"
+          (input)="onSearch()"
+        />
+        <label htmlFor="username">Student Name</label>
+      </span>
+
+      <div class="list-search p-3" *ngIf="listGadings">
+        <div *ngIf="listGadings && listGadings.length == 0">Not found</div>
+        <div
+          class="list-search-item cursor-p p-2 br-8"
+          *ngFor="let gading of listGadings"
+        >
+          <div class="cursor-p" (click)="showDialog(gading)">
+            {{ gading.studentName }}
+            <div class="d-inline-block mx-2">|</div>
+            {{ gading.birthday | date : "dd/MM/yyyy" }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <p-dialog
+      header="Gading Information"
+      [(visible)]="visible"
+      [modal]="true"
+      [style]="{ width: '50vw' }"
+      [draggable]="false"
+      [resizable]="false"
+    >
+      <div class="m-0 d-flex flex-column gap-2">
+        <div *ngIf="gading && gading.studentID">
+          <div class="d-inline-block fw-bold">Student ID:</div>
+          {{ gading.studentID }}
+        </div>
+        <div *ngIf="gading && gading.studentName">
+          <div class="d-inline-block fw-bold">Student Name:</div>
+          {{ gading.studentName }}
+        </div>
+        <div *ngIf="gading && gading.birthday">
+          <div class="d-inline-block fw-bold">Student Birthday:</div>
+          {{ gading.studentName }}
+        </div>
+        <div>
+          <div *ngIf="gading && gading.images" class="d-flex flex-row gap-3">
+            <div class="img" *ngFor="let img of gading.images">
+              <img [src]="apiImage + img" />
+            </div>
+          </div>
+        </div>
+        <div *ngIf="gading && gading.math">
+          <div class="d-inline-block fw-bold">Math:</div>
+          {{ gading.math }}
+        </div>
+        <div *ngIf="gading && gading.english">
+          <div class="d-inline-block fw-bold">English:</div>
+          {{ gading.english }}
+        </div>
+        <div *ngIf="gading && gading.literature">
+          <div class="d-inline-block fw-bold">Literature:</div>
+          {{ gading.literature }}
+        </div>
+        <div *ngIf="gading && gading.average">
+          <div class="d-inline-block fw-bold">Average:</div>
+          {{ gading.average }}
+        </div>
+      </div>
+    </p-dialog>
+  </div>
+</div>

@@ -20,6 +20,10 @@ export class GadingService {
     return this.http.get(this.api + 'gadings/?teacherID=' + teacherID);
   }
 
+  getListGadingsByStudentName(studentName: string) {
+    return this.http.get(this.api + 'gadings/' + studentName);
+  }
+
   addPoint(data: IGadingEdit, images: FileList) {
     const formData: FormData = new FormData();
     if (images && images.length > 0) {

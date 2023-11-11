@@ -5,6 +5,7 @@ const {
   addPoint,
   changeImages,
   getSingleGadingByStudentID,
+  getListGadingStudentName,
 } = require("../services/gading.services");
 
 module.exports = {
@@ -43,7 +44,29 @@ module.exports = {
       } else {
         res.status(404).json({
           EC: 1,
-          message: data.payload,
+          message: payload.data,
+        });
+      }
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+      res.status(400).json({
+        EC: 1,
+        message: "Server error",
+      });
+    }
+  },
+  getListGadingByName: async (req, res) => {
+    try {
+      const { studentName } = req.params;
+      const payload = await getListGadingStudentName(studentName);
+      if (payload.message === "OK") {
+        res.status(200).json({
+          data: payload.data,
+        });
+      } else {
+        res.status(404).json({
+          EC: 1,
+          message: payload.message,
         });
       }
     } catch (error) {
