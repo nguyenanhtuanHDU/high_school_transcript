@@ -23,6 +23,8 @@ import { PrincipalService } from '../services/principal.service';
 import { AuthService } from '../services/auth.service';
 import { StudentService } from '../services/student.service';
 import { ClipboardService } from 'ngx-clipboard';
+import { FileSaverService } from 'ngx-filesaver';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -38,7 +40,10 @@ export class HomeComponent {
     private messageService: MessageService,
     private authService: AuthService,
     private studentService: StudentService,
-    private _clipboardService: ClipboardService
+    private _clipboardService: ClipboardService,
+    private fileSaverService: FileSaverService,
+    private confirmationService: ConfirmationService,
+    private http: HttpClient
   ) {
     this.titleService.setTitle('School - Home');
   }
@@ -79,6 +84,27 @@ export class HomeComponent {
 
   showDialogUserPK() {
     this.visiblePK = true;
+  }
+
+  downloadPrivateKeyFile() {
+    this.confirmationService.confirm({
+      message: 'Do you want to dowload your private key(1 time) ?',
+      header: 'Confirmation',
+      icon: 'pi pi-question-circle',
+      accept: () => {
+        this.http
+          .get('http://localhost:8000/v1/api/key/private-key', {
+            withCredentials: true,
+          })
+          .subscribe((data: any) => {
+            const blob = new Blob([data.data], {
+              type: 'text/plain;charset=utf-8',
+            });
+            this.fileSaverService.save(blob, 'private-key.pem');
+          });
+      },
+      reject: () => {},
+    });
   }
 
   copyPK() {

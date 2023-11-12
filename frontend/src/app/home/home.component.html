@@ -5,8 +5,16 @@
       <p-button
         *ngIf="userType !== 'ADMIN'"
         (click)="showDialogUserPK()"
-        icon="pi pi-external-link"
-        label="Your Public Key"
+        icon="pi pi-key"
+        label="Show Public Key"
+        class="me-2"
+      ></p-button>
+      <p-button
+        *ngIf="userType !== 'ADMIN'"
+        (click)="downloadPrivateKeyFile()"
+        icon="pi pi-download"
+        label="Download Private Key"
+        severity="success"
       ></p-button>
       <p-dialog
         header="Public Key"
@@ -172,3 +180,4 @@
   </div>
 </div>
 <p-toast></p-toast>
+<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>

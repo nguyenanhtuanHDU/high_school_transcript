@@ -31,6 +31,7 @@ const {
   verifyDeleteBlockTemp,
   verifyRoleSign,
 } = require("./src/middleware/block");
+const { getPrivateKey } = require("./src/services/key.services");
 
 app.get("/", (req, res) => {
   res.send("Author: tuanna");
@@ -134,6 +135,36 @@ const server = http.createServer(app);
               message: payload,
             });
           }
+        } catch (error) {
+          console.log("🚀 ~ error:", error);
+          res.status(400).json({
+            EC: 1,
+            message: "Server error",
+          });
+        }
+      }
+    );
+
+    app.get(
+      "/v1/api/key/private-key",
+      // verifyDeleteBlockTemp,
+      async (req, res) => {
+        try {
+          const { username } = req.body;
+          let type = "";
+          if (req.cookies.type == "TEACHER") {
+            type = "teachers";
+          } else if (req.cookies.type == "PRINCIPAL") {
+            type = "principal";
+          }
+
+          const privateKey = await getPrivateKey(
+            req.cookies.userSessionUsername,
+            type
+          );
+          res.status(200).json({
+            data: privateKey,
+          });
         } catch (error) {
           console.log("🚀 ~ error:", error);
           res.status(400).json({

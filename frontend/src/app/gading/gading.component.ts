@@ -82,6 +82,7 @@ export class GadingComponent {
   newImagesSelected: string[] = [];
   selectedFiles!: FileList | null;
   apiImage: string = environment.apiImage;
+  visible: boolean = false;
 
   handleFileInput(event: any) {
     this.newImagesSelected = [];
@@ -95,6 +96,10 @@ export class GadingComponent {
         reader.readAsDataURL(this.selectedFiles[i]);
       }
     }
+  }
+
+  typePrivateKey() {
+    this.visible = true;
   }
 
   removeImagesDisplay(index: number) {

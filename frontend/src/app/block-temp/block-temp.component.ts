@@ -81,6 +81,7 @@ export class BlockTempComponent {
   gadingCurrent!: IGading;
   headerCheckGading: string = '';
   userSessionUsername: string = '';
+  visible: boolean = false;
 
   getListBlocksTemp() {
     this.socketService.connectToServer();
@@ -137,6 +138,10 @@ export class BlockTempComponent {
       },
       reject: () => {},
     });
+  }
+
+  typePrivateKey() {
+    this.visible = true;
   }
 
   createBlock(blockID: string) {

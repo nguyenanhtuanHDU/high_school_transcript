@@ -116,11 +116,32 @@
             pRipple
             class="btn btn-warning text-white student-btn"
             [disabled]="gadingCheck && checkGading()"
-            (click)="createBlock(block._id)"
+            (click)="typePrivateKey()"
           >
             <span class="me-1">Sign</span>
             <fa-icon class="" [icon]="faFileSignature"></fa-icon>
           </button>
+
+          <p-dialog
+            header="Choose File Contain Your Private Key"
+            [(visible)]="visible"
+            [modal]="true"
+            [style]="{ width: '50vw' }"
+            [draggable]="false"
+            [resizable]="false"
+          >
+            <div class="d-flex flex-column gap-3 py-4">
+              <p-fileUpload
+                mode="basic"
+                chooseLabel="Choose File"
+              ></p-fileUpload>
+              <p-button
+                label="Sign Now"
+                severity="success"
+                (onClick)="createBlock(block._id)"
+              ></p-button>
+            </div>
+          </p-dialog>
 
           <button
             pRipple
